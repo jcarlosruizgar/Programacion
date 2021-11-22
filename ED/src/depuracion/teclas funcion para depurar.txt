@@ -1,0 +1,3 @@
+F11 para arrancar el debuger
+
+F5 y F6- ir paso a paso
