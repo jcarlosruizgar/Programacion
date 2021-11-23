@@ -131,6 +131,7 @@ public class PrincipalBR2 {
 		while (i<notas.length) {
 			if(notas[i] == a) {
 				posicion = i;
+				i = notas.length;
 			}
 			i++;
 		}
