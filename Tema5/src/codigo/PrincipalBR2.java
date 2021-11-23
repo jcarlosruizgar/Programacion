@@ -39,6 +39,8 @@ public class PrincipalBR2 {
 		System.out.println("La media es: " + mediaNotas());
 		System.out.println("El número menor es: " + numeroMenor());
 		System.out.println("El número mayor es: " + numeroMayor());
+		System.out.println(busquedaSecuencialFor(2));
+		System.out.println(busquedaSecuencialWhile(2));
 	}
 
 	public static void cargarDatosLineales() {//0,1,2,3,.....
@@ -110,5 +112,28 @@ public class PrincipalBR2 {
 			}
 		}
 		return numeroMayor;
+	}
+	
+	public static int busquedaSecuencialFor(int a) {
+		int posicion = -1;
+		for(int i=0; i<notas.length; i++) {
+			if (notas[i] == a) {
+				posicion = i;
+				i = notas.length;
+			}
+		}
+		return posicion;
+	}
+	
+	public static int busquedaSecuencialWhile(int a) {
+		int posicion = -1;
+		int i = 0;
+		while (posicion == -1) {
+			if(notas[i] == a) {
+				posicion = i;
+			}
+			i++;
+		}
+		return posicion;
 	}
 }

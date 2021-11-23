@@ -76,8 +76,14 @@ public class CalculadoraModular4 {
 	private static void introducirOperandosAritmeticos() {//metodo para elegir los operandos
 		System.out.println("Introduzca el 1º operando:");
 		operandoA = teclado.nextInt();
-		System.out.println("Introduzca el 2º operando:");
-		operandoB = teclado.nextInt();
+		do {
+			System.out.println("Introduzca el 2º operando:");
+			operandoB = teclado.nextInt();
+			if (operacion == 4 && operandoB == 0) {
+				System.out.println("Un número no puede ser dividido entre 0.");
+			}
+		}
+		while(operacion == 4 && operandoB == 0);//control de error en division entre 0
 	}
 	
 	private static void mostrarResultadoAritmetico() {//metodo que muestra el resultado de la operacion aritmetica elegida
