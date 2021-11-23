@@ -128,7 +128,7 @@ public class PrincipalBR2 {
 	public static int busquedaSecuencialWhile(int a) {
 		int posicion = -1;
 		int i = 0;
-		while (posicion == -1) {
+		while (i<notas.length) {
 			if(notas[i] == a) {
 				posicion = i;
 			}
