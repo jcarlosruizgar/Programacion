@@ -114,7 +114,7 @@ public class PrincipalBR2 {
 		return numeroMayor;
 	}
 	
-	public static int busquedaSecuencialFor(int a) {
+	public static int busquedaSecuencialFor(int a) {//devuelve la posicion de un numero
 		int posicion = -1;
 		for(int i=0; i<notas.length; i++) {
 			if (notas[i] == a) {
@@ -125,7 +125,7 @@ public class PrincipalBR2 {
 		return posicion;
 	}
 	
-	public static int busquedaSecuencialWhile(int a) {
+	public static int busquedaSecuencialWhile(int a) {//devuelve la posicion de un numero
 		int posicion = -1;
 		int i = 0;
 		while (i<notas.length) {
