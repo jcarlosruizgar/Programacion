@@ -93,22 +93,22 @@ public class PrincipalBR2 {
 	}
 	
 	public static double numeroMenor() {//devuelve el numero mas pequeño del array
-		double numeroMe = 11;
+		double numeroMenor = notas[0];
 		for(int i=0; i<notas.length; i++) {
-			if (notas[i] < numeroMe) {
-				numeroMe = notas[i];
+			if (notas[i] < numeroMenor) {
+				numeroMenor = notas[i];
 			}
 		}
-		return numeroMe;
+		return numeroMenor;
 	}
 	
 	public static double numeroMayor() {//devuelve el numero mas grande del array
-		double numeroMa = -1;
+		double numeroMayor = notas[0];
 		for(int i=0; i<notas.length; i++) {
-			if (notas[i] > numeroMa) {
-				numeroMa = notas[i];
+			if (notas[i] > numeroMayor) {
+				numeroMayor = notas[i];
 			}
 		}
-		return numeroMa;
+		return numeroMayor;
 	}
 }
