@@ -132,7 +132,7 @@ public class PrincipalBR2 {
 		while (i<notas.length && !salir) {//condicion compuesta para salir del buble
 			if(notas[i] == a) {
 				posicion = i;
-				salir = !salir;//invertimos la variable bandera
+				salir = true;//invertimos la variable bandera
 			}
 			i++;
 		}
