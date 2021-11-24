@@ -128,11 +128,11 @@ public class PrincipalBR2 {
 	public static int busquedaSecuencialWhile(int a) {//devuelve la posicion de un numero
 		int posicion = -1;//suponemos que no existe
 		int i = 0;
-		boolean salir = false;//variable bandera
-		while (i<notas.length && !salir) {//condicion compuesta para salir del buble
+		//boolean salir = false;//variable bandera
+		while (i<notas.length && posicion == -1) {//condicion compuesta para salir del bucle, tmb vale con !salir
 			if(notas[i] == a) {
 				posicion = i;
-				salir = true;//para salir del bucle
+				//salir = true;//para salir del bucle
 			}
 			i++;
 		}
