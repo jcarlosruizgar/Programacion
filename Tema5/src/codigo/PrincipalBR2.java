@@ -115,23 +115,24 @@ public class PrincipalBR2 {
 	}
 	
 	public static int busquedaSecuencialFor(int a) {//devuelve la posicion de un numero
-		int posicion = -1;
+		int posicion = -1;//suponemos que no existe
 		for(int i=0; i<notas.length; i++) {
 			if (notas[i] == a) {
 				posicion = i;
-				i = notas.length;
+				i = notas.length;//para evitar mas lecturas del array
 			}
 		}
 		return posicion;
 	}
 	
 	public static int busquedaSecuencialWhile(int a) {//devuelve la posicion de un numero
-		int posicion = -1;
+		int posicion = -1;//suponemos que no existe
 		int i = 0;
-		while (i<notas.length) {
+		boolean salir = false;//variable bandera
+		while (i<notas.length && !salir) {//condicion compuesta para salir del buble
 			if(notas[i] == a) {
 				posicion = i;
-				i = notas.length;
+				salir = !salir;//invertimos la variable bandera
 			}
 			i++;
 		}
