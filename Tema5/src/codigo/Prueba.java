@@ -26,7 +26,7 @@ public class Prueba {
 		return posicion;
 	}
 	
-	public static double busquedaBinaria(double a) {//hacerla
+	public static double busquedaBinaria(double a) {
 		int n = notas.length;
 		int centro, inf=0, sup=n-1;
 		while(inf<=sup) {

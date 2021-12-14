@@ -46,11 +46,13 @@ public class Persona {
 	public void setSexo(TipoSexo sexo) {
 		this.sexo = sexo;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", edad=" + edad + ", sexo=" + sexo + "]";
 	}
+	
+	
 
 	
 	
