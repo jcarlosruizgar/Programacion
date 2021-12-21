@@ -1,5 +1,5 @@
 /*
- * @author Juan Carlos Ruiz García
+ * @author Juan Carlos Ruiz Garcia
  * @date 19/12/21
  */
 
