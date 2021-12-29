@@ -141,51 +141,50 @@ public class Principal {
     }
 
     //posicion del array y nuevo valor, retorna codigo segun error o si es correcta(1 o !1), modificarNumeroEmpleado
-    static int modificarNumeroEmpleado(int posicion, int nuevoValor) {//controlar el try catch en este metodo
+    static int modificarNumeroEmpleado(int posicion, int nuevoValor) {
+        boolean modificado = false;
         try {
             arrayEmpleados[posicion].setNumeroEmpleado(nuevoValor);
-            if (arrayEmpleados[posicion].getNumeroEmpleado() == nuevoValor) {
-                return 1;
-            }
+            modificado = true;
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
     }
 
     static int modificarApellido(int posicion, String apellido) {
+        boolean modificado = false;
         try {
             arrayEmpleados[posicion].setApellido(apellido);
-            if (arrayEmpleados[posicion].getApellido().compareTo(apellido) == 0) {
-                return 1;
-            }
+            modificado = true;
         }
         catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
     }
 
     static int modificarOficio(int posicion, String oficio) {
+        boolean modificado = false;
         try {
             arrayEmpleados[posicion].setOficio(oficio);
-            if(arrayEmpleados[posicion].getOficio().compareTo(oficio) == 0) {
-                return 1;
-            }
+            modificado = true;
         }
         catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
     }
 
     static int modificarFechaAlta(int posicion, String fechaAlta) {
+        boolean modificado = false;
         try {
             LocalDate fechaA = LocalDate.parse(fechaAlta);
             arrayEmpleados[posicion].setFechaAlta(fechaA);
-            if(arrayEmpleados[posicion].getFechaAlta().compareTo(fechaA) == 0) {
-                return 1;
-            }
+            modificado = true;
         }
         catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
@@ -193,33 +192,34 @@ public class Principal {
         catch (DateTimeParseException dtpe) {
             System.out.println("Fecha en formato no valido. " + dtpe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
     }
 
     static int modificarSalario(int posicion, double salario) {
+        boolean modificado = false;
         try {
             arrayEmpleados[posicion].setSalario(salario);
-            if(arrayEmpleados[posicion].getSalario() == salario) {
-                return 1;
-            }
+            modificado = true;
         }
         catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
     }
 
     static int modificarComision(int posicion, double comision) {
+        boolean modificado = false;
         try {
             arrayEmpleados[posicion].setComision(comision);
-            if(arrayEmpleados[posicion].getComision() == comision) {
-                return 1;
-            }
+            modificado = true;
         }
         catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
     }
 
     static int modificarNumeroDepartamento(int posicion, int numeroDepartamento) {
