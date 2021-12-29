@@ -223,15 +223,15 @@ public class Principal {
     }
 
     static int modificarNumeroDepartamento(int posicion, int numeroDepartamento) {
+        boolean modificado = false;
         try {
             arrayEmpleados[posicion].setNumeroDepartamento(numeroDepartamento);
-            if(arrayEmpleados[posicion].getNumeroDepartamento() == numeroDepartamento) {
-                return 1;
-            }
+            modificado = true;
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
-        return 0;
+        if (modificado) return 1;
+        else return 0;
 
     }
 
