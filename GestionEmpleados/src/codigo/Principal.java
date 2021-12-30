@@ -5,26 +5,31 @@
 
 package codigo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Principal {
 
 
     private static final int TAM = 10;//tamaño del array de empleados
-    private static Empleado[] arrayEmpleados = new Empleado[TAM];
+    private static Empleado[] arrayEmpleados = new Empleado[TAM];//define el array de empleados de 10 posiciones
+    private static int posicionInserciones = 0;//posicion del array en la que se hara la proxima insercion, -1 si lleno
+    private static int numeroElementos = 0;//cantidad de empleados en el array
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
-
-
-
-        //arrayEmpleados[0] = new Empleado(3, "Gómez", "Programadora", LocalDate.of(2018, 10, 02) , 3000, 500, 1);
-        //arrayEmpleados[1] = new Empleado(5, "Pérez", "Analista", LocalDate.of(2017, 07, 03), 4500, 1000, 2);
-
+        System.out.println("Aplicación de gestión de empleados versión 1.0");
         cargaAutomatica();
+        try {
+            menu();
+            menuModificaciones();
+        } catch (Exception e) {
+            System.out.println("Eso no es un valor valido.");
+        }
+
 		/*try {
 			cargaInteractiva();
 		} catch (DateTimeParseException dtpe) {
@@ -36,35 +41,27 @@ public class Principal {
 		catch (NumberFormatException nfe) {
 			System.out.println("Valor introducido no valido, " + nfe);
 		}*/
-        mostrarEmpleados();
-        try{
-            System.out.println("El empleado con el mayor salario esta en la posición: " + mayorSalario());//devuelve el entero de la posicion del array del empleado con el mayor salario
-        }
-        catch (NullPointerException npe) {
-            System.out.println("No se ha podido obtener el salario. " + npe);
-        }
-        try {
-            System.out.println("El empleado que lleva más tiempo en la empresa esta en la posición: " + mayorAntiguedad());
-        }
-        catch(NullPointerException npe) {
-            System.out.println("No se ha podido obtener la fecha de alta. " + npe);
-        }
-        salarioMas1000();
+
+        /*
         System.out.println(modificarNumeroEmpleado(2,99));
         System.out.println(modificarApellido(2,"XXXXX"));
         System.out.println(modificarOficio(2,"YYYYY"));
         System.out.println(modificarFechaAlta(2,"1000-01-01"));
         System.out.println(modificarSalario(2,80000));
-        System.out.println(modificarComision(2,20000));
+        System.out.println(modificarComision(20,20000));
         System.out.println(modificarNumeroDepartamento(2,88));
         mostrarEmpleados();
+        System.out.println(existeEmpleado(2));
+         */
+
     }
 
+    //muestra un listado con los empleados
     static void mostrarEmpleados() {
         int i;
         int j = 0;
         for (i = 0; i < TAM; i++) {
-            if(arrayEmpleados[i] != null) {
+            if (arrayEmpleados[i] != null) {
                 System.out.println(arrayEmpleados[i]);
                 j++;
             }
@@ -72,23 +69,24 @@ public class Principal {
         System.out.println("Tenemos en total: " + j + " empleados.");
     }
 
+    //carga de forma automatica 10 empleados en el array
     static void cargaAutomatica() {
-        arrayEmpleados[0] = new Empleado(3, "Gómez", "Programadora", LocalDate.of(2018, 10, 02) , 3001, 533, 1);
+        arrayEmpleados[0] = new Empleado(3, "Gómez", "Programadora", LocalDate.of(2018, 10, 02), 3001, 533, 1);
         arrayEmpleados[1] = new Empleado(5, "Pérez", "Analista", LocalDate.of(2017, 07, 03), 14502, 202, 2);
-        arrayEmpleados[2] = new Empleado(9, "García", "Cerero", LocalDate.of(2014, 06, 02) , 303, 575, 3);
+        arrayEmpleados[2] = new Empleado(9, "García", "Cerero", LocalDate.of(2014, 06, 02), 303, 575, 3);
         arrayEmpleados[3] = new Empleado(1, "Bolaños", "Tester", LocalDate.of(2015, 07, 07), 4504, 1120, 4);
-        arrayEmpleados[4] = new Empleado(2, "Hereje", "Vago", LocalDate.of(2016, 11, 02) , 3005, 550, 5);
+        arrayEmpleados[4] = new Empleado(2, "Hereje", "Vago", LocalDate.of(2016, 11, 02), 3005, 550, 5);
         arrayEmpleados[5] = new Empleado(12, "Ruiz", "Hacker", LocalDate.of(2014, 02, 03), 506, 1000, 6);
-        arrayEmpleados[6] = new Empleado(21, "Flores", "Programador", LocalDate.of(2015, 01, 02) , 3407, 510, 7);
+        arrayEmpleados[6] = new Empleado(21, "Flores", "Programador", LocalDate.of(2015, 01, 02), 3407, 510, 7);
         arrayEmpleados[7] = new Empleado(7, "Terrón", "Java developer", LocalDate.of(2016, 05, 03), 4508, 1050, 8);
-        arrayEmpleados[8] = new Empleado(19, "Tena", "Bbdd", LocalDate.of(2010, 12, 02) , 1039, 500, 9);
+        arrayEmpleados[8] = new Empleado(19, "Tena", "Bbdd", LocalDate.of(2010, 12, 02), 1039, 500, 9);
         arrayEmpleados[9] = new Empleado(20, "Godoy", "Bigdata", LocalDate.of(2016, 07, 03), 510, 1000, 10);
     }
 
-    static void cargaInteractiva() throws  IOException, NumberFormatException, DateTimeParseException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    //carga de forma interactiva 10 empleados en el array
+    static void cargaInteractiva() throws IOException, NumberFormatException, DateTimeParseException {
         for (int i = 0; i < TAM; i++) {
-            System.out.println("Registro del empleado nº " + (i+1));
+            System.out.println("Registro del empleado nº " + (i + 1));
             System.out.println("Introduza el número de empleado:");
             int numeroEmpleado = Integer.parseInt(br.readLine());
             System.out.println("Introduzca el apellido del empleado:");
@@ -107,10 +105,11 @@ public class Principal {
         }
     }
 
-    static int mayorSalario() throws NullPointerException{
+    //devuelve el empleado con el mayor salario
+    static int mayorSalario() throws NullPointerException {
         double max = 0;
         int posicionMax = 0;
-        for(int i = 0; i<TAM;i++) {
+        for (int i = 0; i < TAM; i++) {
             if (arrayEmpleados[i].getSalario() > max) {
                 max = arrayEmpleados[i].getSalario();
                 posicionMax = i;
@@ -119,10 +118,11 @@ public class Principal {
         return posicionMax;
     }
 
+    //devuelve el empleado con la mayor antiguedad
     static int mayorAntiguedad() throws NullPointerException {
         LocalDate añoMenor = LocalDate.of(9999, 12, 31);
         int fechaMenor = 0;
-        for(int i = 0; i<TAM;i++) {
+        for (int i = 0; i < TAM; i++) {
             if (arrayEmpleados[i].getFechaAlta().compareTo(añoMenor) < 0) {
                 añoMenor = arrayEmpleados[i].getFechaAlta();
                 fechaMenor = i;
@@ -134,13 +134,13 @@ public class Principal {
     //metodo para mostrar por pantalla el apellido de los empleados que cobren mas de 1000€
     static void salarioMas1000() {
         for (int i = 0; i < TAM; i++) {
-            if(arrayEmpleados[i].getSalario() > 1000) {
+            if (arrayEmpleados[i].getSalario() > 1000) {
                 System.out.println(arrayEmpleados[i].getApellido());
             }
         }
     }
 
-    //posicion del array y nuevo valor, retorna codigo segun error o si es correcta(1 o !1), modificarNumeroEmpleado
+    //modifica el numero de empleado
     static int modificarNumeroEmpleado(int posicion, int nuevoValor) {
         boolean modificado = false;
         try {
@@ -153,75 +153,75 @@ public class Principal {
         else return 0;
     }
 
+    //modifica el apellido del empleado
     static int modificarApellido(int posicion, String apellido) {
         boolean modificado = false;
         try {
             arrayEmpleados[posicion].setApellido(apellido);
             modificado = true;
-        }
-        catch (ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
         if (modificado) return 1;
         else return 0;
     }
 
+    //modifica el oficio del empleado
     static int modificarOficio(int posicion, String oficio) {
         boolean modificado = false;
         try {
             arrayEmpleados[posicion].setOficio(oficio);
             modificado = true;
-        }
-        catch (ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
         if (modificado) return 1;
         else return 0;
     }
 
+    //modifica la fecha de alta del empleado
     static int modificarFechaAlta(int posicion, String fechaAlta) {
         boolean modificado = false;
         try {
             LocalDate fechaA = LocalDate.parse(fechaAlta);
             arrayEmpleados[posicion].setFechaAlta(fechaA);
             modificado = true;
-        }
-        catch (ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
-        }
-        catch (DateTimeParseException dtpe) {
+        } catch (DateTimeParseException dtpe) {
             System.out.println("Fecha en formato no valido. " + dtpe);
         }
         if (modificado) return 1;
         else return 0;
     }
 
+    //modifica el salario del empleado
     static int modificarSalario(int posicion, double salario) {
         boolean modificado = false;
         try {
             arrayEmpleados[posicion].setSalario(salario);
             modificado = true;
-        }
-        catch (ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
         if (modificado) return 1;
         else return 0;
     }
 
+    //modifica la comision del empleado
     static int modificarComision(int posicion, double comision) {
         boolean modificado = false;
         try {
             arrayEmpleados[posicion].setComision(comision);
             modificado = true;
-        }
-        catch (ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             System.out.println("Ese nº de empleado no existe. " + aioobe);
         }
         if (modificado) return 1;
         else return 0;
     }
 
+    //modifica el numero de departamento del empleado
     static int modificarNumeroDepartamento(int posicion, int numeroDepartamento) {
         boolean modificado = false;
         try {
@@ -235,4 +235,121 @@ public class Principal {
 
     }
 
+    //borra al empleado
+    static void borrarEmpleado(int numeroEmpleado) {
+        int posicion = existeEmpleado(numeroEmpleado);
+        if (posicion == -1) {
+            System.out.println("No existe el empleado nº " + numeroEmpleado + ".");
+        }
+        try {
+            arrayEmpleados[numeroEmpleado] = null;
+            System.out.println("El empleado nº " + numeroEmpleado + 1 + ", ha sido borrado correctamente.");
+            posicionInserciones = posicion;
+            numeroElementos--;
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            System.out.println("Ese nº de empleado no existe. " + aioobe);
+        }
+    }
+
+    //comprueba si existe el empleado
+    static int existeEmpleado(int numeroEmpleado) {
+        boolean encontrado = false;
+        int i = 0;
+        do {
+            if (arrayEmpleados[i] != null && arrayEmpleados[i].getNumeroEmpleado() == numeroEmpleado) {
+                encontrado = true;
+            } else i++;
+        }
+        while (!encontrado && i < TAM);
+        if (encontrado) return i;
+        else return -1;
+    }
+
+    //menu principal
+    static void menu() throws IOException {
+        int funcionMenu;
+        do {
+            System.out.println("Puede realizar las siguientes funciones:");
+            System.out.println("1 - Insertar nuevos empleados.");
+            System.out.println("2 - Mostrar empleados registrados.");
+            System.out.println("3 - Modificar datos de los empleados.");
+            System.out.println("4 - Borrar empleado.");
+            System.out.println("0 - Salir del programa.");
+            System.out.println("Introduzca la función a realizar:");
+            funcionMenu = Integer.parseInt(br.readLine());
+            if (funcionMenu < 0 || funcionMenu > 4) {
+                System.out.println("Eso no es una opción valida.");//mensaje si la opcion elegida es erronea
+            }
+        }
+        while (funcionMenu < 0 || funcionMenu > 4);//control error operacion erronea
+    }
+
+    //menu para modificar datos de un empledo
+    static void menuModificaciones() throws IOException {
+        int numeroEmpleado;
+        int posicionEmpleado;
+        int funcionMenu;
+        System.out.println("Seleccione que empleado desea modificar:");
+        mostrarEmpleados();
+        System.out.println("Introduzca el número del empleado a modificar:");
+        numeroEmpleado = Integer.parseInt(br.readLine());
+        posicionEmpleado = existeEmpleado(numeroEmpleado);
+        if (posicionEmpleado == -1) System.out.println("Empleado no encontrado");
+        else {
+            do{
+                System.out.println("Puede realizar las siguientes funciones:");
+                System.out.println("1 - Modificar el número de empleado.");
+                System.out.println("2 - Modificar el apellido.");
+                System.out.println("3 - Modificar el oficio.");
+                System.out.println("4 - Modificar la fecha de alta.");
+                System.out.println("5 - Modificar el salario.");
+                System.out.println("6 - Modificar la comisión.");
+                System.out.println("7 - Modificar el número de departamento.");
+                System.out.println("0 - Volver al menu principal.");
+                System.out.println("Introduzca la función a realizar:");
+                funcionMenu = Integer.parseInt(br.readLine());
+                switch (funcionMenu) {
+                    case 1:
+                        System.out.println("Introduzca el nuevo número de empleado:");
+                        modificarNumeroEmpleado(posicionEmpleado, Integer.parseInt(br.readLine()));
+                        break;
+                    case 2:
+                        System.out.println("Introduzca el nuevo apellido:");
+                        modificarApellido(posicionEmpleado, br.readLine());
+                        break;
+                    case 3:
+                        System.out.println("Introduzca el nuevo oficio:");
+                        modificarOficio(posicionEmpleado, br.readLine());
+                        break;
+                    case 4:
+                        System.out.println("Introduzca la nueva fecha de alta (formato aaaa-mm-dd):");
+                        modificarFechaAlta(posicionEmpleado, br.readLine());
+                        break;
+                    case 5:
+                        System.out.println("Introduzca el nuevo salario:");
+                        modificarSalario(posicionEmpleado, Double.parseDouble(br.readLine()));
+                        break;
+                    case 6:
+                        System.out.println("Introduzca la nueva comisión:");
+                        modificarComision(posicionEmpleado, Double.parseDouble(br.readLine()));
+                        break;
+                    case 7:
+                        System.out.println("Introduzca el nuevo número de departamento:");
+                        modificarNumeroDepartamento(posicionEmpleado, Integer.parseInt(br.readLine()));
+                        break;
+                    case 0:
+                        menu();
+                        break;
+                }
+                if(funcionMenu <0 || funcionMenu > 7) System.out.println("Esa no es una función valida.\nPruebe de nuevo.");
+            }
+            while(funcionMenu < 0 || funcionMenu > 7);
+        }
+    }
 }
+/*
+menu de las modificaciones, hacer que se pueda repetir otra operacion sobre el mismo empleado
+||                          hacer que se pueda repetir la operacion de elegir empleado o volver al menu principal
+
+hacer inserciones, borrados, mostrar y vincular todo al menu principal
+ */
