@@ -32,8 +32,6 @@ public class Principal {
                         break;
                     case 2:
                         mostrarEmpleados();
-                        System.out.println("posicion " +posicionInserciones);
-                        System.out.println("elementos " + numeroElementos);
                         break;
                     case 3:
                         menuModificaciones();
@@ -402,7 +400,7 @@ public class Principal {
             }
             else i++;
         }
-        while(noEncontrado && i<TAM);
+        while(!noEncontrado && i<TAM);
         if(!noEncontrado) posicionInserciones = -1;
     }
 }
