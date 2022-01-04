@@ -1,3 +1,7 @@
+/*
+@author Juan Carlos Ruiz García
+@date 04/01/2022
+ */
 package codigo;
 
 public class TresEnRaya {
