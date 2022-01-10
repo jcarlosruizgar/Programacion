@@ -23,7 +23,6 @@ public class Principal {
         boolean salir = false;//variable bandera salir del programa
         int repetirPrograma;//variable para modificar la variable bandera
         System.out.println("Aplicación de gestión de empleados versión 1.0");
-        cargaAutomatica();
         try {
             do{
                 switch(menu()){
@@ -38,6 +37,9 @@ public class Principal {
                         break;
                     case 4:
                         borrarEmpleado(menuBorrado());
+                        break;
+                    case 5:
+                        cargaAutomatica();
                         break;
                     case 0:
                         salir = true;
@@ -284,12 +286,13 @@ public class Principal {
             System.out.println("2 - Mostrar empleados registrados.");
             System.out.println("3 - Modificar datos de los empleados.");
             System.out.println("4 - Borrar empleado.");
+            System.out.println("5 - Carga automática.");
             System.out.println("0 - Salir del programa.");
             System.out.println("Introduzca la función a realizar:");
             funcionMenu = Integer.parseInt(br.readLine());
-            if (funcionMenu < 0 || funcionMenu > 4) System.out.println("Eso no es una opción valida.");//mensaje si la opcion elegida es erronea
+            if (funcionMenu < 0 || funcionMenu > 5) System.out.println("Eso no es una opción valida.");//mensaje si la opcion elegida es erronea
         }
-        while (funcionMenu < 0 || funcionMenu > 4);//control error operacion erronea
+        while (funcionMenu < 0 || funcionMenu > 5);//control error operacion erronea
         return funcionMenu;
     }
 
