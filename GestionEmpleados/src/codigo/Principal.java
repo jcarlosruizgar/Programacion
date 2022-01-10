@@ -253,7 +253,7 @@ public class Principal {
             try {
                 arrayEmpleados[posicion] = null;
                 System.out.println("El empleado nº " + numeroEmpleado + ", ha sido borrado correctamente.");
-                posicionInserciones = posicion;
+                calcularInsercion();
                 numeroElementos--;
             } catch (ArrayIndexOutOfBoundsException aioobe) {
                 System.out.println("Ese nº de empleado no existe. " + aioobe);
