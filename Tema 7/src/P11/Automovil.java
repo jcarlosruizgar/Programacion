@@ -6,7 +6,7 @@ public class Automovil extends Vehiculo {
     protected int combustible;
 
     public void repostar(int litros){
-        comustible += litros;
+        combustible += litros;
     }
 
     public Automovil() {

@@ -2,7 +2,7 @@ package P11;
 
 public class Coche extends Automovil{
 
-    Protected int puertas;
+    protected int puertas;
 
     public Coche() {
     }
