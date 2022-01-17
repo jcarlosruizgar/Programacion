@@ -3,13 +3,20 @@ package P12;
 public class PruebaCoche {
 
     public static void main(String[] args) {
-        Coche coche1 = new Coche(100,50);
-        coche1.acelerar(100);
-        coche1.repostar(20);
-        coche1.acelerar(10);
-        System.out.println(coche1);
-        coche1.parar();
-        System.out.println(coche1);
+
+        Vehiculo cascajo = new Vehiculo(0);
+
+        Coche carro = new Coche(0,50);
+
+        cascajo = carro;
+
+        System.out.println(cascajo);
+
+
+
+
+
+
     }
 
 }
