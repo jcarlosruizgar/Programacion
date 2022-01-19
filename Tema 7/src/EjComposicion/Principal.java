@@ -6,7 +6,6 @@ public class Principal {
 
         Edificio donoso = new Edificio(80);
 
-
     }
 
 }
