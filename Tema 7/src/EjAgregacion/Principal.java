@@ -12,6 +12,8 @@ public class Principal {
             delPocero[i] = new Piso((int)Math.floor(Math.random()*(200-40))+40);
         }
 
+        Edificio donoso = new Edificio(delPocero);
+
     }
 
 }

@@ -6,5 +6,6 @@ public class Edificio {
 
     public Edificio(Piso[] pisos) {
         this.pisosEdificio = pisos;
+        System.out.println("Se ha creado un edificio.");
     }
 }
