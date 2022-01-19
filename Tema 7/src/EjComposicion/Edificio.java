@@ -9,10 +9,6 @@ public class Edificio {
         for (int i = 0; i < pisos; i++) {
             arrayPisos[i] = new Piso();
         }
-
-
     }
-
-
 
 }
