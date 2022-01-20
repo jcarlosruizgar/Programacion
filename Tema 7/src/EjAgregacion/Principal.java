@@ -2,7 +2,7 @@ package EjAgregacion;
 
 public class Principal {
 
-    private static final int NUMERO= 50;
+    private static final int NUMERO= 10;
 
     public static void main(String[] args) {
 
