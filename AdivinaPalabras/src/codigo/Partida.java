@@ -19,6 +19,8 @@ public class Partida {
     private int palabraSeleccionada;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private boolean terminarJuego = false;
+    private boolean repetirJuego = false;
+    private int eleccion;
 
     //constructor vacio
     public Partida() {
@@ -36,38 +38,63 @@ public class Partida {
     public void pintarMenu(){
         System.out.println("Hoy es "+fecha);
         System.out.println("Hola "+nombreJugador);
-        palabraSeleccionada = (int)Math.floor(Math.random()*3);
-        do{
-            pintarPalabra();
-            System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.");
-            try{
-                switch (Integer.parseInt(br.readLine())){
-                    case 1:
-                        System.out.println("Introduzca la palabra completa:");
-                        resolver(br.readLine().toUpperCase().toCharArray());
-                        break;
-                    case 2:
-                        System.out.println("Introduzca la letra:");
-                        //elegirLetra(br.read());
-                        elegirLetra(br.readLine().charAt(0));
-                        //System.out.println(letra);
-                        break;
+        do{//bucle do while para repetir el programa con otra palabra
+            palabraSeleccionada = (int)Math.floor(Math.random()*3);
+            do{//bucle do while que lleva la ejecucion de la partida
+                pintarPalabra();
+                System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
+                try{
+                    switch (Integer.parseInt(br.readLine())){
+                        case 1:
+                            System.out.println("Introduzca la palabra completa:");
+                            resolver(br.readLine().toUpperCase().toCharArray());
+                            break;
+                        case 2:
+                            System.out.println("Introduzca la letra:");
+                            //elegirLetra(br.read());
+                            elegirLetra(br.readLine().charAt(0));
+                            //System.out.println(letra);
+                            break;
+                        case 3:
+                            terminarJuego = true;
+                            repetirJuego = true;
+                            eleccion = -1;
+                            break;
+                    }
+                }
+                catch (Exception e){
+                    System.out.println("Error.");
+                }
+                juegoPerdido();
+            }
+            while(!terminarJuego);
+            if(eleccion != -1){
+                System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");
+                try{
+                    eleccion = Integer.parseInt(br.readLine());
+                }
+                catch (Exception e){
+                    System.out.println("Error.");
+                }
+                if(eleccion == 2){
+                    repetirJuego = true;
                 }
             }
-            catch (Exception e){
-                System.out.println("Error.");
-            }
-
-
-
         }
-        while(!terminarJuego);
+        while(!repetirJuego);
+        System.out.println("Cerrando el programa.");
+
 
     }
 
     //metodo que comprueba si se ha perdido el juego
     public void juegoPerdido(){
-
+        boolean[] comprobar = new boolean[this.palabras[palabraSeleccionada].getPosicionesOcupadas().length];
+        Arrays.fill(comprobar,true);
+        if(intentos==0 || Arrays.equals(this.palabras[palabraSeleccionada].getPosicionesOcupadas(),comprobar)){
+            System.out.println("Has perdido.");
+            terminarJuego = true;
+        }
     }
 
     //metodo para resolver la palabra
