@@ -44,7 +44,7 @@ public class Partida {
                 pintarPalabra();
                 System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
                 try{
-                    switch (Integer.parseInt(br.readLine())){
+                    switch (Integer.parseInt(br.readLine())){//opciones a elegir
                         case 1:
                             System.out.println("Introduzca la palabra completa:");
                             resolver(br.readLine().toUpperCase().toCharArray());
@@ -68,7 +68,7 @@ public class Partida {
                 juegoPerdido();
             }
             while(!terminarJuego);
-            if(eleccion != -1){
+            if(eleccion != -1){//si se ha elegido salir del programa, no ejecutara esta parte
                 System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");
                 try{
                     eleccion = Integer.parseInt(br.readLine());
@@ -83,7 +83,6 @@ public class Partida {
         }
         while(!repetirJuego);
         System.out.println("Cerrando el programa.");
-
 
     }
 
