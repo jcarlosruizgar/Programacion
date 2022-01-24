@@ -49,10 +49,10 @@ public class Principal {
         }
 
         //inicializar partida
-        Partida miJuego = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);
+        Partida miPartida = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);
 
         //ejecucion
-        Partida.pintarMenu();
+        miPartida.pintarMenu();
     }
 
     //recibe una array de caracteres y devuelve un array de boleanos con las posiciones que se van a mostrar en true
