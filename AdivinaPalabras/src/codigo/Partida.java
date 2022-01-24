@@ -44,7 +44,7 @@ public class Partida {
                 switch (Integer.parseInt(br.readLine())){
                     case 1:
                         System.out.println("Introduzca la palabra completa:");
-                        resolver(br.readLine().toCharArray());
+                        resolver(br.readLine().toUpperCase().toCharArray());
                         break;
                     case 2:
                         System.out.println("Introduzca la letra:");
@@ -62,11 +62,6 @@ public class Partida {
 
         }
         while(!terminarJuego);
-
-    }
-
-    //metodo que comprueba si se ha ganado el juego
-    public void comprobarJugada(){
 
     }
 
