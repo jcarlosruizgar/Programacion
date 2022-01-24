@@ -14,10 +14,25 @@ public class Partida {
     }
 
     //constructor parametrizado
-    public Partida(LocalDate fecha, String nombreJugador, int intentos, Palabra[] palabras) {
+    public Partida(LocalDate fecha, String nombreJugador, int intentos, Palabra[] palabrasRecibidas) {
         this.fecha = fecha;
         this.nombreJugador = nombreJugador;
         this.intentos = intentos;
-        this.palabras = palabras;
+        this.palabras = palabrasRecibidas;
+    }
+
+    //metodo que muestra la ejecuccion
+    public static void pintarMenu(){
+
+    }
+
+    //metodo que comprueba si se ha ganado el juego
+    public static void comprobarJugada(){
+
+    }
+
+    //metodo que comprueba si se ha perdido el juego
+    public static void juegoPerdido(){
+
     }
 }

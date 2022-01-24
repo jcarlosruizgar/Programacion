@@ -8,24 +8,17 @@ public class Principal {
     private static String nombre;
     private static int intentos = 3;
 
-    private static String[] palabras = {"CODIGO","TRAZA","ALGORITMO"};
+    private static Palabra[] palabras2 = new Palabra[3];
+
+    String prueba = "gilipollas";
+    char[] prueba2 = prueba.length();
+    boolean[] prueba3 = prueba.length();
+
+    palabras2[0] = new Palabra(prueba,prueba2,prueba3);
 
     public static void main(String[] args) {
 
     }
 
-    //metodo que muestra la ejecuccion
-    public static void pintarMenu(){
 
-    }
-
-    //metodo que comprueba si se ha ganado el juego
-    public static void juegoGanado(){
-
-    }
-
-    //metodo que comprueba si se ha perdido el juego
-    public static void juegoPerdido(){
-
-    }
 }
