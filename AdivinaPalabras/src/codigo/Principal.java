@@ -1,3 +1,8 @@
+/*
+@author Juan Carlos Ruiz Garcia
+@date 24/01/2022
+@description juego de adivinar la palabra
+ */
 package codigo;
 
 import java.io.BufferedReader;

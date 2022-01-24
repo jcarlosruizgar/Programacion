@@ -1,5 +1,12 @@
+/*
+@author Juan Carlos Ruiz Garcia
+@date 24/01/2022
+@description juego de adivinar la palabra
+ */
 package codigo;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 public class Partida {
@@ -9,6 +16,8 @@ public class Partida {
     private int intentos;
     private Palabra[] palabras;
     private int palabraSeleccionada;
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private boolean terminarJuego = false;
 
     //constructor vacio
     public Partida() {
@@ -25,6 +34,12 @@ public class Partida {
     //metodo que muestra la ejecuccion
     public void pintarMenu(){
         palabraSeleccionada = (int)Math.floor(Math.random()*3);
+        System.out.println("Hoy es "+fecha);
+        System.out.println("Hola "+nombreJugador);
+        do{
+            pintarPalabra();
+        }
+        while(!terminarJuego);
 
     }
 
@@ -50,10 +65,14 @@ public class Partida {
 
     //metodo que muestra la palabra con las letras elegidas
     public void pintarPalabra(){
+        System.out.println("La palabra es:");
         for (int i = 0; i < this.palabras[palabraSeleccionada].getPosicionesOcupadas().length; i++) {
-            if(this.palabras[palabraSeleccionada].devolverBooleano(i)==true) System.out.print(this.palabras[palabraSeleccionada].devolverLetra(i));
-            else System.out.print(' ');
+            if(this.palabras[palabraSeleccionada].devolverBooleano(i)){
+                System.out.print(this.palabras[palabraSeleccionada].devolverLetra(i));
+            }
+            else System.out.print('_');
         }
+        System.out.println("\nLe quedan: "+intentos+" intentos.");
     }
 
 }
