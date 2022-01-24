@@ -8,6 +8,7 @@ package codigo;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Partida {
 
@@ -76,7 +77,14 @@ public class Partida {
 
     //metodo para resolver la palabra
     public void resolver(char[] solucion){
-
+        if(Arrays.equals(this.palabras[palabraSeleccionada].getLetrasDisponibles(),solucion)){
+            System.out.println("Has ganado.");
+            terminarJuego = true;
+        }
+        else{
+            System.out.println("Has fallado.");
+            intentos--;
+        }
     }
 
     //metodo que asigna a true las posiciones del array de booleanos que coinciden con la letra elegida
