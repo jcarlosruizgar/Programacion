@@ -50,7 +50,7 @@ public class Principal {
             nombreJugador = br.readLine();
         }
         catch(Exception e){
-            System.out.println("Error");
+            System.out.println("Error.");
         }
 
         //inicializar partida

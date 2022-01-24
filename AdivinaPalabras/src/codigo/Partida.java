@@ -38,6 +38,27 @@ public class Partida {
         System.out.println("Hola "+nombreJugador);
         do{
             pintarPalabra();
+            System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.");
+            try{
+                switch (Integer.parseInt(br.readLine())){
+                    case 1:
+                        System.out.println("Introduzca la palabra completa:");
+                        resolver(br.readLine().toCharArray());
+                        break;
+                    case 2:
+                        System.out.println("Introduzca la letra:");
+                        //elegirLetra(br.read());
+                        elegirLetra(br.readLine().charAt(0));
+                        //System.out.println(letra);
+                        break;
+                }
+            }
+            catch (Exception e){
+                System.out.println("Error.");
+            }
+
+
+
         }
         while(!terminarJuego);
 
@@ -53,12 +74,17 @@ public class Partida {
 
     }
 
+    //metodo para resolver la palabra
+    public void resolver(char[] solucion){
+
+    }
+
     //metodo que asigna a true las posiciones del array de booleanos que coinciden con la letra elegida
     public void elegirLetra(char letraElegida){
         char letraElegidaMayus = Character.toUpperCase(letraElegida);
         for (int i = 0; i < this.palabras[palabraSeleccionada].getLetrasDisponibles().length; i++) {
             if(this.palabras[palabraSeleccionada].devolverLetra(i)==letraElegidaMayus){
-                this.palabras[palabraSeleccionada].asignarLetra(palabraSeleccionada);
+                this.palabras[palabraSeleccionada].asignarLetra(i);
             }
         }
     }
