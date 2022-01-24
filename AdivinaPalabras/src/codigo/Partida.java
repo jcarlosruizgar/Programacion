@@ -34,9 +34,9 @@ public class Partida {
 
     //metodo que muestra la ejecuccion
     public void pintarMenu(){
-        palabraSeleccionada = (int)Math.floor(Math.random()*3);
         System.out.println("Hoy es "+fecha);
         System.out.println("Hola "+nombreJugador);
+        palabraSeleccionada = (int)Math.floor(Math.random()*3);
         do{
             pintarPalabra();
             System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.");
