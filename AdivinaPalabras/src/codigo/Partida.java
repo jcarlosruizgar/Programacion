@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class Partida {
 
-    private LocalDate fecha;//
+    private LocalDate fecha;
     private String nombreJugador;
-    private int intentos = 3;
+    private int intentos;
     private Palabra[] palabras;
 
     //constructor vacio
