@@ -6,6 +6,7 @@
 package codigo;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
@@ -55,6 +56,7 @@ public class Principal {
             System.out.println("Error.");
         }
 
+        //bucle do while que controla la repeticion del programa
         do{
             //inicializar partida
             Partida miPartida = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);
@@ -63,17 +65,24 @@ public class Principal {
             miPartida.pintarMenu();
 
             if(eleccion != -1){//si se ha elegido salir del programa, no ejecutara esta parte
-                System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");
-                try{
-                    eleccion = Integer.parseInt(br.readLine());
+                System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");//jugar con otra palabra elegida aleatoriamente
+                do{//bucle do while para controlar que solo se seleccione 1 o 2
+                    try{
+                        eleccion = Integer.parseInt(br.readLine());
+                    }
+                    catch (NumberFormatException nfe){
+                        System.out.println("Introduzca una opción valida:\n1-Si.\n2-No.");
+                    }
+                    catch(IOException ioe){
+                        System.out.println("Error de datos introducidos.");
+                    }
+                    if(eleccion == 2){
+                        repetirJuego = true;
+                        miPartida.setTerminarJuego(true);
+                    }
                 }
-                catch (Exception e){
-                    System.out.println("Error.");
-                }
-                if(eleccion == 2){
-                    repetirJuego = true;
-                    miPartida.setTerminarJuego(true);
-                }
+                while(eleccion !=1 && eleccion !=2);
+
             }
         }
         while(!repetirJuego);
