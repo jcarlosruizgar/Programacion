@@ -60,7 +60,7 @@ public class Partida {
                         break;
                     case 2:
                         System.out.println("Introduzca la letra:");
-                        elegirLetra(br.readLine().charAt(0));
+                        elegirLetra(br.readLine().charAt(0));//ver si hay una opcion mejor
                         break;
                     case 3:
                         terminarJuego = true;
