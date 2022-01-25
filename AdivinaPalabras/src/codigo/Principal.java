@@ -56,12 +56,11 @@ public class Principal {
             System.out.println("Error.");
         }
 
-        //bucle do while que controla la repeticion del programa
-        do{
+        do{//bucle do while que controla la repeticion del programa
             //inicializar partida
             Partida miPartida = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);
 
-            //ejecucion
+            //ejecucion de la partida
             miPartida.pintarMenu();
 
             if(eleccion != -1){//si se ha elegido salir del programa, no ejecutara esta parte
@@ -76,13 +75,12 @@ public class Principal {
                     catch(IOException ioe){
                         System.out.println("Error de datos introducidos.");
                     }
-                    if(eleccion == 2){
+                    if(eleccion == 2){//si se quiere salir del juego
                         repetirJuego = true;
                         miPartida.setTerminarJuego(true);
                     }
                 }
                 while(eleccion !=1 && eleccion !=2);
-
             }
         }
         while(!repetirJuego);
