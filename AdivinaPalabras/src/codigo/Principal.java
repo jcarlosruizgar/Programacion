@@ -64,13 +64,15 @@ public class Principal {
             miPartida.pintarMenu();
 
             if(eleccion != -1){//si se ha elegido salir del programa, no ejecutara esta parte
-                System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");//jugar con otra palabra elegida aleatoriamente
+
                 do{//bucle do while para controlar que solo se seleccione 1 o 2
                     try{
+                        if(eleccion !=1 && eleccion !=2)
+                            System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");//jugar con otra palabra elegida aleatoriamente
                         eleccion = Integer.parseInt(br.readLine());
                     }
                     catch (NumberFormatException nfe){
-                        System.out.println("Introduzca una opción valida:\n1-Si.\n2-No.");
+                        System.out.println("Eso no es un número.");
                     }
                     catch(IOException ioe){
                         System.out.println("Dato introducido no valido.");

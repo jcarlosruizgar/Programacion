@@ -6,6 +6,7 @@
 package codigo;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -42,6 +43,7 @@ public class Partida {
             pintarPalabra();
             System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
             try {
+
                 switch (Integer.parseInt(br.readLine())) {//opciones a elegir
                     case 1:
                         System.out.println("Introduzca la palabra completa:");
@@ -49,9 +51,7 @@ public class Partida {
                         break;
                     case 2:
                         System.out.println("Introduzca la letra:");
-                        //elegirLetra(br.read());
                         elegirLetra(br.readLine().charAt(0));
-                        //System.out.println(letra);
                         break;
                     case 3:
                         terminarJuego = true;
@@ -59,8 +59,8 @@ public class Partida {
                         Principal.setEleccion(-1);
                         break;
                 }
-            } catch (Exception e) {
-                System.out.println("Error.");
+            } catch (IOException ioe) {
+                System.out.println("Dato introducido no valido.");
             }
             juegoPerdido();
         }
