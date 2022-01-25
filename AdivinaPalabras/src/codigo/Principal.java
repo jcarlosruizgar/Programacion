@@ -67,9 +67,10 @@ public class Principal {
 
                 do{//bucle do while para controlar que solo se seleccione 1 o 2
                     try{
-                        if(eleccion !=1 && eleccion !=2)
+                        if(eleccion !=1 && eleccion !=2){
                             System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");//jugar con otra palabra elegida aleatoriamente
-                        eleccion = Integer.parseInt(br.readLine());
+                            eleccion = Integer.parseInt(br.readLine());
+                        }
                     }
                     catch (NumberFormatException nfe){
                         System.out.println("Eso no es un número.");
