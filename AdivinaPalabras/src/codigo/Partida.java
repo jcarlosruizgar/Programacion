@@ -83,7 +83,6 @@ public class Partida {
         if (intentos == 0 || Arrays.equals(this.palabras[palabraSeleccionada].getPosicionesOcupadas(), comprobar)) {//si intentos a 0, o todas las posiciones a true
             System.out.println("Has perdido.");
             terminarJuego = true;
-
         }
     }
 
