@@ -69,9 +69,9 @@ public class Partida {
 
     //metodo que comprueba si se ha perdido el juego
     public void juegoPerdido() {
-        boolean[] comprobar = new boolean[this.palabras[palabraSeleccionada].getPosicionesOcupadas().length];
-        Arrays.fill(comprobar, true);
-        if (intentos == 0 || Arrays.equals(this.palabras[palabraSeleccionada].getPosicionesOcupadas(), comprobar)) {
+        boolean[] comprobar = new boolean[this.palabras[palabraSeleccionada].getPosicionesOcupadas().length];//crea un array de booleano con la longitud de la palabra con la que se juega
+        Arrays.fill(comprobar, true);//asigna todas las posiciones a true
+        if (intentos == 0 || Arrays.equals(this.palabras[palabraSeleccionada].getPosicionesOcupadas(), comprobar)) {//si intentos a 0, o todas las posiciones a true
             System.out.println("Has perdido.");
             terminarJuego = true;
         }
@@ -79,7 +79,7 @@ public class Partida {
 
     //metodo para resolver la palabra
     public void resolver(char[] solucion) {
-        if (Arrays.equals(this.palabras[palabraSeleccionada].getLetrasDisponibles(), solucion)) {
+        if (Arrays.equals(this.palabras[palabraSeleccionada].getLetrasDisponibles(), solucion)) {//si la palabra introducida y la elegida coinciden
             System.out.println("Has ganado.");
             terminarJuego = true;
         } else {
@@ -90,10 +90,10 @@ public class Partida {
 
     //metodo que asigna a true las posiciones del array de booleanos que coinciden con la letra elegida
     public void elegirLetra(char letraElegida) {
-        char letraElegidaMayus = Character.toUpperCase(letraElegida);
+        char letraElegidaMayus = Character.toUpperCase(letraElegida);//convierte la letra a mayuscula
         for (int i = 0; i < this.palabras[palabraSeleccionada].getLetrasDisponibles().length; i++) {
-            if (this.palabras[palabraSeleccionada].devolverLetra(i) == letraElegidaMayus) {
-                this.palabras[palabraSeleccionada].asignarLetra(i);
+            if (this.palabras[palabraSeleccionada].getLetrasDisponibles()[i] == letraElegidaMayus) {//comprueba si coinciden las letras
+                this.palabras[palabraSeleccionada].asignarLetra(i);//pone a true la posicion de la letra si coincide
             }
         }
     }
@@ -102,8 +102,8 @@ public class Partida {
     public void pintarPalabra() {
         System.out.println("La palabra es:");
         for (int i = 0; i < this.palabras[palabraSeleccionada].getPosicionesOcupadas().length; i++) {
-            if (this.palabras[palabraSeleccionada].devolverBooleano(i)) {
-                System.out.print(this.palabras[palabraSeleccionada].devolverLetra(i));
+            if (this.palabras[palabraSeleccionada].getPosicionesOcupadas()[i]) {
+                System.out.print(this.palabras[palabraSeleccionada].getLetrasDisponibles()[i]);
             } else System.out.print('_');
         }
         System.out.println("\nLe quedan: " + intentos + " intentos.");

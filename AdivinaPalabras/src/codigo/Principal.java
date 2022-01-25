@@ -52,8 +52,8 @@ public class Principal {
         try{
             nombreJugador = br.readLine();
         }
-        catch(Exception e){
-            System.out.println("Error.");
+        catch(IOException exception){
+            System.out.println("Dato introducido no valido.");
         }
 
         do{//bucle do while que controla la repeticion del programa
@@ -73,7 +73,7 @@ public class Principal {
                         System.out.println("Introduzca una opción valida:\n1-Si.\n2-No.");
                     }
                     catch(IOException ioe){
-                        System.out.println("Error de datos introducidos.");
+                        System.out.println("Dato introducido no valido.");
                     }
                     if(eleccion == 2){//si se quiere salir del juego
                         repetirJuego = true;
