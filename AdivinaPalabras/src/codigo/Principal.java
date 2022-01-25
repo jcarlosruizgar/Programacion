@@ -85,6 +85,7 @@ public class Principal {
                 }
                 while(eleccion !=1 && eleccion !=2);
             }
+            eleccion = 0;//reiniciar eleccion para asegurar que pregunta si se quiere repetir
         }
         while(!repetirJuego);
         System.out.println("Cerrando el programa.");

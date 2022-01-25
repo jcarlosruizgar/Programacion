@@ -43,7 +43,7 @@ public class Partida {
             pintarPalabra();
             try {
                 int eleccionMenu = 0;
-                do{
+                do{//bucle do while que solo deja introducir 1, 2 o 3
                     try{
                         System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
                         eleccionMenu = Integer.parseInt(br.readLine());
@@ -83,6 +83,7 @@ public class Partida {
         if (intentos == 0 || Arrays.equals(this.palabras[palabraSeleccionada].getPosicionesOcupadas(), comprobar)) {//si intentos a 0, o todas las posiciones a true
             System.out.println("Has perdido.");
             terminarJuego = true;
+
         }
     }
 
