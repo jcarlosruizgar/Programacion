@@ -41,10 +41,19 @@ public class Partida {
         palabraSeleccionada = (int) Math.floor(Math.random() * 3);
         do {//bucle do while que lleva la ejecucion de la partida
             pintarPalabra();
-            System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
             try {
-
-                switch (Integer.parseInt(br.readLine())) {//opciones a elegir
+                int eleccionMenu = 0;
+                do{
+                    try{
+                        System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
+                        eleccionMenu = Integer.parseInt(br.readLine());
+                    }
+                    catch (NumberFormatException nfe){
+                        System.out.println("Eso no es un número.");
+                    }
+                }
+                while(eleccionMenu !=1 && eleccionMenu !=2 && eleccionMenu !=3);
+                switch (eleccionMenu) {//opciones a elegir
                     case 1:
                         System.out.println("Introduzca la palabra completa:");
                         resolver(br.readLine().toUpperCase().toCharArray());
