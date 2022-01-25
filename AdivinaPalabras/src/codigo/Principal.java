@@ -18,6 +18,8 @@ public class Principal {
     private static int intentos = 3;
     private static Palabra[] arrayPalabras = new Palabra[3];
     private static String nombreJugador;
+    private static boolean repetirJuego = false;
+    private static int eleccion = 0;
 
     public static void main(String[] args) {
 
@@ -53,11 +55,29 @@ public class Principal {
             System.out.println("Error.");
         }
 
-        //inicializar partida
-        Partida miPartida = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);
+        do{
+            //inicializar partida
+            Partida miPartida = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);
 
-        //ejecucion
-        miPartida.pintarMenu();
+            //ejecucion
+            miPartida.pintarMenu();
+
+            if(eleccion != -1){//si se ha elegido salir del programa, no ejecutara esta parte
+                System.out.println("¿Quieres jugar con otra palabra?\n1-Si.\n2-No.");
+                try{
+                    eleccion = Integer.parseInt(br.readLine());
+                }
+                catch (Exception e){
+                    System.out.println("Error.");
+                }
+                if(eleccion == 2){
+                    repetirJuego = true;
+                    miPartida.setTerminarJuego(true);
+                }
+            }
+        }
+        while(!repetirJuego);
+        System.out.println("Cerrando el programa.");
     }
 
     //recibe una array de caracteres y devuelve un array de boleanos con las posiciones que se van a mostrar en true
@@ -78,5 +98,11 @@ public class Principal {
         return booleanosRetornar;
     }
 
+    public static void setEleccion(int eleccion) {
+        Principal.eleccion = eleccion;
+    }
 
+    public static void setRepetirJuego(boolean repetirJuego) {
+        Principal.repetirJuego = repetirJuego;
+    }
 }
