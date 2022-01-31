@@ -20,7 +20,7 @@ public class Principal {
     public static void main(String[] args) {
         LocalDate fechaActual = LocalDate.now();
         int intentos = 3;
-        final int TAMAÑO = 3;
+        final int TAMANO = 3;
         String nombreJugador = "";
 
         //palabras para inicializar el array de palabras
@@ -64,7 +64,7 @@ public class Principal {
             boolean[] posicionesC = iniciarPosiciones(letrasC);
 
             //inicializar y crear las 3 palabras en el array
-            Palabra[] arrayPalabras = new Palabra[TAMAÑO];
+            Palabra[] arrayPalabras = new Palabra[TAMANO];
             arrayPalabras[0] = new Palabra(arrayString[0],letrasA,posicionesA);
             arrayPalabras[1] = new Palabra(arrayString[1],letrasB,posicionesB);
             arrayPalabras[2] = new Palabra(arrayString[2],letrasC,posicionesC);
