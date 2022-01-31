@@ -36,9 +36,21 @@ public class Principal {
         //para leer el nombre del jugador
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Juego Adivina la palabra versión 1.0");
-        System.out.println("Introduzca su nombre:");
         try{
-            nombreJugador = br.readLine();
+            boolean entradaIncorrecta = true;
+            while(entradaIncorrecta){
+                System.out.println("Introduzca su nombre:");
+                try{
+                    nombreJugador = br.readLine();
+                    Double decimal = Double.parseDouble(nombreJugador);
+                    System.out.println("Solo letras.");
+                }
+                catch (NumberFormatException nfe){
+                    entradaIncorrecta = false;
+                }
+
+
+            }
         }
         catch(IOException exception){
             System.out.println("Dato introducido no valido.");
