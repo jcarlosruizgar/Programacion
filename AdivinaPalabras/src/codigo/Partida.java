@@ -102,7 +102,13 @@ public class Partida {
         char letraElegidaMayus = Character.toUpperCase(letraElegida);//convierte la letra a mayuscula
         for (int i = 0; i < this.palabras[palabraSeleccionada].getLetrasDisponibles().length; i++) {
             if (this.palabras[palabraSeleccionada].getLetrasDisponibles()[i] == letraElegidaMayus) {//comprueba si coinciden las letras
-                this.palabras[palabraSeleccionada].asignarLetra(i);//pone a true la posicion de la letra si coincide
+                if (this.palabras[palabraSeleccionada].getPosicionesOcupadas()[i]){
+                    System.out.println("La letra " + letraElegida + " ya estaba elegida.");
+                    i=this.palabras[palabraSeleccionada].getLetrasDisponibles().length;
+                }
+                else{
+                    this.palabras[palabraSeleccionada].asignarLetra(i);//pone a true la posicion de la letra si coincide
+                }
             }
         }
     }

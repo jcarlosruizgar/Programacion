@@ -31,16 +31,7 @@ public class Principal {
         char[] letrasB = arrayString[1].toCharArray();
         char[] letrasC = arrayString[2].toCharArray();
 
-        //array de boolenaos para inicializar el array de palabras
-        boolean[] posicionesA = iniciarPosiciones(letrasA);
-        boolean[] posicionesB = iniciarPosiciones(letrasB);
-        boolean[] posicionesC = iniciarPosiciones(letrasC);
 
-        //inicializar y crear las 3 palabras en el array
-        Palabra[] arrayPalabras = new Palabra[TAMAÑO];
-        arrayPalabras[0] = new Palabra(arrayString[0],letrasA,posicionesA);
-        arrayPalabras[1] = new Palabra(arrayString[1],letrasB,posicionesB);
-        arrayPalabras[2] = new Palabra(arrayString[2],letrasC,posicionesC);
 
         //para leer el nombre del jugador
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -54,7 +45,20 @@ public class Principal {
         }
 
         do{//bucle do while que controla la repeticion del programa
+
+            //array de boolenaos para inicializar el array de palabras
+            boolean[] posicionesA = iniciarPosiciones(letrasA);
+            boolean[] posicionesB = iniciarPosiciones(letrasB);
+            boolean[] posicionesC = iniciarPosiciones(letrasC);
+
+            //inicializar y crear las 3 palabras en el array
+            Palabra[] arrayPalabras = new Palabra[TAMAÑO];
+            arrayPalabras[0] = new Palabra(arrayString[0],letrasA,posicionesA);
+            arrayPalabras[1] = new Palabra(arrayString[1],letrasB,posicionesB);
+            arrayPalabras[2] = new Palabra(arrayString[2],letrasC,posicionesC);
+
             Partida miPartida = new Partida(fechaActual,nombreJugador,intentos,arrayPalabras);//inicializar partida
+
             miPartida.pintarMenu();//ejecucion de la partida
             if(eleccion != -1){//si se ha elegido salir del programa, no ejecutara esta parte
                 do{//bucle do while para controlar que solo se seleccione 1 o 2
