@@ -48,8 +48,6 @@ public class Principal {
                 catch (NumberFormatException nfe){
                     entradaIncorrecta = false;
                 }
-
-
             }
         }
         catch(IOException exception){
