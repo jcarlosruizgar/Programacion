@@ -29,7 +29,7 @@ public class Principal {
         //String nombreJugador = "";
 
         //para leer el nombre del jugador
-        System.out.println("Juego Adivina la palabra versión 1.0");
+        System.out.println("Juego Adivina la palabra version 1.0");
         /*try {
             boolean entradaIncorrecta = true;
             while (entradaIncorrecta) {
@@ -58,7 +58,7 @@ public class Principal {
                             eleccion = Integer.parseInt(br.readLine());
                         }
                     } catch (NumberFormatException nfe) {
-                        System.out.println("Eso no es un número.");
+                        System.out.println("Eso no es un numero.");
                     } catch (IOException ioe) {
                         System.out.println("Dato introducido no valido.");
                     }
@@ -124,7 +124,7 @@ public class Principal {
         String[] frasesLeidas = new String[tamano];
         try {
             for (int i = 0; i < tamano; i++) {
-                System.out.println("Introduzca la " + (i + 1) + "º palabra");
+                System.out.println("Introduzca la palabra numero " + (i + 1));
                 frasesLeidas[i] = br.readLine().toUpperCase();
             }
         } catch (IOException ioe) {
@@ -147,7 +147,7 @@ public class Principal {
         }
         arrayPalabras = Arrays.copyOf(pal, tamano);
     }
-/*
+/* no necesario con la implementacion actual
     //metodo que pide a jugador las frases con las que va a jugar
     public static void pedirPalabra(){
         System.out.println("Introduzca las 3 palabras con las que quiere jugar:");

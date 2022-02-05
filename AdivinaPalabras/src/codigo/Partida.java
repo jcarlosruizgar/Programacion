@@ -50,7 +50,7 @@ public class Partida {
                         eleccionMenu = Integer.parseInt(br.readLine());
                     }
                     catch (NumberFormatException nfe){
-                        System.out.println("Eso no es un número.");
+                        System.out.println("Eso no es un numero.");
                     }
                 }
                 while(eleccionMenu !=1 && eleccionMenu !=2 && eleccionMenu !=3 && eleccionMenu !=4);
@@ -72,7 +72,7 @@ public class Partida {
                                 eleccionPreferencias = Integer.parseInt(br.readLine());
                             }
                             catch (NumberFormatException nfe){
-                                System.out.println("Eso no es un número.");
+                                System.out.println("Eso no es un numero.");
                             }
                         }
                         while(eleccionPreferencias !=1 && eleccionPreferencias !=2 && eleccionPreferencias !=3);
@@ -85,11 +85,11 @@ public class Partida {
                                 boolean numeroElegido = true;
                                 do{//bucle do while para introducir un numero valido
                                     try{
-                                        System.out.println("Introduzca cuantos intentos quiere en las próximas partidas");
+                                        System.out.println("Introduzca cuantos intentos quiere en las proximas partidas");
                                         intentosSiguiente = Integer.parseInt(br.readLine());
                                     }
                                     catch (NumberFormatException nfe){
-                                        System.out.println("Introduzca un número.");
+                                        System.out.println("Introduzca un numero.");
                                         numeroElegido = false;
                                     }
                                 }
