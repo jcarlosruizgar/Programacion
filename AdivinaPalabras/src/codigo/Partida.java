@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class Partida {
 
     private LocalDate fecha;
-    private String nombreJugador;
+    //private String nombreJugador;
     private int intentos;
     private Palabra[] palabras;
     private int palabraSeleccionada;
@@ -26,9 +26,9 @@ public class Partida {
     }
 
     //constructor parametrizado
-    public Partida(LocalDate fecha, String nombreJugador, int intentos, Palabra[] palabrasRecibidas) {
+    public Partida(LocalDate fecha, int intentos, Palabra[] palabrasRecibidas) {
         this.fecha = fecha;
-        this.nombreJugador = nombreJugador;
+        //this.nombreJugador = nombreJugador;
         this.intentos = intentos;
         this.palabras = palabrasRecibidas;
     }
@@ -36,23 +36,23 @@ public class Partida {
     //metodo que muestra la ejecuccion
     public void pintarMenu() {
         System.out.println("Hoy es " + fecha);
-        System.out.println("Hola " + nombreJugador);
+        //System.out.println("Hola " + nombreJugador);
 
         palabraSeleccionada = (int) Math.floor(Math.random() * 3);
         do {//bucle do while que lleva la ejecucion de la partida
             pintarPalabra();
             try {
                 int eleccionMenu = 0;
-                do{//bucle do while que solo deja introducir 1, 2 o 3
+                do{//bucle do while que solo deja introducir 1, 2, 3 o 4
                     try{
-                        System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Salir.");
+                        System.out.println("Puede:\n1-Resolver.\n2-Pedir letra.\n3-Preferencias.\n4-Salir.");
                         eleccionMenu = Integer.parseInt(br.readLine());
                     }
                     catch (NumberFormatException nfe){
                         System.out.println("Eso no es un número.");
                     }
                 }
-                while(eleccionMenu !=1 && eleccionMenu !=2 && eleccionMenu !=3);
+                while(eleccionMenu !=1 && eleccionMenu !=2 && eleccionMenu !=3 && eleccionMenu !=4);
                 switch (eleccionMenu) {//opciones a elegir
                     case 1:
                         System.out.println("Introduzca la palabra completa:");
@@ -63,6 +63,43 @@ public class Partida {
                         elegirLetra(br.readLine().charAt(0));//ver si hay una opcion mejor
                         break;
                     case 3:
+                        int eleccionPreferencias = 0;
+                        do{//bucle do while que solo deja introducir 1, 2 o 3
+                            try{
+                                System.out.println("Introduzca:");
+                                System.out.println("1-Definir palabras.\n2-Modificar intentos.\n3-Menú anterior.");
+                                eleccionPreferencias = Integer.parseInt(br.readLine());
+                            }
+                            catch (NumberFormatException nfe){
+                                System.out.println("Eso no es un número.");
+                            }
+                        }
+                        while(eleccionPreferencias !=1 && eleccionPreferencias !=2 && eleccionPreferencias !=3);
+                        switch (eleccionPreferencias){
+                            case 1:
+                                cargaInteractiva();
+                                break;
+                            case 2:
+                                int intentosSiguiente = 3;
+                                boolean numeroElegido = true;
+                                do{//bucle do while para introducir un numero valido
+                                    try{
+                                        System.out.println("Introduzca cuantos intentos quiere en las próximas partidas");
+                                        intentosSiguiente = Integer.parseInt(br.readLine());
+                                    }
+                                    catch (NumberFormatException nfe){
+                                        System.out.println("Introduzca un número.");
+                                        numeroElegido = false;
+                                    }
+                                }
+                                while(!numeroElegido);
+                                modificarIntentos(intentosSiguiente);
+                                break;
+                            case 3://volver menu anterior
+                                break;
+                        }
+                        break;
+                    case 4:
                         terminarJuego = true;
                         Principal.setRepetirJuego(true);
                         Principal.setEleccion(-1);
@@ -119,12 +156,22 @@ public class Partida {
         for (int i = 0; i < this.palabras[palabraSeleccionada].getPosicionesOcupadas().length; i++) {
             if (this.palabras[palabraSeleccionada].getPosicionesOcupadas()[i]) {
                 System.out.print(this.palabras[palabraSeleccionada].getLetrasDisponibles()[i]);
-            } else System.out.print('_');
+            } else System.out.print('-');
         }
         System.out.println("\nLe quedan: " + intentos + " intentos.");
     }
 
     public void setTerminarJuego(boolean terminarJuego) {
         this.terminarJuego = terminarJuego;
+    }
+
+    public void cargaInteractiva(){
+        Principal.pedirPalabras();
+        terminarJuego = true;
+        Principal.setEleccion(-1);
+    }
+
+    public void modificarIntentos(int intentosElegidos){
+        Principal.setIntentos(intentosElegidos);
     }
 }
