@@ -13,12 +13,15 @@ import java.util.Arrays;
 
 public class Principal {
 
+    //atributos
     private static boolean repetirJuego = false;
     private static int eleccion = 0;
-    private static int tamano = 3;//cantidad de palabras, modificar si se hace para aceptar mas
+    private static int tamano = 3;//cantidad de palabras
     private static String[] arrayString;
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static int intentos = 3;
+    private static Palabra[] arrayPalabras;
+    private static boolean noModificado = true;//booleano que determina si se han alterado las 3 palabras iniciales
 
     public static void main(String[] args) {
         LocalDate fechaActual = LocalDate.now();
@@ -42,29 +45,10 @@ public class Principal {
         } catch (IOException exception) {
             System.out.println("Dato introducido no valido.");
         }*/
-        arrayString = new String[] {"CODIGO","TRAZA","ALGORITMO"};
-        //pedirPalabras();
 
         do {//bucle do while que controla la repeticion del programa
-
-
-            char[] letrasA = arrayString[0].toCharArray();
-            char[] letrasB = arrayString[1].toCharArray();
-            char[] letrasC = arrayString[2].toCharArray();
-
-            //array de boolenaos para inicializar el array de palabras
-            boolean[] posicionesA = iniciarPosiciones(letrasA);
-            boolean[] posicionesB = iniciarPosiciones(letrasB);
-            boolean[] posicionesC = iniciarPosiciones(letrasC);
-
-            //inicializar y crear las 3 palabras en el array
-            Palabra[] arrayPalabras = new Palabra[tamano];
-            arrayPalabras[0] = new Palabra(arrayString[0], letrasA, posicionesA);
-            arrayPalabras[1] = new Palabra(arrayString[1], letrasB, posicionesB);
-            arrayPalabras[2] = new Palabra(arrayString[2], letrasC, posicionesC);
-
+            cargarPalabras();//carga las palabras para la nueva partida
             Partida miPartida = new Partida(fechaActual, intentos, arrayPalabras);//inicializar partida
-
             miPartida.pintarMenu();//ejecucion de la partida
             if (eleccion != -1) {//si se ha elegido salir del programa, no ejecutara esta parte
                 do {//bucle do while para controlar que solo se seleccione 1 o 2
@@ -99,7 +83,7 @@ public class Principal {
         int contador = 0;
         do {
             int numeroAleatorio = (int) Math.floor(Math.random() * listaLetras.length);
-            if (booleanosRetornar[numeroAleatorio] == true) ;
+            if (booleanosRetornar[numeroAleatorio]) ;
             else {
                 booleanosRetornar[numeroAleatorio] = true;
                 contador++;
@@ -109,35 +93,78 @@ public class Principal {
         return booleanosRetornar;
     }
 
+    //metodo que modifica eleccion
     public static void setEleccion(int eleccionRecibida) {
         eleccion = eleccionRecibida;
     }
 
+    //metodo que modifica repetirJuego
     public static void setRepetirJuego(boolean repetirJuegoRecibido) {
         repetirJuego = repetirJuegoRecibido;
     }
 
+    //emtodo que modifica intentos
     public static void setIntentos(int intentosSiguientePartida){
         intentos = intentosSiguientePartida;
     }
 
+    //metodo que modifica tamano
     public static void setTamano(int tamanoSiguientePartida){
         tamano = tamanoSiguientePartida;
     }
 
-    //metodo que pide a jugador las palabras con las que va a jugar
-    public static void pedirPalabras(){
+    //metodo que devuelve tamano
+    public static int getTamano(){
+        return tamano;
+    }
+
+    //metodo que pide a jugador las frases con las que va a jugar
+    public static void pedirFrase(){
         System.out.println("Introduzca las 3 palabras con las que quiere jugar:");
-        String[] palabrasLeidas = new String[tamano];
+        String[] frasesLeidas = new String[tamano];
         try {
             for (int i = 0; i < tamano; i++) {
                 System.out.println("Introduzca la " + (i + 1) + "º palabra");
-                palabrasLeidas[i] = br.readLine().toUpperCase();
+                frasesLeidas[i] = br.readLine().toUpperCase();
             }
         } catch (IOException ioe) {
             System.out.println("Error.");
         }
-        arrayString = Arrays.copyOf(palabrasLeidas, tamano);
+        arrayString = Arrays.copyOf(frasesLeidas, tamano);
+        noModificado = false;
     }
+
+    //metodo que genera las palabras con las que se generara la partida
+    public static void cargarPalabras(){
+        Palabra[] pal = new Palabra[tamano];
+        if (noModificado){
+            arrayString = new String[] {"CODIGO","TRAZA","ALGORITMO"};
+        }
+        for (int i = 0; i < tamano; i++) {
+            char[] letras = arrayString[i].toCharArray();
+            boolean[] posiciones = iniciarPosiciones(letras);
+            pal[i] = new Palabra(arrayString[i], letras, posiciones);
+        }
+        arrayPalabras = Arrays.copyOf(pal, tamano);
+    }
+/*
+    //metodo que pide a jugador las frases con las que va a jugar
+    public static void pedirPalabra(){
+        System.out.println("Introduzca las 3 palabras con las que quiere jugar:");
+        Palabra[] palabrasLeidas = new Palabra[tamano];
+        try {
+            for (int i = 0; i < tamano; i++) {
+                System.out.println("Introduzca la " + (i + 1) + "º palabra");
+                String fraseLeida = br.readLine().toUpperCase();
+                char[] letras = fraseLeida.toCharArray();
+                boolean[] posiciones = iniciarPosiciones(letras);
+                palabrasLeidas[i] = new Palabra(fraseLeida, letras, posiciones);
+            }
+        } catch (IOException ioe) {
+            System.out.println("Error.");
+        }
+        arrayPalabras = Arrays.copyOf(palabrasLeidas, tamano);
+    }
+*/
 
 }

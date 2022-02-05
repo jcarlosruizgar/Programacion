@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 public class Partida {
 
+    //atributos
     private LocalDate fecha;
     //private String nombreJugador;
     private int intentos;
@@ -38,7 +39,7 @@ public class Partida {
         System.out.println("Hoy es " + fecha);
         //System.out.println("Hola " + nombreJugador);
 
-        palabraSeleccionada = (int) Math.floor(Math.random() * 3);
+        palabraSeleccionada = (int) Math.floor(Math.random() * Principal.getTamano());
         do {//bucle do while que lleva la ejecucion de la partida
             pintarPalabra();
             try {
@@ -75,11 +76,11 @@ public class Partida {
                             }
                         }
                         while(eleccionPreferencias !=1 && eleccionPreferencias !=2 && eleccionPreferencias !=3);
-                        switch (eleccionPreferencias){
-                            case 1:
+                        switch (eleccionPreferencias){//submenu
+                            case 1://carga de nuevas palabras
                                 cargaInteractiva();
                                 break;
-                            case 2:
+                            case 2://modifica los intentos para las siguientes partidas
                                 int intentosSiguiente = 3;
                                 boolean numeroElegido = true;
                                 do{//bucle do while para introducir un numero valido
@@ -99,7 +100,7 @@ public class Partida {
                                 break;
                         }
                         break;
-                    case 4:
+                    case 4://cerrar el programa
                         terminarJuego = true;
                         Principal.setRepetirJuego(true);
                         Principal.setEleccion(-1);
@@ -161,16 +162,31 @@ public class Partida {
         System.out.println("\nLe quedan: " + intentos + " intentos.");
     }
 
+    //metodo que permite modificar el atributo terminar juego
     public void setTerminarJuego(boolean terminarJuego) {
         this.terminarJuego = terminarJuego;
     }
 
+    //metodo para cargar un numero de palabras variables
     public void cargaInteractiva(){
-        Principal.pedirPalabras();
+        boolean tamanoElegido = false;
+        do{
+            try{
+                System.out.println("¿Con cuantas palabras quiere jugar?");
+                Principal.setTamano(Integer.parseInt(br.readLine()));
+            }
+            catch (Exception e){
+                System.out.println("Eso no es un numero.");
+                tamanoElegido = true;
+            }
+        }
+        while(tamanoElegido);
+        Principal.pedirFrase();//pide los strings con los que se va a jugar
         terminarJuego = true;
         Principal.setEleccion(-1);
     }
 
+    //metodo para modifcar los intentos de las proximas partidas
     public void modificarIntentos(int intentosElegidos){
         Principal.setIntentos(intentosElegidos);
     }
