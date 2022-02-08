@@ -77,6 +77,7 @@ public class Principal {
         else{
             arrayDepartamentos[posicionInserciones] = a;
             departamentosOcupados++;
+            posicionInserciones++;//a cambiar luego
             return 1;
         }
     }
