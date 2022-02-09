@@ -33,10 +33,6 @@ public class Principal {
 
 
 
-
-
-
-
     }
 
     public static void cargaInteractiva() throws IOException,NumberFormatException {
