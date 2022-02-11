@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class Empresa {
 
-    private final int TAMAÑO = 4;
-    private Cliente arrayClientes[] = new Cliente[TAMAÑO];
+    private final int TAMANO = 4;
+    private Cliente arrayClientes[] = new Cliente[TAMANO];
     private int i = 0;
 
     public void addCliente(Cliente unCliente){
-        if (i == TAMAÑO) System.out.println("No se pueden añadir más clientes");
+        if (i == TAMANO) System.out.println("No se pueden añadir más clientes");
         else{
             arrayClientes[i] = new Cliente();
             arrayClientes[i].setTelefono(unCliente.getTelefono());
@@ -21,7 +21,7 @@ public class Empresa {
     @Override
     public String toString() {
         return "Empresa{" +
-                "TAMAÑO=" + TAMAÑO +
+                "TAMAÑO=" + TAMANO +
                 ", arrayClientes=" + Arrays.toString(arrayClientes) +
                 ", i=" + i +
                 '}';
