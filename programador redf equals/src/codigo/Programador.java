@@ -1,5 +1,7 @@
 package codigo;
 
+import java.util.Objects;
+
 public class Programador extends Empleado{
 
 	private int lineasDeCodigoPorHora;
@@ -28,12 +30,27 @@ public class Programador extends Empleado{
 
 	public boolean equals (Object o){
 		return (o instanceof Programador &&
-				((Programador) o).lenguajeUsado.equals(lenguajeUsado) &&
-				((Programador) o).lineasDeCodigoPorHora==lineasDeCodigoPorHora &&
-				((Programador) o).casado==casado &&
-				((Programador) o).salario==salario &&
-				((Programador) o).edad==edad &&
-				((Programador) o).nombre.equals(nombre));
+				Objects.equals(((Programador) o).nombre,nombre) &&
+				Objects.equals(((Programador) o).edad,edad) &&
+				Objects.equals(((Programador) o).salario,salario) &&
+				Objects.equals(((Programador) o).casado,casado) &&
+				Objects.equals(((Programador) o).lineasDeCodigoPorHora,lineasDeCodigoPorHora) &&
+				Objects.equals(((Programador) o).lenguajeUsado,lenguajeUsado));
 	}
 
+	public int getLineasDeCodigoPorHora() {
+		return lineasDeCodigoPorHora;
+	}
+
+	public void setLineasDeCodigoPorHora(int lineasDeCodigoPorHora) {
+		this.lineasDeCodigoPorHora = lineasDeCodigoPorHora;
+	}
+
+	public String getLenguajeUsado() {
+		return lenguajeUsado;
+	}
+
+	public void setLenguajeUsado(String lenguajeUsado) {
+		this.lenguajeUsado = lenguajeUsado;
+	}
 }

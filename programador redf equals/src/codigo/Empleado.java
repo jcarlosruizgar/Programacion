@@ -39,5 +39,7 @@ public abstract class Empleado {
 	}
 	
 	abstract public void presentarse();
+
+
 		
 }
