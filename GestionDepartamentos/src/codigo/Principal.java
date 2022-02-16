@@ -7,6 +7,7 @@
 package codigo;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Principal {
@@ -36,6 +37,7 @@ public class Principal {
                 opcionMenu = Integer.parseInt(br.readLine());
                 switch(opcionMenu){
                     case 1:
+                        opcionMenu1();
                         break;
                     case 2:
                         break;
@@ -73,6 +75,34 @@ public class Principal {
         if(!noEncontrado) posicionInserciones = -1;
     }
 
+    //metodo para convertir el numero de departemento en la posicion del array
+    public static int localizarDepartamento(int numero) {
+        int posLoc = -1;
+        for (int i = 0; i < listadoDepartamentos.length; i++) {
+            if (listadoDepartamentos[i]!=null && listadoDepartamentos[i].getDept_no() == numero) {
+                posLoc = i;
+                i = listadoDepartamentos.length;
+            }
+        }
+        return posLoc;
+    }
+
+    //metodo para mostrar un departamento
+    static void mostrarDepartamento(int numero){
+        if (localizarDepartamento(numero) == -1) System.out.println("Ese departamento no existe");
+        else {
+            System.out.println(listadoDepartamentos[localizarDepartamento(numero)]);
+        }
+    }
+
+    static void opcionMenu1() throws IOException,NumberFormatException {
+        System.out.println("Introduzca el numero de departamento que quiere mostrar:");
+        int dptoMostrar = Integer.parseInt(br.readLine());
+        if(dptoMostrar == -1) System.out.println("Ese departamento no existe.");
+        else{
+            mostrarDepartamento(dptoMostrar);
+        }
+    }
 
 
 }
