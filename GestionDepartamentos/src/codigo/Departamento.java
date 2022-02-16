@@ -38,7 +38,7 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Departamento numero "+dept_no+" de "+dnombre+" ubicado en: "+localizacion;
+        return "Departamento numero "+dept_no+" de "+dnombre+" ubicado en "+localizacion;
     }
 
 }

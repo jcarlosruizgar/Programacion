@@ -40,8 +40,11 @@ public class Principal {
                         opcionMenu1();
                         break;
                     case 2:
+                        insertarDepartamento();
                         break;
                     case 3:
+                        System.out.println("Introduzca el numero de departamento que quiere borrar:");
+                        borrarDepartamento(Integer.parseInt(br.readLine()));
                         break;
                     case 4:
                         break;
@@ -61,7 +64,7 @@ public class Principal {
     }
 
     //metodo para calcular la posicion a insertar
-    static void calcularInsercion(){
+    public static void calcularInsercion(){
         boolean noEncontrado = false;
         int i = 0;
         do{
@@ -88,14 +91,15 @@ public class Principal {
     }
 
     //metodo para mostrar un departamento
-    static void mostrarDepartamento(int numero){
+    public static void mostrarDepartamento(int numero){
         if (localizarDepartamento(numero) == -1) System.out.println("Ese departamento no existe");
         else {
             System.out.println(listadoDepartamentos[localizarDepartamento(numero)]);
         }
     }
 
-    static void opcionMenu1() throws IOException,NumberFormatException {
+    //metodo con la primera opcion del menu modularizada
+    public static void opcionMenu1() throws IOException,NumberFormatException {
         System.out.println("Introduzca el numero de departamento que quiere mostrar:");
         int dptoMostrar = Integer.parseInt(br.readLine());
         if(dptoMostrar == -1) System.out.println("Ese departamento no existe.");
@@ -104,5 +108,35 @@ public class Principal {
         }
     }
 
+    //metodo para insertar un departamento en el array
+    public static void insertarDepartamento() throws IOException,NumberFormatException{
+        if (posOcupadas < 5) {
+            try {
+                System.out.println("Introduzca el numero de departamento:");
+                int nDpto = Integer.parseInt(br.readLine());
+                System.out.println("Introduzca el nombre del departamento:");
+                String nomDpto = br.readLine();
+                System.out.println("Introduzca donde se ubica el departamento:");
+                String locDpto = br.readLine();
+                listadoDepartamentos[posicionInserciones] = new Departamento(nDpto,nomDpto,locDpto);
+                posOcupadas++;
+            }
+            catch(IOException ioe) {
+                System.out.println("Error en la introduccion de datos.");
+            }
+        }
+        else {
+            System.out.println("No se pueden introducir mas departamentos.");
+        }
+    }
+
+    //metodo para borrar un departamento
+    public static void borrarDepartamento(int numero){
+        if(localizarDepartamento(numero) == -1) System.out.println("No existe ese departamento.");
+        else {
+            listadoDepartamentos[localizarDepartamento(numero)]=null;
+            posOcupadas--;
+        }
+    }
 
 }
