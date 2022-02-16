@@ -26,13 +26,21 @@ public class Principal {
         System.out.println("Aplicacion de gestion de departamentos version 1.0");
         try{
             do{//bucle do while con la ejecucion del programa
-                System.out.println("Seleccione la operacion a realizar:\nMenu:");
-                System.out.println("1 - Mostrar departamento.");
-                System.out.println("2 - Insertar un departamento.");
-                System.out.println("3 - Borrar un departamento.");
-                System.out.println("4 - Modificar atributo de un departamento.");
-                System.out.println("5 - Salir.");
-                opcionMenu = Integer.parseInt(br.readLine());
+                do{
+                    System.out.println("Seleccione la operacion a realizar:\nMenu:");
+                    System.out.println("1 - Mostrar departamento.");
+                    System.out.println("2 - Insertar un departamento.");
+                    System.out.println("3 - Borrar un departamento.");
+                    System.out.println("4 - Modificar atributo de un departamento.");
+                    System.out.println("5 - Salir.");
+                    try{
+                        opcionMenu = Integer.parseInt(br.readLine());
+                    }
+                    catch(NumberFormatException nfe){
+                        System.out.println("Eso no es un numero.");
+                    }
+                }
+                while(opcionMenu < 1 || opcionMenu > 5);
                 switch(opcionMenu){
                     case 1:
                         opcionMenu1();
