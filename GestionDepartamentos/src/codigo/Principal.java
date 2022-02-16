@@ -43,6 +43,7 @@ public class Principal {
                         insertarDepartamento();
                         break;
                     case 3:
+                        listarDepartamentos();
                         System.out.println("Introduzca el numero de departamento que quiere borrar:");
                         borrarDepartamento(Integer.parseInt(br.readLine()));
                         break;
@@ -51,11 +52,10 @@ public class Principal {
                         break;
                     case 5://opcion salir
                         salir=true;
-                        System.out.println("Saliendo del programa.");
+                        System.out.println("Cerrando el programa.");
                         break;
                 }
-
-
+                if(!salir)listarDepartamentos();
             }
             while(!salir);//salida de la ejecucion del programa
         }
@@ -64,6 +64,9 @@ public class Principal {
         }
         catch(NumberFormatException nfe){
             System.out.println("Eso no es un numero.");
+        }
+        catch (ArrayIndexOutOfBoundsException aioobe){
+            System.out.println("No existe ese departamento.");
         }
         catch(Exception e){
             e.printStackTrace();
@@ -117,6 +120,7 @@ public class Principal {
 
     //metodo para insertar un departamento en el array
     public static void insertarDepartamento() throws IOException,NumberFormatException{
+        listarDepartamentos();
         if (posOcupadas < 5) {
             try {
                 System.out.println("Introduzca el numero de departamento:");
@@ -146,7 +150,9 @@ public class Principal {
         }
     }
 
-    public static void submenu() throws IOException,NumberFormatException{
+    //metodo con el submenu de modificaciones
+    public static void submenu() throws IOException,NumberFormatException,ArrayIndexOutOfBoundsException{
+        listarDepartamentos();
         System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
         posSub = localizarDepartamento(Integer.parseInt(br.readLine()));
         if (posSub == -1) System.out.println("No existe ese departamento.");
@@ -154,21 +160,36 @@ public class Principal {
             System.out.println("¿Que atributo quiere modificar?");
             System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
             decSubmenu = Integer.parseInt(br.readLine());
+            System.out.println(posSub);
+            System.out.println(decSubmenu);
             switch(decSubmenu){
                 case 1:
                     System.out.println("Introduzca el nuevo numero de departamento:");
-                    listadoDepartamentos[localizarDepartamento(posSub)].setDept_no(Integer.parseInt(br.readLine()));
+                    listadoDepartamentos[posSub].setDept_no(Integer.parseInt(br.readLine()));
                     break;
                 case 2:
                     System.out.println("Introduzca el nuevo nombre de departamento:");
-                    listadoDepartamentos[localizarDepartamento(posSub)].setDnombre(br.readLine());
+                    listadoDepartamentos[posSub].setDnombre(br.readLine());
                     break;
                 case 3:
                     System.out.println("Introduzca la nueva localizacion del departamento:");
-                    listadoDepartamentos[localizarDepartamento(posSub)].setLocalizacion(br.readLine());
+                    listadoDepartamentos[posSub].setLocalizacion(br.readLine());
                     break;
             }
         }
+    }
+
+    //metodo para mostrar todos los departamentos
+    public static void listarDepartamentos(){
+        System.out.println("\nDepartamentos registrados.");
+        int j = 0;
+        for (int i = 0; i < TAMANO; i++) {
+            if(listadoDepartamentos[i]!=null){
+                System.out.println(listadoDepartamentos[i]);
+                j++;
+            }
+        }
+        System.out.println("Se han mostrado "+j+" de "+TAMANO+" posibles.\n");
     }
 
 }
