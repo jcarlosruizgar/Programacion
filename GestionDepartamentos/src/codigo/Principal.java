@@ -23,11 +23,9 @@ public class Principal {
     private static int posicionInserciones;//posicion donde se va a hacer la proxima insercion
 
     public static void main(String[] args) {
-
         System.out.println("Aplicacion de gestion de departamentos version 1.0");
         try{
             do{//bucle do while con la ejecucion del programa
-                calcularInsercion();
                 System.out.println("Seleccione la operacion a realizar:\nMenu:");
                 System.out.println("1 - Mostrar departamento.");
                 System.out.println("2 - Insertar un departamento.");
@@ -121,6 +119,7 @@ public class Principal {
     //metodo para insertar un departamento en el array
     public static void insertarDepartamento() throws IOException,NumberFormatException{
         listarDepartamentos();
+        calcularInsercion();
         if (posOcupadas < 5) {
             try {
                 System.out.println("Introduzca el numero de departamento:");
