@@ -23,8 +23,9 @@ public class Principal {
         boolean salir = false;//variable bandera salir del programa
         int repetirPrograma;//variable para modificar la variable bandera
         System.out.println("Aplicación de gestión de empleados versión 1.0");
-        try {
+
             do{
+                try {
                 switch(menu()){
                     case 1:
                         cargaInteractiva();
@@ -55,11 +56,27 @@ public class Principal {
                     }
                     while(repetirPrograma < 0 || repetirPrograma > 1);
                 }
+                }catch (DateTimeParseException dtpe){
+                    System.out.println("Error en la introduccion de la fecha.");
+                }
+                catch (NullPointerException npe){
+                    System.out.println("No existe datos en esa posicion.");
+                }
+                catch (ArrayIndexOutOfBoundsException aioobe){
+                    System.out.println("No existe es posicion.");
+                }
+                catch(NumberFormatException nfe){
+                    System.out.println("Eso no es un numero.");
+                }
+                catch(IOException ioe){
+                    System.out.println("Fallo en la introduccion de datos.");
+                }
+                catch (Exception e) {
+                    System.out.println("Eso no es un valor valido.");
+                }
             }
             while(!salir);
-        } catch (Exception e) {
-            System.out.println("Eso no es un valor valido.");
-        }
+
     }
 
     //muestra un listado con los empleados
