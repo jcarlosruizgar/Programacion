@@ -11,14 +11,11 @@ import java.time.LocalDate;
 public class Principal {
 
     private static final int TAMANO = 5;
+    private static Departamento[] listadoDepartamentos = new Departamento[TAMANO];
+    private static Empleado[] listadoEmpleadosVentas = new Empleado[TAMANO];
+    private static Empleado[] listadoEmpleadosInnovacion = new Empleado[TAMANO];
 
     public static void main(String[] args) {
-
-        Departamento[] listadoDepartamentos = new Departamento[TAMANO];
-
-        Empleado[] listadoEmpleadosVentas = new Empleado[TAMANO];
-
-        Empleado[] listadoEmpleadosInnovacion = new Empleado[TAMANO];
 
         listadoDepartamentos[0] = new Departamento(15,"Ventas","Barcelona",listadoEmpleadosVentas);
         listadoDepartamentos[1] = new Departamento(7,"Innovacion","Helechosa de los montes",listadoEmpleadosInnovacion);
