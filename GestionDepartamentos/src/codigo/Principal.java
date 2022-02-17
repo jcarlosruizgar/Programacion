@@ -24,8 +24,8 @@ public class Principal {
 
     public static void main(String[] args) {
         System.out.println("Aplicacion de gestion de departamentos version 1.0");
-        try{
-            do{//bucle do while con la ejecucion del programa
+        do{//bucle do while con la ejecucion del programa
+            try{
                 do{
                     System.out.println("Seleccione la operacion a realizar:\nMenu:");
                     System.out.println("1 - Mostrar departamento.");
@@ -49,9 +49,7 @@ public class Principal {
                         insertarDepartamento();
                         break;
                     case 3:
-                        listarDepartamentos();
-                        System.out.println("Introduzca el numero de departamento que quiere borrar:");
-                        borrarDepartamento(Integer.parseInt(br.readLine()));
+                        opcionMenu3();
                         break;
                     case 4:
                         submenu();
@@ -63,20 +61,18 @@ public class Principal {
                 }
                 if(!salir)listarDepartamentos();
             }
-            while(!salir);//salida de la ejecucion del programa
-        }
-        catch(IOException ioe){
-            System.out.println("Entrada de datos erronea.");
-        }
-        catch(NumberFormatException nfe){
-            System.out.println("Eso no es un numero.");
-        }
-        catch (ArrayIndexOutOfBoundsException aioobe){
-            System.out.println("No existe ese departamento.");
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+            catch(IOException ioe){
+                System.out.println("Entrada de datos erronea.");
+            }
+            catch (ArrayIndexOutOfBoundsException aioobe){
+                System.out.println("No existe ese departamento.");
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+            }
+        while(!salir);//salida de la ejecucion del programa
     }
 
     //metodo para calcular la posicion a insertar
@@ -115,17 +111,34 @@ public class Principal {
     }
 
     //metodo con la primera opcion del menu modularizada
-    public static void opcionMenu1() throws IOException,NumberFormatException {
-        System.out.println("Introduzca el numero de departamento que quiere mostrar:");
-        int dptoMostrar = Integer.parseInt(br.readLine());
-        if(dptoMostrar == -1) System.out.println("Ese departamento no existe.");
-        else{
-            mostrarDepartamento(dptoMostrar);
+    public static void opcionMenu1() throws IOException{
+        try{
+            System.out.println("Introduzca el numero de departamento que quiere mostrar:");
+            int dptoMostrar = Integer.parseInt(br.readLine());
+            if(dptoMostrar == -1) System.out.println("Ese departamento no existe.");
+            else{
+                mostrarDepartamento(dptoMostrar);
+            }
+        }
+        catch (NumberFormatException nfe){
+            System.out.println("Eso no es un numero.");
+        }
+    }
+
+    //metodo con la tercera opcion del menu modularizada
+    public static void opcionMenu3() throws IOException{
+        listarDepartamentos();
+        try{
+            System.out.println("Introduzca el numero de departamento que quiere borrar:");
+            borrarDepartamento(Integer.parseInt(br.readLine()));
+        }
+        catch (NumberFormatException nfe){
+            System.out.println("Eso no es un numero.");
         }
     }
 
     //metodo para insertar un departamento en el array
-    public static void insertarDepartamento() throws IOException,NumberFormatException{
+    public static void insertarDepartamento() throws IOException{
         listarDepartamentos();
         calcularInsercion();
         if (posOcupadas < 5) {
@@ -139,8 +152,8 @@ public class Principal {
                 listadoDepartamentos[posicionInserciones] = new Departamento(nDpto,nomDpto,locDpto);
                 posOcupadas++;
             }
-            catch(IOException ioe) {
-                System.out.println("Error en la introduccion de datos.");
+            catch(NumberFormatException nfe) {
+                System.out.println("Eso no es un numero.");
             }
         }
         else {
@@ -149,7 +162,7 @@ public class Principal {
     }
 
     //metodo para borrar un departamento
-    public static void borrarDepartamento(int numero) throws NumberFormatException{
+    public static void borrarDepartamento(int numero){
         if(localizarDepartamento(numero) == -1) System.out.println("No existe ese departamento.");
         else {
             listadoDepartamentos[localizarDepartamento(numero)]=null;
@@ -161,29 +174,41 @@ public class Principal {
     public static void submenu() throws IOException,NumberFormatException,ArrayIndexOutOfBoundsException{
         listarDepartamentos();
         System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
-        posSub = localizarDepartamento(Integer.parseInt(br.readLine()));
-        if (posSub == -1) System.out.println("No existe ese departamento.");
-        else{
-            System.out.println("¿Que atributo quiere modificar?");
-            System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
-            decSubmenu = Integer.parseInt(br.readLine());
-            System.out.println(posSub);
-            System.out.println(decSubmenu);
-            switch(decSubmenu){
-                case 1:
-                    System.out.println("Introduzca el nuevo numero de departamento:");
-                    listadoDepartamentos[posSub].setDept_no(Integer.parseInt(br.readLine()));
-                    break;
-                case 2:
-                    System.out.println("Introduzca el nuevo nombre de departamento:");
-                    listadoDepartamentos[posSub].setDnombre(br.readLine());
-                    break;
-                case 3:
-                    System.out.println("Introduzca la nueva localizacion del departamento:");
-                    listadoDepartamentos[posSub].setLocalizacion(br.readLine());
-                    break;
+        try{
+            posSub = localizarDepartamento(Integer.parseInt(br.readLine()));
+            if (posSub == -1) System.out.println("No existe ese departamento.");
+            else{
+                do{
+                    try{
+                        System.out.println("¿Que atributo quiere modificar?");
+                        System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
+                        decSubmenu = Integer.parseInt(br.readLine());
+                    }
+                    catch (NumberFormatException nfe){
+                        System.out.println("Eso no es un numero.");
+                    }
+                }
+                while(decSubmenu < 1 || decSubmenu > 3);
+                switch(decSubmenu){
+                    case 1:
+                        System.out.println("Introduzca el nuevo numero de departamento:");
+                        listadoDepartamentos[posSub].setDept_no(Integer.parseInt(br.readLine()));
+                        break;
+                    case 2:
+                        System.out.println("Introduzca el nuevo nombre de departamento:");
+                        listadoDepartamentos[posSub].setDnombre(br.readLine());
+                        break;
+                    case 3:
+                        System.out.println("Introduzca la nueva localizacion del departamento:");
+                        listadoDepartamentos[posSub].setLocalizacion(br.readLine());
+                        break;
+                }
             }
         }
+        catch (NumberFormatException nfe){
+            System.out.println("Eso no es un numero.");
+        }
+
     }
 
     //metodo para mostrar todos los departamentos
