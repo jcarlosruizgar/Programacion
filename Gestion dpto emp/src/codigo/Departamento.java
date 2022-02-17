@@ -5,16 +5,18 @@ public class Departamento {
     private int dept_no;//numero de departamento
     private String dnombre;//nombre del departamento
     private String localizacion;//nombre de la poblacion donde esta el departamento
+    private Empleado[] listaEmpleados;
 
     public Departamento() {
         super();
     }
 
-    public Departamento(int dept_no, String dnombre, String localizacion) {
+    public Departamento(int dept_no, String dnombre, String localizacion, Empleado[] empleados) {
         super();
         this.dept_no = dept_no;
         this.dnombre = dnombre;
         this.localizacion = localizacion;
+        this.listaEmpleados = empleados;
     }
 
     public int getDept_no() {
@@ -34,6 +36,14 @@ public class Departamento {
     }
     public void setLocalizacion(String localizacion) {
         this.localizacion = localizacion;
+    }
+
+    public Empleado[] getListaEmpleados() {
+        return listaEmpleados;
+    }
+
+    public void setListaEmpleados(Empleado[] listaEmpleados) {
+        this.listaEmpleados = listaEmpleados;
     }
 
     @Override

@@ -10,22 +10,21 @@ public class Empleado {
     private LocalDate fechaAlta;
     private double salario;
     private double comision;
-    private int numeroDepartamento;
+    //private int numeroDepartamento;
+    private Departamento departamentoEmpleado;
 
     public Empleado() {
         super();
     }
 
-    public Empleado(int numeroEmpleado, String apellido, String oficio, LocalDate fechaAlta, double salario,
-                    double comision, int numeroDepartamento) {
-        super();
+    public Empleado(int numeroEmpleado, String apellido, String oficio, LocalDate fechaAlta, double salario, double comision, Departamento departamentoEmpleado) {
         this.numeroEmpleado = numeroEmpleado;
         this.apellido = apellido;
         this.oficio = oficio;
         this.fechaAlta = fechaAlta;
         this.salario = salario;
         this.comision = comision;
-        this.numeroDepartamento = numeroDepartamento;
+        this.departamentoEmpleado = departamentoEmpleado;
     }
 
     public int getNumeroEmpleado() {
@@ -75,7 +74,7 @@ public class Empleado {
     public void setComision(double comision) {
         this.comision = comision;
     }
-
+/*
     public int getNumeroDepartamento() {
         return numeroDepartamento;
     }
@@ -83,14 +82,26 @@ public class Empleado {
     public void setNumeroDepartamento(int numeroDepartamento) {
         this.numeroDepartamento = numeroDepartamento;
     }
+*/
+    public Departamento getDepartamentoEmpleado() {
+        return departamentoEmpleado;
+    }
+
+    public void setDepartamentoEmpleado(Departamento departamentoEmpleado) {
+        this.departamentoEmpleado = departamentoEmpleado;
+    }
 
     @Override
     public String toString() {
-        return "Empleado [numeroEmpleado=" + numeroEmpleado + ", apellido=" + apellido + ", oficio=" + oficio
-                + ", fechaAlta=" + fechaAlta + ", salario=" + salario + ", comision=" + comision
-                + ", numeroDepartamento=" + numeroDepartamento + "]";
+        return "Empleado{" +
+                "numeroEmpleado=" + numeroEmpleado +
+                ", apellido='" + apellido + '\'' +
+                ", oficio='" + oficio + '\'' +
+                ", fechaAlta=" + fechaAlta +
+                ", salario=" + salario +
+                ", comision=" + comision +
+                ", departamentoEmpleado=" + departamentoEmpleado +
+                '}';
     }
-
-
 
 }
