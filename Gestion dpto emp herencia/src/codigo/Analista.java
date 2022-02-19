@@ -11,6 +11,15 @@ public class Analista extends Empleado{
         super(numeroEmpleado, apellido, fechaAlta, salario, departamentoEmpleado);
     }
 
+    @Override
+    public void saludar() {
+        System.out.println("Saluda un analista.");
+    }
+
+    public double salarioAnual(){
+        return getSalario()*14;
+    }
+
     public String toStrin(){
         return super.toString();
     }

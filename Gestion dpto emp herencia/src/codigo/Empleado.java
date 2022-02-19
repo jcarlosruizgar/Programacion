@@ -2,7 +2,7 @@ package codigo;
 
 import java.time.LocalDate;
 
-public class Empleado {
+public abstract class Empleado {
 
     private int numeroEmpleado;
     private String apellido;
@@ -26,6 +26,12 @@ public class Empleado {
         //this.comision = comision;
         this.departamentoEmpleado = departamentoEmpleado;
     }
+
+    public void saludar(){
+        System.out.println("Saluda un empleado.");
+    }
+
+    public abstract double salarioAnual();
 
     public int getNumeroEmpleado() {
         return numeroEmpleado;
