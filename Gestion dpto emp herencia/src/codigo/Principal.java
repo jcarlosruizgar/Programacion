@@ -8,7 +8,7 @@ public class Principal {
 
         listadoDepartamentos = new Departamento[5];
         listadoDepartamentos[0] = new Departamento(15,"Ventas","Barcelona");
-        listadoDepartamentos[0] = new Departamento(15,"Innovacion","Madrid");
+        listadoDepartamentos[1] = new Departamento(7,"Innovacion","Madrid");
 
         System.out.println(listadoDepartamentos[0]);
 
@@ -26,6 +26,7 @@ public class Principal {
 
         System.out.println(sueldoMayor());
 
+        System.out.println(posicionDepartamento(15));
 
     }
 
@@ -55,6 +56,18 @@ public class Principal {
             }
         }
         return apellido;
+    }
+
+    //metodo para convertir el numero de departemento en la posicion del array
+    public static int posicionDepartamento(int dept_no) {
+        int posLoc = -1;
+        for (int i = 0; i < listadoDepartamentos.length; i++) {
+            if (listadoDepartamentos[i] != null && listadoDepartamentos[i].getDept_no() == dept_no) {
+                posLoc = i;
+                i = listadoDepartamentos.length;
+            }
+        }
+        return posLoc;
     }
 
 }

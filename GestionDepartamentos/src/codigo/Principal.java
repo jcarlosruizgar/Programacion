@@ -18,8 +18,8 @@ public class Principal {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static int opcionMenu;//opcion tomada en el menu principal
     private static boolean salir = false;//variable bandera ejecucion del programa
-    private static int decSubmenu;//opcion tomada en el submenu modificaciones
-    private static int posSub;//posicion del array tomada en el submenu
+    private static int decisionSubmenu;//opcion tomada en el submenu modificaciones
+    private static int posicionSubmenu;//posicion del array tomada en el submenu
     private static int posicionInserciones;//posicion donde se va a hacer la proxima insercion
 
     public static void main(String[] args) {
@@ -87,14 +87,14 @@ public class Principal {
 
     //metodo para convertir el numero de departemento en la posicion del array
     public static int localizarDepartamento(int numero) {
-        int posLoc = -1;
+        int posicionLocalizada = -1;
         for (int i = 0; i < listadoDepartamentos.length; i++) {
             if (listadoDepartamentos[i] != null && listadoDepartamentos[i].getDept_no() == numero) {
-                posLoc = i;
+                posicionLocalizada = i;
                 i = listadoDepartamentos.length;
             }
         }
-        return posLoc;
+        return posicionLocalizada;
     }
 
     //metodo para mostrar un departamento
@@ -166,31 +166,31 @@ public class Principal {
         listarDepartamentos();
         System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
         try {
-            posSub = localizarDepartamento(Integer.parseInt(br.readLine()));
-            if (posSub == -1) System.out.println("No existe ese departamento.");
+            posicionSubmenu = localizarDepartamento(Integer.parseInt(br.readLine()));
+            if (posicionSubmenu == -1) System.out.println("No existe ese departamento.");
             else {
                 do {
                     try {
                         System.out.println("¿Que atributo quiere modificar?");
                         System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
-                        decSubmenu = Integer.parseInt(br.readLine());
+                        decisionSubmenu = Integer.parseInt(br.readLine());
                     } catch (NumberFormatException nfe) {
                         System.out.println("Eso no es un numero.");
                     }
                 }
-                while (decSubmenu < 1 || decSubmenu > 3);
-                switch (decSubmenu) {
+                while (decisionSubmenu < 1 || decisionSubmenu > 3);
+                switch (decisionSubmenu) {
                     case 1:
                         System.out.println("Introduzca el nuevo numero de departamento:");
-                        listadoDepartamentos[posSub].setDept_no(Integer.parseInt(br.readLine()));
+                        listadoDepartamentos[posicionSubmenu].setDept_no(Integer.parseInt(br.readLine()));
                         break;
                     case 2:
                         System.out.println("Introduzca el nuevo nombre de departamento:");
-                        listadoDepartamentos[posSub].setDnombre(br.readLine());
+                        listadoDepartamentos[posicionSubmenu].setDnombre(br.readLine());
                         break;
                     case 3:
                         System.out.println("Introduzca la nueva localizacion del departamento:");
-                        listadoDepartamentos[posSub].setLocalizacion(br.readLine());
+                        listadoDepartamentos[posicionSubmenu].setLocalizacion(br.readLine());
                         break;
                 }
             }
