@@ -76,5 +76,10 @@ public class Principal {
     //1º forma desde la clase Departamento, recibe int emp_no
     //2º forma desde la clase Principal, recibe int emp_no y posicion del array
 
+    //hacer la 2º forma, la 1º esta hecha
+
+    //proyecto nuevo aprovechando las clases que hemos hecho
+    //hacer un menu que permita gestionar departamentos y empleados
+    //hacer listados automaticos
 
 }
