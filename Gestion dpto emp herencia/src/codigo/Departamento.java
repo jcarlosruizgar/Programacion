@@ -50,6 +50,7 @@ public class Departamento {
         this.listaEmpleados = listaEmpleados;
     }
 
+    //metodo que convierte el numero de empleado, en la posicion del array en la que se encuentra el mismo
     public int posicionEmpleado(int emp_no){
         /*
         int posicionLocalizada = -1;
@@ -61,7 +62,6 @@ public class Departamento {
         }
         return posicionLocalizada;
         */
-
         int i = 0;
         boolean encontrado = false;
         do{

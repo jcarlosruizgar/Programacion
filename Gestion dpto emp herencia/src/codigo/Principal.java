@@ -28,7 +28,8 @@ public class Principal {
 
         System.out.println(posicionDepartamento(15));
 
-        System.out.println(listadoDepartamentos[1].posicionEmpleado(7));
+        System.out.println(listadoDepartamentos[1].posicionEmpleado(20));
+        System.out.println(posicionEmpleado(500,listadoDepartamentos[0]));
 
     }
 
@@ -72,14 +73,32 @@ public class Principal {
         return posicionLocalizada;
     }
 
-    //hacer int posicionEmpleado de 2 formas
-    //1º forma desde la clase Departamento, recibe int emp_no
-    //2º forma desde la clase Principal, recibe int emp_no y posicion del array
+    //convierte el numero de empleado de un departamento, en la posicion del array en la que se enecuentra de dicho departamento
+    public static int posicionEmpleado(int emp_no, Departamento dept){
+                int i = 0;
+        boolean encontrado = false;
+        do{
+            if(dept.getListaEmpleados()[i] != null && dept.getListaEmpleados()[i].getNumeroEmpleado()== emp_no){
+                encontrado = true;
+            }
+            else i++;
 
-    //hacer la 2º forma, la 1º esta hecha
+        }
+        while(!encontrado && i < dept.getListaEmpleados().length);
+        if(encontrado)return i;
+        else return -1;
+    }
 
     //proyecto nuevo aprovechando las clases que hemos hecho
     //hacer un menu que permita gestionar departamentos y empleados
     //hacer listados automaticos
+
+    //1º pregunta si queremos trabajar con departamentos o empleados
+    //si departamento, menu con las cosas que se pueden hacer con los departamentos
+    //+opcion atras para poder volver a elegir
+    //si empleado, menu con todas las opciones que se pueden hacer
+    //+opcione satras para poder volver a elegir
+
+    //esto es un prototipo sin funcionalidad, solo deja ver las opciones que se van a llevar, pero sin llevarlas a cabo
 
 }
