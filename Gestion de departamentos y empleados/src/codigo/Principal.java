@@ -1,5 +1,10 @@
 package codigo;
-
+/**
+ * @author Juan Carlos Ruiz Garcia
+ * @version 1
+ * @date 22/02/2022
+ * @description programa gestion de departamentos y de empleados
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
