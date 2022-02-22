@@ -14,7 +14,7 @@ public class Principal {
 
     private final static int TAMANO = 5;//constante con el tamano del array
     private static Departamento[] listadoDepartamentos = new Departamento[TAMANO];
-    private static int posOcupadas = 0;//contador de posiciones ocupadas del array
+    private static int posicionesOcupadas = 0;//contador de posiciones ocupadas del array
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static int opcionMenu;//opcion tomada en el menu principal
     private static boolean salir = false;//variable bandera ejecucion del programa
@@ -134,7 +134,7 @@ public class Principal {
     public static void insertarDepartamento() throws IOException {
         listarDepartamentos();
         calcularInsercion();
-        if (posOcupadas < 5) {
+        if (posicionesOcupadas < 5) {
             try {
                 System.out.println("Introduzca el numero de departamento:");
                 int nDpto = Integer.parseInt(br.readLine());
@@ -143,9 +143,9 @@ public class Principal {
                 System.out.println("Introduzca donde se ubica el departamento:");
                 String locDpto = br.readLine();
                 listadoDepartamentos[posicionInserciones] = new Departamento(nDpto, nomDpto, locDpto);
-                posOcupadas++;
+                posicionesOcupadas++;
             } catch (NumberFormatException nfe) {
-                System.out.println("Eso no es un numero.");
+                System.out.println("Lo que ha introducido como numero de departamento, no es un numero.");
             }
         } else {
             System.out.println("No se pueden introducir mas departamentos.");
@@ -157,7 +157,7 @@ public class Principal {
         if (localizarDepartamento(numero) == -1) System.out.println("No existe ese departamento.");
         else {
             listadoDepartamentos[localizarDepartamento(numero)] = null;
-            posOcupadas--;
+            posicionesOcupadas--;
         }
     }
 

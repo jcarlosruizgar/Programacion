@@ -50,6 +50,8 @@ public class Departamento {
         this.listaEmpleados = listaEmpleados;
     }
 
+
+
     @Override
     public String toString() {
         return "Departamento numero "+dept_no+" de "+dnombre+" ubicado en "+localizacion;

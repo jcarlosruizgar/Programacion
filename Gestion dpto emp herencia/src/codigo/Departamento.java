@@ -50,6 +50,32 @@ public class Departamento {
         this.listaEmpleados = listaEmpleados;
     }
 
+    public int posicionEmpleado(int emp_no){
+        /*
+        int posicionLocalizada = -1;
+        for (int i = 0; i < listaEmpleados.length; i++) {
+            if (listaEmpleados[i] != null && listaEmpleados[i].getNumeroEmpleado()== emp_no) {
+                posicionLocalizada = i;
+                break;
+            }
+        }
+        return posicionLocalizada;
+        */
+
+        int i = 0;
+        boolean encontrado = false;
+        do{
+            if(listaEmpleados[i] != null && listaEmpleados[i].getNumeroEmpleado()== emp_no){
+                encontrado = true;
+            }
+            else i++;
+
+        }
+        while(!encontrado && i < listaEmpleados.length);
+        if(encontrado)return i;
+        else return -1;
+    }
+
     @Override
     public String toString() {
         return "Departamento numero "+dept_no+" de "+dnombre+" ubicado en "+localizacion;

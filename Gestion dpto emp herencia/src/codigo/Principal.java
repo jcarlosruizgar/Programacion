@@ -28,6 +28,8 @@ public class Principal {
 
         System.out.println(posicionDepartamento(15));
 
+        System.out.println(listadoDepartamentos[1].posicionEmpleado(7));
+
     }
 
     public static void esInstanciaDe(Empleado e){
@@ -60,14 +62,19 @@ public class Principal {
 
     //metodo para convertir el numero de departemento en la posicion del array
     public static int posicionDepartamento(int dept_no) {
-        int posLoc = -1;
+        int posicionLocalizada = -1;
         for (int i = 0; i < listadoDepartamentos.length; i++) {
             if (listadoDepartamentos[i] != null && listadoDepartamentos[i].getDept_no() == dept_no) {
-                posLoc = i;
+                posicionLocalizada = i;
                 i = listadoDepartamentos.length;
             }
         }
-        return posLoc;
+        return posicionLocalizada;
     }
+
+    //hacer int posicionEmpleado de 2 formas
+    //1º forma desde la clase Departamento, recibe int emp_no
+    //2º forma desde la clase Principal, recibe int emp_no y posicion del array
+
 
 }
