@@ -7,10 +7,10 @@ public class Departamento {
     private int dept_no;//numero de departamento
     private String dnombre;//nombre del departamento
     private String localizacion;//nombre de la poblacion donde esta el departamento
-    private final int TAMANO = 5;
-    private Empleado[] empleados;
-    private int numeroEmpleados = 0;
-    private int posicionInserciones = 0;
+    private final int TAMANO = 5;//constante con el tamano del array de empleados
+    private Empleado[] empleados;//declaracion del array de empleados
+    private int numeroEmpleados = 0;//variable de control con el numero de empleados en el array de empledos
+    private int posicionInserciones = 0;//posicion en la que se realizara la proxima insercion en el array de empleados
 
     public Departamento() {
     }
@@ -31,6 +31,8 @@ public class Departamento {
         this.dnombre=dnombre;
         this.localizacion=localizacion;
         this.empleados = empleados;
+        numeroEmpleados = empleados.length;
+        posicionInserciones = numeroEmpleados;
     }
 
     public int getDept_no() {

@@ -169,6 +169,8 @@ public class Principal {
         //asignacion del departamento a los empleados del segundo departamento, logistica
         departamentos[1].getEmpleados()[0].setDepartamentoEmpleado(departamentos[1]);
         departamentos[1].getEmpleados()[1].setDepartamentoEmpleado(departamentos[1]);
+        numeroDepartamentos = 2;
+        posicionInserciones = 2;
     }
 
 }
