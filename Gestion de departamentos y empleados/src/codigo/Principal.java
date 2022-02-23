@@ -18,15 +18,13 @@ public class Principal {
         do{
             try{
                 System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
-                System.out.println("Introduzca:\n1 - Para gestionar los departamentos.\n2 - Para gestionar los empleados.\n3 - Carga automatica.\n0 - Para salir.");
+                System.out.println("Introduzca:\n1 - Para gestionar los departamentos.\n2 - Para gestionar los empleados.\n0 - Para salir.");
                 switch(Integer.parseInt(br.readLine())){
                     case 1:
                         menuDepartamentos();
                         break;
                     case 2:
                         menuEmpleados();
-                        break;
-                    case 3:
                         break;
                     case 0:
                         salir = true;
@@ -46,6 +44,7 @@ public class Principal {
         System.out.println("2 - Insertar un departamento.");
         System.out.println("3 - Borrar un departamento.");
         System.out.println("4 - Modificar un departamento.");
+        System.out.println("5 - Carga automatica.");
         System.out.println("0 - Volver al menu anterior.");
         switch(Integer.parseInt(br.readLine())){
             case 1:
@@ -56,6 +55,8 @@ public class Principal {
                 break;
             case 4:
                 modificarDepartamento();
+                break;
+            case 5:
                 break;
             case 0:
                 break;
