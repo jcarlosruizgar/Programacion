@@ -8,15 +8,20 @@ package codigo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 
 public class Principal {
 
     private static boolean salir = false;//variable bandera que controla la ejecucion del programa
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static Departamento[] listadoDepartamentos = new Departamento[5];
+    private static final int TAMANO = 5;//constante que determina el tamano del array de departamentos
+    private static Departamento[] departamentos = new Departamento[TAMANO];
+    private static int numeroDepartamentos = 0;//variable de control con el numero de departamentos ocupados
+    private static int posicionInserciones = 0;//variable donde se hara la proxima insercion
 
     public static void main(String[] args) {
-        cargaAutomaticaComposicion();
+        //cargaAutomaticaComposicion();
+        cargaAutomaticaAgregacion();
         do{
             try{
                 System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
@@ -132,8 +137,38 @@ public class Principal {
     }
 
     public static void cargaAutomaticaComposicion(){
-        listadoDepartamentos[0] = new Departamento(7,"Ventas","Madrid");
-        listadoDepartamentos[0] = new Departamento(2,"Logistica","Barcelona");
+        departamentos[0] = new Departamento(7,"Ventas","Madrid");//creo el primer departamento por composicion
+        departamentos[1] = new Departamento(2,"Logistica","Barcelona");//creo el segundo departamento por composicion
+        numeroDepartamentos = 2;
+        posicionInserciones = 2;
+    }
+
+    public static void cargaAutomaticaAgregacion(){
+        int tamanoEmpleados = 5;//tamano de los array de empleados
+
+        //creacion del array de empleados de ventas y 2 empleados
+        Empleado[] empleadosVentas = new Empleado[tamanoEmpleados];
+        empleadosVentas[0] = new Analista(20,"Luis",LocalDate.of(1980,4,10),2600,null);
+        empleadosVentas[1] = new Director(10,"Maria",LocalDate.of(1980,4,10),3000,null,600);
+
+        //creacion del array de empleados de logistica y 2 empleados
+        Empleado[] empleadosLogistica = new Empleado[tamanoEmpleados];
+        empleadosLogistica[0] = new Analista(29,"Luisa",LocalDate.of(1989,6,15),1900,null);
+        empleadosLogistica[1] = new Director(3,"Mario",LocalDate.of(2012,10,2),2700,null,200);
+
+        //creacion del primer departamento de ventas
+        departamentos[0] = new Departamento(7,"Ventas","Madrid",empleadosVentas);
+
+        //creacion del segundo departamento de logistica
+        departamentos[1] = new Departamento(2,"Logistica","Barcelona",empleadosLogistica);
+
+        //asignacion del departamento a los empleados del primer departamento, ventas
+        departamentos[0].getEmpleados()[0].setDepartamentoEmpleado(departamentos[0]);
+        departamentos[0].getEmpleados()[1].setDepartamentoEmpleado(departamentos[0]);
+
+        //asignacion del departamento a los empleados del segundo departamento, logistica
+        departamentos[1].getEmpleados()[0].setDepartamentoEmpleado(departamentos[1]);
+        departamentos[1].getEmpleados()[1].setDepartamentoEmpleado(departamentos[1]);
     }
 
 }

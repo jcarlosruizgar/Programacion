@@ -7,20 +7,30 @@ public class Departamento {
     private int dept_no;//numero de departamento
     private String dnombre;//nombre del departamento
     private String localizacion;//nombre de la poblacion donde esta el departamento
-    private Empleado[] listaEmpleados;
+    private final int TAMANO = 5;
+    private Empleado[] empleados;
+    private int numeroEmpleados = 0;
+    private int posicionInserciones = 0;
 
     public Departamento() {
-        super();
     }
 
     public Departamento(int dept_no, String dnombre, String localizacion) {
-        super();
         this.dept_no = dept_no;
         this.dnombre = dnombre;
         this.localizacion = localizacion;
-        this.listaEmpleados = new Empleado[5];
-        this.listaEmpleados[0] = new Director(10,"Maria",LocalDate.of(1980,4,10),3000,this,600);
-        this.listaEmpleados[1] = new Analista(20,"Luis",LocalDate.of(1980,4,10),2600,this);
+        this.empleados = new Empleado[TAMANO];
+        this.empleados[0] = new Director(10,"Maria",LocalDate.of(1980,4,10),3000,this,600);
+        this.empleados[1] = new Analista(20,"Luis",LocalDate.of(1980,4,10),2600,this);
+        numeroEmpleados = 2;
+        posicionInserciones = 2;
+    }
+
+    public Departamento(int dept_no, String dnombre, String localizacion, Empleado[] empleados){
+        this.dept_no=dept_no;
+        this.dnombre=dnombre;
+        this.localizacion=localizacion;
+        this.empleados = empleados;
     }
 
     public int getDept_no() {
@@ -42,12 +52,12 @@ public class Departamento {
         this.localizacion = localizacion;
     }
 
-    public Empleado[] getListaEmpleados() {
-        return listaEmpleados;
+    public Empleado[] getEmpleados() {
+        return empleados;
     }
 
-    public void setListaEmpleados(Empleado[] listaEmpleados) {
-        this.listaEmpleados = listaEmpleados;
+    public void setEmpleados(Empleado[] empleados) {
+        this.empleados = empleados;
     }
 
     //metodo que convierte el numero de empleado, en la posicion del array en la que se encuentra el mismo
@@ -65,13 +75,13 @@ public class Departamento {
         int i = 0;
         boolean encontrado = false;
         do{
-            if(listaEmpleados[i] != null && listaEmpleados[i].getNumeroEmpleado()== emp_no){
+            if(empleados[i] != null && empleados[i].getNumeroEmpleado()== emp_no){
                 encontrado = true;
             }
             else i++;
 
         }
-        while(!encontrado && i < listaEmpleados.length);
+        while(!encontrado && i < empleados.length);
         if(encontrado)return i;
         else return -1;
     }
