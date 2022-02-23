@@ -13,8 +13,10 @@ public class Principal {
 
     private static boolean salir = false;//variable bandera que controla la ejecucion del programa
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static Departamento[] listadoDepartamentos = new Departamento[5];
 
     public static void main(String[] args) {
+        cargaAutomaticaComposicion();
         do{
             try{
                 System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
@@ -44,7 +46,6 @@ public class Principal {
         System.out.println("2 - Insertar un departamento.");
         System.out.println("3 - Borrar un departamento.");
         System.out.println("4 - Modificar un departamento.");
-        System.out.println("5 - Carga automatica.");
         System.out.println("0 - Volver al menu anterior.");
         switch(Integer.parseInt(br.readLine())){
             case 1:
@@ -55,8 +56,6 @@ public class Principal {
                 break;
             case 4:
                 modificarDepartamento();
-                break;
-            case 5:
                 break;
             case 0:
                 break;
@@ -130,6 +129,11 @@ public class Principal {
             case 7:
                 break;
         }
+    }
+
+    public static void cargaAutomaticaComposicion(){
+        listadoDepartamentos[0] = new Departamento(7,"Ventas","Madrid");
+        listadoDepartamentos[0] = new Departamento(2,"Logistica","Barcelona");
     }
 
 }
