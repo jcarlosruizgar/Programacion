@@ -18,15 +18,16 @@ public class Principal {
     private static Departamento[] departamentos = new Departamento[TAMANO];
     private static int numeroDepartamentos = 0;//variable de control con el numero de departamentos ocupados
     private static int posicionInserciones = 0;//variable donde se hara la proxima insercion
+    private static int numeroEmpleados = 0;//variable de control con el numero total de empleados, entre todos los departamentos
 
     public static void main(String[] args) {
-        cargaAutomaticaComposicion();
-        //cargaAutomaticaAgregacion();
+        //cargaAutomaticaComposicion();
+        cargaAutomaticaAgregacion();
         //System.out.println(departamentos[0]);
         //System.out.println(departamentos[0].getEmpleados()[0]);
+        System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
         do{
             try{
-                System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
                 System.out.println("Introduzca:\n1 - Para gestionar los departamentos.\n2 - Para gestionar los empleados.\n0 - Para salir.");
                 switch(Integer.parseInt(br.readLine())){
                     case 1:
@@ -56,7 +57,7 @@ public class Principal {
         System.out.println("0 - Volver al menu anterior.");
         switch(Integer.parseInt(br.readLine())){
             case 1:
-                mostrarDepartamentosEmpleados();
+                mostrarDepartamentos();
                 break;
             case 2:
                 break;
@@ -97,6 +98,7 @@ public class Principal {
             case 1:
                 break;
             case 2:
+                mostrarEmpleados();
                 break;
             case 3:
                 modificarEmpleado();
@@ -144,6 +146,7 @@ public class Principal {
         departamentos[1] = new Departamento(2,"Logistica","Barcelona");//creo el segundo departamento por composicion
         numeroDepartamentos = 2;
         posicionInserciones = 2;
+        numeroEmpleados = 4;
     }
 
     public static void cargaAutomaticaAgregacion(){
@@ -174,6 +177,7 @@ public class Principal {
         departamentos[1].getEmpleados()[1].setDepartamentoEmpleado(departamentos[1]);
         numeroDepartamentos = 2;
         posicionInserciones = 2;
+        numeroEmpleados = 4;
     }
 
     public static void mostrarDepartamentos(){
@@ -182,7 +186,7 @@ public class Principal {
         }
     }
 
-    public static void mostrarDepartamentosEmpleados(){
+    public static void mostrarEmpleados(){
         for (int i = 0; i < TAMANO; i++) {
             if(departamentos[i]!=null){
                 System.out.println("El departamento de " + departamentos[i].getDnombre() +
@@ -191,17 +195,21 @@ public class Principal {
                 //System.out.println(departamentos[i]);
                 for (int j = 0; j < departamentos[i].getEmpleados().length; j++) {
                     if(departamentos[i]!=null && departamentos[i].getEmpleados()[j]!=null){
-                        System.out.println("\t"+departamentos[i].getEmpleados()[j]);
+                        //System.out.println("\t"+departamentos[i].getEmpleados()[j]);
+                        System.out.println("\tEl empleado "+departamentos[i].getEmpleados()[j].getApellido()+
+                                " con numero de empleado "+departamentos[i].getEmpleados()[j].getNumeroEmpleado()+
+                                " se dio de alta el dia "+departamentos[i].getEmpleados()[j].getFechaAlta()+
+                                " percibe un salario de "+departamentos[i].getEmpleados()[j].getSalario());
                     }
                 }
             }
             }
-        System.out.println("Hay "+ numeroDepartamentos + " departamentos");
+        System.out.println("Hay "+ numeroDepartamentos + " departamentos registrados en el sistema.");
         if(numeroDepartamentos == TAMANO){
             System.out.println("La estructura esta llena.");
         }
         else{
-            System.out.println("El proximo departamentos se insertara en la posicion " + (posicionInserciones+1));
+            System.out.println("El proximo departamento se insertara en la posicion " + (posicionInserciones+1) +".");
         }
         }
     }

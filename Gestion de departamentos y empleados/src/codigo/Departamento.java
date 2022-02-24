@@ -32,7 +32,11 @@ public class Departamento {
         this.dnombre=dnombre;
         this.localizacion=localizacion;
         this.empleados = empleados;
-        numeroEmpleados = empleados.length;
+        for (int i = 0; i < empleados.length; i++) {
+            if (empleados[i]!=null){
+                numeroEmpleados++;
+            }
+        }
         posicionInserciones = numeroEmpleados;
     }
 
