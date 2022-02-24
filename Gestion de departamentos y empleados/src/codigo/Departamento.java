@@ -1,6 +1,7 @@
 package codigo;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Departamento {
 
@@ -90,7 +91,34 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Departamento numero "+dept_no+" de "+dnombre+" ubicado en "+localizacion;
+        return "Departamento{" +
+                "dept_no=" + dept_no +
+                ", dnombre='" + dnombre + '\'' +
+                ", localizacion='" + localizacion + '\'' +
+                ", TAMANO=" + TAMANO +
+                ", empleados=" + Arrays.toString(empleados) +
+                ", numeroEmpleados=" + numeroEmpleados +
+                ", posicionInserciones=" + posicionInserciones +
+                '}';
     }
 
+    public int getTAMANO() {
+        return TAMANO;
+    }
+
+    public int getNumeroEmpleados() {
+        return numeroEmpleados;
+    }
+
+    public void setNumeroEmpleados(int numeroEmpleados) {
+        this.numeroEmpleados = numeroEmpleados;
+    }
+
+    public int getPosicionInserciones() {
+        return posicionInserciones;
+    }
+
+    public void setPosicionInserciones(int posicionInserciones) {
+        this.posicionInserciones = posicionInserciones;
+    }
 }

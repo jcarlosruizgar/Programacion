@@ -14,14 +14,16 @@ public class Principal {
 
     private static boolean salir = false;//variable bandera que controla la ejecucion del programa
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static final int TAMANO = 5;//constante que determina el tamano del array de departamentos
+    private static final int TAMANO = 2;//constante que determina el tamano del array de departamentos
     private static Departamento[] departamentos = new Departamento[TAMANO];
     private static int numeroDepartamentos = 0;//variable de control con el numero de departamentos ocupados
     private static int posicionInserciones = 0;//variable donde se hara la proxima insercion
 
     public static void main(String[] args) {
-        //cargaAutomaticaComposicion();
-        cargaAutomaticaAgregacion();
+        cargaAutomaticaComposicion();
+        //cargaAutomaticaAgregacion();
+        //System.out.println(departamentos[0]);
+        //System.out.println(departamentos[0].getEmpleados()[0]);
         do{
             try{
                 System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
@@ -54,6 +56,7 @@ public class Principal {
         System.out.println("0 - Volver al menu anterior.");
         switch(Integer.parseInt(br.readLine())){
             case 1:
+                mostrarDepartamentosEmpleados();
                 break;
             case 2:
                 break;
@@ -173,4 +176,34 @@ public class Principal {
         posicionInserciones = 2;
     }
 
-}
+    public static void mostrarDepartamentos(){
+        for (int i = 0; i < TAMANO; i++) {
+            if(departamentos[i]!=null) System.out.println(departamentos[i]);
+        }
+    }
+
+    public static void mostrarDepartamentosEmpleados(){
+        for (int i = 0; i < TAMANO; i++) {
+            if(departamentos[i]!=null){
+                System.out.println("El departamento de " + departamentos[i].getDnombre() +
+                        " con numero de departamento " + departamentos[i].getDept_no() +
+                        " esta ubicado en " + departamentos[i].getLocalizacion());
+                //System.out.println(departamentos[i]);
+                for (int j = 0; j < departamentos[i].getEmpleados().length; j++) {
+                    if(departamentos[i]!=null && departamentos[i].getEmpleados()[j]!=null){
+                        System.out.println("\t"+departamentos[i].getEmpleados()[j]);
+                    }
+                }
+            }
+            }
+        System.out.println("Hay "+ numeroDepartamentos + " departamentos");
+        if(numeroDepartamentos == TAMANO){
+            System.out.println("La estructura esta llena.");
+        }
+        else{
+            System.out.println("El proximo departamentos se insertara en la posicion " + (posicionInserciones+1));
+        }
+        }
+    }
+
+

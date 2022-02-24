@@ -105,7 +105,6 @@ public abstract class Empleado {
                 ", apellido='" + apellido + '\'' +
                 ", fechaAlta=" + fechaAlta +
                 ", salario=" + salario +
-                ", departamentoEmpleado=" + departamentoEmpleado +
                 '}';
     }
 
