@@ -61,7 +61,7 @@ public class Principal {
                 insertarDepartamentoSinEmpleados();
                 break;
             case 3:
-                borrarDepartamento(7);
+                borrarDepartamentoInteractivo();
                 break;
             case 4:
                 modificarDepartamento();
@@ -303,9 +303,20 @@ public class Principal {
     }
 
     //interactura con el usuario para borrar un departamento.
-    public static void borrarDepartamentoInteractivo(){
+    public static void borrarDepartamentoInteractivo() throws IOException{
         System.out.println("Introduzca el numero de departamento que quiere borrar:");
-
+        int departamentoBorrar = Integer.parseInt(br.readLine());
+        switch (borrarDepartamento(departamentoBorrar)){
+            case 0:
+                System.out.println("No hay ningun departamento registrado en el sistema.");
+                break;
+            case 1:
+                System.out.println("El departamento ha sido eliminado del sistema.");
+                break;
+            case -1:
+                System.out.println("El departamento elegido no existe.");
+                break;
+        }
     }
 
 }
