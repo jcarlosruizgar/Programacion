@@ -64,38 +64,44 @@ public class Principal {
                 borrarDepartamentoInteractivo();
                 break;
             case 4:
-                modificarDepartamento();
+                modificarDepartamentoInteractivo();
                 break;
             case 0:
                 break;
         }
     }
 
-    public static void modificarDepartamento() throws IOException {
+    public static void modificarDepartamentoInteractivo() throws IOException {
+        int[] datos = new int[2];
         if(departamentosVacios()){
             System.out.println("No hay ningun departamento registrado.");
         }
         else{
             System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
-            int opcionModificacionDepartamento = existeDepartamento(Integer.parseInt(br.readLine()));
-            if (opcionModificacionDepartamento == -1) {
+            datos[0] = existeDepartamento(Integer.parseInt(br.readLine()));
+            if (datos[0] == -1) {
                 System.out.println("Ese departamento no existe.");
             }
             else {
                 System.out.println("¿Que dato quiere modificar?");
                 System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
-                switch (Integer.parseInt(br.readLine())) {
-                    case 1:
-                        modificarNumeroDepartamenteInteractivo(opcionModificacionDepartamento);
-                        break;
-                    case 2:
-                        modificarNombreDepartamenteInteractivo(opcionModificacionDepartamento);
-                        break;
-                    case 3:
-                        modificarLocalizacionDepartamenteInteractivo(opcionModificacionDepartamento);
-                        break;
-                }
+                datos[1] = Integer.parseInt(br.readLine());
+                modificarDepartamento(datos);
             }
+        }
+    }
+
+    public static void modificarDepartamento(int[] datos) throws IOException{
+        switch (datos[1]) {
+            case 1:
+                modificarNumeroDepartamenteInteractivo(datos[0]);
+                break;
+            case 2:
+                modificarNombreDepartamenteInteractivo(datos[0]);
+                break;
+            case 3:
+                modificarLocalizacionDepartamenteInteractivo(datos[0]);
+                break;
         }
     }
 
