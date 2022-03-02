@@ -72,18 +72,63 @@ public class Principal {
     }
 
     public static void modificarDepartamento() throws IOException {
-        System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
-        int opcionModificacionDepartamento = Integer.parseInt(br.readLine());
-        System.out.println("¿Que dato quiere modificar?");
-        System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
-        switch (Integer.parseInt(br.readLine())) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+        if(departamentosVacios()){
+            System.out.println("No existe ningun departamento\nIntroduzca alguno antes de poder realizar modificaciones.");
         }
+        else{
+            System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
+            int opcionModificacionDepartamento = existeDepartamento(Integer.parseInt(br.readLine()));
+            if(opcionModificacionDepartamento == -1){
+                System.out.println("Ese departamento no existe.");
+            }
+            else{
+                System.out.println("¿Que dato quiere modificar?");
+                System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
+                switch (Integer.parseInt(br.readLine())) {
+                    case 1:
+                        modificarNumeroDepartamenteInteractivo(opcionModificacionDepartamento);
+                        break;
+                    case 2:
+                        modificarNombreDepartamenteInteractivo(opcionModificacionDepartamento);
+                        break;
+                    case 3:
+                        modificarLocalizacionDepartamenteInteractivo(opcionModificacionDepartamento);
+                        break;
+                }
+            }
+        }
+    }
+
+    public static void modificarNumeroDepartamento(int departamento,int nuevo_dept_no){
+        departamentos[departamento].setDept_no(nuevo_dept_no);
+    }
+
+    public static void modificarNumeroDepartamenteInteractivo(int departamento) throws IOException{
+        System.out.println("Introduzca el nuevo numero de departamento");
+        try{
+            modificarNumeroDepartamento(departamento,Integer.parseInt(br.readLine()));
+        }
+        catch (NumberFormatException nfe){
+            System.out.println("Ese no es un numero de departamento valido.");
+        }
+    }
+
+    public static void modificarNombreDepartamento(int departamento,String nombre){
+        departamentos[departamento].setDnombre(nombre);
+    }
+
+    public static void modificarNombreDepartamenteInteractivo(int departamento) throws IOException{
+        System.out.println("Introduzca el nuevo nombre del departamento");
+        modificarNombreDepartamento(departamento,br.readLine());
+    }
+
+    public static void modificarLocalizacionDepartamento(int departamento,String localizacion){
+        departamentos[departamento].setLocalizacion(localizacion);
+    }
+
+    public static void modificarLocalizacionDepartamenteInteractivo(int departamento) throws IOException{
+        System.out.println("Introduzca la nueva localizacion del departamento");
+        modificarLocalizacionDepartamento(departamento,br.readLine());
     }
 
     public static void menuEmpleados() throws IOException {
