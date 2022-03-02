@@ -72,26 +72,29 @@ public class Principal {
     }
 
     public static void modificarDepartamento() throws IOException {
-        System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
-        int opcionModificacionDepartamento = existeDepartamento(Integer.parseInt(br.readLine()));
-        if (opcionModificacionDepartamento == -1) {
-            System.out.println("Ese departamento no existe.");
-        } else if (opcionModificacionDepartamento == -2) {
-            System.out.println("No existe ningun departamento\nIntroduzca alguno antes de poder realizar modificaciones.");
-
-        } else {
-            System.out.println("¿Que dato quiere modificar?");
-            System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
-            switch (Integer.parseInt(br.readLine())) {
-                case 1:
-                    modificarNumeroDepartamenteInteractivo(opcionModificacionDepartamento);
-                    break;
-                case 2:
-                    modificarNombreDepartamenteInteractivo(opcionModificacionDepartamento);
-                    break;
-                case 3:
-                    modificarLocalizacionDepartamenteInteractivo(opcionModificacionDepartamento);
-                    break;
+        if(departamentosVacios()){
+            System.out.println("No hay ningun departamento registrado.");
+        }
+        else{
+            System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
+            int opcionModificacionDepartamento = existeDepartamento(Integer.parseInt(br.readLine()));
+            if (opcionModificacionDepartamento == -1) {
+                System.out.println("Ese departamento no existe.");
+            }
+            else {
+                System.out.println("¿Que dato quiere modificar?");
+                System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
+                switch (Integer.parseInt(br.readLine())) {
+                    case 1:
+                        modificarNumeroDepartamenteInteractivo(opcionModificacionDepartamento);
+                        break;
+                    case 2:
+                        modificarNombreDepartamenteInteractivo(opcionModificacionDepartamento);
+                        break;
+                    case 3:
+                        modificarLocalizacionDepartamenteInteractivo(opcionModificacionDepartamento);
+                        break;
+                }
             }
         }
     }
@@ -309,22 +312,18 @@ public class Principal {
 
     //existe departamento, devuelve -1 si no existe o devuelve la posicion del array donde se encuentra dicho departamento
     public static int existeDepartamento(int numero) {
-        if (departamentosVacios()) {
-            return -2;
-        } else {
-            boolean encontrado = false;
-            int contador = 0;
-            do {
-                if (departamentos[contador] != null && departamentos[contador].getDept_no() == numero) {
-                    encontrado = true;
-                } else {
-                    contador++;
-                }
+        boolean encontrado = false;
+        int contador = 0;
+        do {
+            if (departamentos[contador] != null && departamentos[contador].getDept_no() == numero) {
+                encontrado = true;
+            } else {
+                contador++;
             }
-            while (!encontrado && contador < TAMANO);
-            if (encontrado) return contador;
-            else return -1;
         }
+        while (!encontrado && contador < TAMANO);
+        if (encontrado) return contador;
+        else return -1;
     }
 
     //borrar departamento recibe el numero de departamento a borrar, devuelve 1 si se ha borrado correctamente y 0 en caso contrario
@@ -335,6 +334,8 @@ public class Principal {
         } else {
             if (existeDepartamento(numero) == -1) {
                 borrado = -1;//no existe el departamento elegido
+            } else if (existeDepartamento(numero) == -2) {
+                borrado = -2;//no hay ningun departamento registrado
             } else {
                 departamentos[existeDepartamento(numero)] = null;
                 posicionInserciones = numero;
@@ -346,18 +347,22 @@ public class Principal {
 
     //interactura con el usuario para borrar un departamento.
     public static void borrarDepartamentoInteractivo() throws IOException {
-        System.out.println("Introduzca el numero de departamento que quiere borrar:");
-        int departamentoBorrar = Integer.parseInt(br.readLine());
-        switch (borrarDepartamento(departamentoBorrar)) {
-            case 0:
-                System.out.println("No hay ningun departamento registrado en el sistema.");
-                break;
-            case 1:
-                System.out.println("El departamento ha sido eliminado del sistema.");
-                break;
-            case -1:
-                System.out.println("El departamento elegido no existe.");
-                break;
+        if (departamentosVacios()) {
+            System.out.println("No hay ningun departamento registrado.");
+        } else {
+            System.out.println("Introduzca el numero de departamento que quiere borrar:");
+            int departamentoBorrar = Integer.parseInt(br.readLine());
+            switch (borrarDepartamento(departamentoBorrar)) {
+                case 0:
+                    System.out.println("No hay ningun departamento registrado en el sistema.");
+                    break;
+                case 1:
+                    System.out.println("El departamento ha sido eliminado del sistema.");
+                    break;
+                case -1:
+                    System.out.println("El departamento elegido no existe.");
+                    break;
+            }
         }
     }
 
