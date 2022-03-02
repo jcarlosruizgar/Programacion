@@ -296,6 +296,7 @@ public class Principal {
             }
             else {
                 departamentos[existeDepartamento(numero)] = null;
+                posicionInserciones=numero;
                 numeroDepartamentos--;
             }
         }
