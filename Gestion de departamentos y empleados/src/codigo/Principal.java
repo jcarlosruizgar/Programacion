@@ -58,12 +58,15 @@ public class Principal {
                 mostrarDepartamentos();
                 break;
             case 2:
+                mostrarDepartamentos();
                 insertarDepartamentoSinEmpleadosInteractivo();
                 break;
             case 3:
+                mostrarDepartamentos();
                 borrarDepartamentoInteractivo();
                 break;
             case 4:
+                mostrarDepartamentos();
                 modificarDepartamentoInteractivo();
                 break;
             case 0:
@@ -149,6 +152,7 @@ public class Principal {
                 mostrarEmpleados();
                 break;
             case 3:
+                mostrarEmpleados();
                 modificarEmpleado();
                 break;
             case 4:
