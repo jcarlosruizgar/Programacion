@@ -58,7 +58,7 @@ public class Principal {
                 mostrarDepartamentos();
                 break;
             case 2:
-                insertarDepartamentoSinEmpleados();
+                insertarDepartamentoSinEmpleadosInteractivo();
                 break;
             case 3:
                 borrarDepartamentoInteractivo();
@@ -73,16 +73,14 @@ public class Principal {
 
     public static void modificarDepartamentoInteractivo() throws IOException {
         int[] datos = new int[2];
-        if(departamentosVacios()){
+        if (departamentosVacios()) {
             System.out.println("No hay ningun departamento registrado.");
-        }
-        else{
+        } else {
             System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
             datos[0] = existeDepartamento(Integer.parseInt(br.readLine()));
             if (datos[0] == -1) {
                 System.out.println("Ese departamento no existe.");
-            }
-            else {
+            } else {
                 System.out.println("¿Que dato quiere modificar?");
                 System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
                 datos[1] = Integer.parseInt(br.readLine());
@@ -91,7 +89,7 @@ public class Principal {
         }
     }
 
-    public static void modificarDepartamento(int[] datos) throws IOException{
+    public static void modificarDepartamento(int[] datos) throws IOException {
         switch (datos[1]) {
             case 1:
                 modificarNumeroDepartamenteInteractivo(datos[0]);
@@ -279,12 +277,10 @@ public class Principal {
     }
 
     //metodo para insertar un departamento sin empleados, retorna -1 si no se ha podido insertar o la posicion en la que se ha insertado y recibe por argumentos los 3 atributos de los departamentos
-    public static int insertarDepartamentoSinEmpleados() throws IOException {
-        int posicion = -1;
+    public static void insertarDepartamentoSinEmpleadosInteractivo() throws IOException {
         if (departamentosLlenos()) {
             System.out.println("No se pueden insertar mas departamentos.");
         } else {
-            posicionInserciones = buscarHueco();
             try {
                 System.out.println("Introduzca el numero de departamento:");
                 int nDpto = Integer.parseInt(br.readLine());
@@ -292,14 +288,16 @@ public class Principal {
                 String nomDpto = br.readLine();
                 System.out.println("Introduzca donde se ubica el departamento:");
                 String locDpto = br.readLine();
-                departamentos[posicionInserciones] = new Departamento(nDpto, nomDpto, locDpto);
-                posicion = posicionInserciones;
-                numeroDepartamentos++;
+                insertarDepartamentoSinEmpleados(nDpto,nomDpto,locDpto);
             } catch (NumberFormatException nfe) {
                 System.out.println("Lo que ha introducido como numero de departamento, no es un numero.");
             }
         }
-        return posicion;
+    }
+
+    public static void insertarDepartamentoSinEmpleados(int nDpto, String nomDpto, String locDpto) {
+        departamentos[buscarHueco()] = new Departamento(nDpto, nomDpto, locDpto);
+        numeroDepartamentos++;
     }
 
     //modificarlo a que retorne un int, -1 si no encontrado o numero encontrado
