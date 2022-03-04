@@ -361,9 +361,11 @@ public class Principal {
             System.out.println("Introduzca el numero de departamento que quiere borrar:");
             int departamentoBorrar = Integer.parseInt(br.readLine());
             switch (borrarDepartamento(departamentoBorrar)) {
-                case 0:
-                    System.out.println("No hay ningun departamento registrado en el sistema.");
-                    break;
+                /**
+                 * case 0:
+                 *                     System.out.println("No hay ningun departamento registrado en el sistema.");
+                 *                     break;
+                 */
                 case 1:
                     System.out.println("El departamento ha sido eliminado del sistema.");
                     break;
