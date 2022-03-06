@@ -146,6 +146,7 @@ public class Principal {
         System.out.println("0 - Volver al menu anterior.");
         switch (Integer.parseInt(br.readLine())) {
             case 1:
+                mostrarDepartamentosEmpleados();
                 insertarEmpleadoInteractivo();
                 break;
             case 2:
@@ -246,7 +247,7 @@ public class Principal {
         } else {//si los hay, ejecuta el metodo
             for (int i = 0; i < TAMANO; i++) {//bucle que recorre los departamentos
                 if (departamentos[i] != null) {
-                    System.out.println("El departamento de " + departamentos[i].getDnombre() +
+                    System.out.println("\nEl departamento de " + departamentos[i].getDnombre() +
                             " con numero de departamento " + departamentos[i].getDept_no() +
                             " esta ubicado en " + departamentos[i].getLocalizacion());
                     for (int j = 0; j < departamentos[i].getEmpleados().length; j++) {//bucle que recorre los empleados
@@ -259,11 +260,11 @@ public class Principal {
                     }
                 }
             }
-            System.out.println("Hay " + numeroDepartamentos + " departamentos registrados en el sistema.");
+            System.out.println("\nHay " + numeroDepartamentos + " departamentos registrados en el sistema.");
             if (numeroDepartamentos == TAMANO) {
-                System.out.println("La estructura esta llena.");
+                System.out.println("\nLa estructura esta llena.");
             } else {
-                System.out.println("El proximo departamento se insertara en la posicion " + (posicionInserciones + 1) + ".");
+                System.out.println("\nEl proximo departamento se insertara en la posicion " + (posicionInserciones + 1) + ".");
             }
         }
     }
@@ -422,54 +423,53 @@ public class Principal {
 
     //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno
     public static int insertarEmpleado(Empleado emp, Departamento dept) {
-        if (empleadosLlenos(dept)) {//si el array de empleado esta lleno
-            return -1;
-        } else if (existeEmpleado(dept.getDept_no(), emp.getNumeroEmpleado()) != -1) {
-            return 0;//si el numero de empleado nuevo ya existe
-        } else {//si todo esta ok
-            dept.insertarEmpleado(emp);
-            return 1;
-        }
+        dept.insertarEmpleado(emp);
+        return 1;
     }
 
+    //metodo interactivo para insertar un empleado en un departamento
     public static void insertarEmpleadoInteractivo() throws IOException{
         System.out.println("Seleccione en que departamento quiere insertar un empleado.");
-        int deptInsertar = Integer.parseInt(br.readLine());
-        int posDeptInsertar = existeDepartamento(deptInsertar);
+        int deptInsertar = Integer.parseInt(br.readLine());//lee el numero de departamento
+        int posDeptInsertar = existeDepartamento(deptInsertar);//convierte el numero de departamento en la posicion del departamento
         if (posDeptInsertar == -1){//comrpueba que exista el departamento elegido
             System.out.println("El departamento elegido no existe.");
         }
-        else{//comprueba que no este lleno el array de empleados del departamento
-            if (empleadosLlenos(departamentos[posDeptInsertar])){
+        else{
+            if (empleadosLlenos(departamentos[posDeptInsertar])){//comprueba que no este lleno el array de empleados del departamento
                 System.out.println("No caben mas empleados en este departamento.");
             }
             else{
-                Empleado emp;
-                System.out.println("Que quiere insertar:\n1 - Un analista.\n 2 - Un Director.");
-                int tipoEmpleado = Integer.parseInt(br.readLine());
+                Empleado emp;//objeto empleado
+                System.out.println("Que quiere insertar:\n1 - Un analista.\n2 - Un Director.");
+                int tipoEmpleado = Integer.parseInt(br.readLine());//tipo empleado
                 System.out.println("Indique el numero del empleado:");
-                int numEmp = Integer.parseInt(br.readLine());
-                System.out.println("Indique el apellido del empleado:");
-                String apellidoEmp = br.readLine();
-                System.out.println("Indique la fecha de alta del empleado:\nFormato aaaa-mm-dd");
-                LocalDate fechaAltaEmp = LocalDate.parse(br.readLine());
-                System.out.println("Indique el salario del empleado:");
-                double salarioEmp = Integer.parseInt(br.readLine());
-                if(tipoEmpleado == 1){
-                    emp = new Analista(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar]);
+                int numEmp = Integer.parseInt(br.readLine());//numero de empleado
+                if (existeEmpleado(departamentos[posDeptInsertar].getDept_no(), numEmp) != -1){//comprueba si ya existe ese empleado
+                    System.out.println("Ese empleado ya existe en el departamento.");
                 }
                 else{
-                    System.out.println("Indique la comision del empleado:");
-                    double comisionEmp = Integer.parseInt(br.readLine());
-                    emp = new Director(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar],comisionEmp);
+                    System.out.println("Indique el apellido del empleado:");
+                    String apellidoEmp = br.readLine();//apellido de empleado
+                    System.out.println("Indique la fecha de alta del empleado:\nFormato aaaa-mm-dd");
+                    LocalDate fechaAltaEmp = LocalDate.parse(br.readLine());//fecha de alta de empleado
+                    System.out.println("Indique el salario del empleado:");
+                    double salarioEmp = Integer.parseInt(br.readLine());//salario de empleado
+                    if(tipoEmpleado == 1){//si es analista, llama a su constructor
+                        emp = new Analista(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar]);
+                    }
+                    else{//si es director pide la comision y llama a su constructor
+                        System.out.println("Indique la comision del empleado:");
+                        double comisionEmp = Integer.parseInt(br.readLine());//comision de director
+                        emp = new Director(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar],comisionEmp);
+                    }
+                    if(insertarEmpleado(emp,departamentos[posDeptInsertar]) == 1){//llama a insertar empleado con el empleado y el departamento, si es 1 se ha insertado correctamente
+                        System.out.println("Operacion realizada correctamente.");
+                    }
                 }
-                insertarEmpleado(emp,departamentos[posDeptInsertar]);
-                //departamentos[posDeptInsertar].insertarEmpleado(emp);
             }
         }
     }
-
-
 
 }
 
