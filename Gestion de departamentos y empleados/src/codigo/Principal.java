@@ -421,10 +421,10 @@ public class Principal {
     }
 
     //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno
-    public static int insertarEmpleado(Empleado emp, Departamento dept, int numEmp) {
+    public static int insertarEmpleado(Empleado emp, Departamento dept) {
         if (empleadosLlenos(dept)) {//si el array de empleado esta lleno
             return -1;
-        } else if (existeEmpleado(dept.getDept_no(), emp.getNumeroEmpleado()) == numEmp) {
+        } else if (existeEmpleado(dept.getDept_no(), emp.getNumeroEmpleado()) != -1) {
             return 0;//si el numero de empleado nuevo ya existe
         } else {//si todo esta ok
             dept.insertarEmpleado(emp);
@@ -463,7 +463,7 @@ public class Principal {
                     double comisionEmp = Integer.parseInt(br.readLine());
                     emp = new Director(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar],comisionEmp);
                 }
-                insertarEmpleado(emp,departamentos[posDeptInsertar],numEmp);
+                insertarEmpleado(emp,departamentos[posDeptInsertar]);
                 //departamentos[posDeptInsertar].insertarEmpleado(emp);
             }
         }
