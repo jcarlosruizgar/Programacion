@@ -19,7 +19,6 @@ public class Principal {
     private static Departamento[] departamentos = new Departamento[TAMANO];
     private static int numeroDepartamentos = 0;//variable de control con el numero de departamentos ocupados
     private static int posicionInserciones = 0;//variable donde se hara la proxima insercion
-    private static int numeroEmpleados = 0;//variable de control con el numero total de empleados, entre todos los departamentos
 
     public static void main(String[] args) {
         //cargaAutomaticaComposicion();
@@ -147,12 +146,13 @@ public class Principal {
         System.out.println("0 - Volver al menu anterior.");
         switch (Integer.parseInt(br.readLine())) {
             case 1:
+                insertarEmpleadoInteractivo();
                 break;
             case 2:
-                mostrarEmpleados();
+                mostrarDepartamentosEmpleados();
                 break;
             case 3:
-                mostrarEmpleados();
+                mostrarDepartamentosEmpleados();
                 modificarEmpleado();
                 break;
             case 4:
@@ -198,7 +198,6 @@ public class Principal {
         departamentos[1] = new Departamento(2, "Logistica", "Barcelona");//creo el segundo departamento por composicion
         numeroDepartamentos = 2;
         posicionInserciones = 2;
-        numeroEmpleados = 4;
     }
 
     public static void cargaAutomaticaAgregacion() {
@@ -229,7 +228,6 @@ public class Principal {
         departamentos[1].getEmpleados()[1].setDepartamentoEmpleado(departamentos[1]);
         numeroDepartamentos = 2;
         posicionInserciones = 2;
-        numeroEmpleados = 4;
     }
 
     public static void mostrarDepartamentos() {
@@ -242,7 +240,7 @@ public class Principal {
         }
     }
 
-    public static void mostrarEmpleados() {
+    public static void mostrarDepartamentosEmpleados() {
         if (departamentosVacios()) {//si no hay datos, no muestra nada
             System.out.println("No hay ningun dato que mostrar.");
         } else {//si los hay, ejecuta el metodo
@@ -292,7 +290,7 @@ public class Principal {
                 String nomDpto = br.readLine();
                 System.out.println("Introduzca donde se ubica el departamento:");
                 String locDpto = br.readLine();
-                insertarDepartamentoSinEmpleados(nDpto,nomDpto,locDpto);
+                insertarDepartamentoSinEmpleados(nDpto, nomDpto, locDpto);
             } catch (NumberFormatException nfe) {
                 System.out.println("Lo que ha introducido como numero de departamento, no es un numero.");
             }
@@ -375,6 +373,103 @@ public class Principal {
             }
         }
     }
+
+    //devuelve -1 si no existe empleado, o la posicion del empleado buscado en un departamento
+    public static int existeEmpleado(int num_dpto, int num_empl) {
+        boolean encontrado = false;
+        int contador = 0;
+        int dptoBuscar = existeDepartamento(num_dpto);
+        do {
+            if (departamentos[dptoBuscar].getEmpleados()[contador] != null && departamentos[dptoBuscar].getEmpleados()[contador].getNumeroEmpleado() == num_empl) {
+                encontrado = true;
+            } else {
+                contador++;
+            }
+        }
+        while (!encontrado && contador < departamentos[dptoBuscar].getTAMANO());
+        if (encontrado) return contador;
+        else return -1;
+    }
+
+    public static boolean empleadosVacios(Departamento dept) {
+        return dept.getNumeroEmpleados() == 0;
+    }
+
+    public static boolean empleadosLlenos(Departamento dept) {
+        return dept.getNumeroEmpleados() == dept.getTAMANO();
+    }
+
+    public static void mostrarEmpleados(Departamento dept) {
+        if (empleadosVacios(dept)) {
+            System.out.println("No existen empleados registrados en el departamento " + dept.getDnombre());
+        } else {
+            for (int i = 0; i < dept.getEmpleados().length; i++) {//bucle que recorre los empleados
+                if (dept.getEmpleados()[i] != null) {
+                    System.out.println("\tEl empleado " + dept.getEmpleados()[i].getApellido() +
+                            " con numero de empleado " + dept.getEmpleados()[i].getNumeroEmpleado() +
+                            " se dio de alta el dia " + dept.getEmpleados()[i].getFechaAlta() +
+                            " percibe un salario de " + dept.getEmpleados()[i].getSalario());
+                }
+            }
+            System.out.println("Hay " + dept.getNumeroEmpleados() + " empleados en el departamento " + dept.getDnombre());
+            if (dept.getNumeroEmpleados() == dept.getTAMANO()) {
+                System.out.println("La estructura esta llena.");
+            } else {
+                System.out.println("El proximo empleado se insertara en la posicion " + (dept.getPosicionInserciones() + 1) + ".");
+            }
+        }
+    }
+
+    //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno
+    public static int insertarEmpleado(Empleado emp, Departamento dept, int numEmp) {
+        if (empleadosLlenos(dept)) {//si el array de empleado esta lleno
+            return -1;
+        } else if (existeEmpleado(dept.getDept_no(), emp.getNumeroEmpleado()) == numEmp) {
+            return 0;//si el numero de empleado nuevo ya existe
+        } else {//si todo esta ok
+            dept.insertarEmpleado(emp);
+            return 1;
+        }
+    }
+
+    public static void insertarEmpleadoInteractivo() throws IOException{
+        System.out.println("Seleccione en que departamento quiere insertar un empleado.");
+        int deptInsertar = Integer.parseInt(br.readLine());
+        int posDeptInsertar = existeDepartamento(deptInsertar);
+        if (posDeptInsertar == -1){//comrpueba que exista el departamento elegido
+            System.out.println("El departamento elegido no existe.");
+        }
+        else{//comprueba que no este lleno el array de empleados del departamento
+            if (empleadosLlenos(departamentos[posDeptInsertar])){
+                System.out.println("No caben mas empleados en este departamento.");
+            }
+            else{
+                Empleado emp;
+                System.out.println("Que quiere insertar:\n1 - Un analista.\n 2 - Un Director.");
+                int tipoEmpleado = Integer.parseInt(br.readLine());
+                System.out.println("Indique el numero del empleado:");
+                int numEmp = Integer.parseInt(br.readLine());
+                System.out.println("Indique el apellido del empleado:");
+                String apellidoEmp = br.readLine();
+                System.out.println("Indique la fecha de alta del empleado:\nFormato aaaa-mm-dd");
+                LocalDate fechaAltaEmp = LocalDate.parse(br.readLine());
+                System.out.println("Indique el salario del empleado:");
+                double salarioEmp = Integer.parseInt(br.readLine());
+                if(tipoEmpleado == 1){
+                    emp = new Analista(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar]);
+                }
+                else{
+                    System.out.println("Indique la comision del empleado:");
+                    double comisionEmp = Integer.parseInt(br.readLine());
+                    emp = new Director(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos[posDeptInsertar],comisionEmp);
+                }
+                insertarEmpleado(emp,departamentos[posDeptInsertar],numEmp);
+                //departamentos[posDeptInsertar].insertarEmpleado(emp);
+            }
+        }
+    }
+
+
 
 }
 

@@ -16,6 +16,7 @@ public class Departamento {
     public Departamento() {
     }
 
+    //constructor composicion
     public Departamento(int dept_no, String dnombre, String localizacion) {
         this.dept_no = dept_no;
         this.dnombre = dnombre;
@@ -27,6 +28,7 @@ public class Departamento {
         posicionInserciones = 2;
     }
 
+    //contructor agregacion
     public Departamento(int dept_no, String dnombre, String localizacion, Empleado[] empleados){
         this.dept_no=dept_no;
         this.dnombre=dnombre;
@@ -125,4 +127,12 @@ public class Departamento {
     public void setPosicionInserciones(int posicionInserciones) {
         this.posicionInserciones = posicionInserciones;
     }
+
+    //metodo para insertar un empleado en el departamento
+    public void insertarEmpleado(Empleado emp){
+        this.empleados[posicionInserciones] = emp;
+        numeroEmpleados++;
+        posicionInserciones++;
+    }
+
 }
