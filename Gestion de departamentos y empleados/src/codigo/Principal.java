@@ -441,14 +441,14 @@ public class Principal {
             }
             else{
                 Empleado emp;//objeto empleado
-                System.out.println("Que quiere insertar:\n1 - Un analista.\n2 - Un Director.");
-                int tipoEmpleado = Integer.parseInt(br.readLine());//tipo empleado
                 System.out.println("Indique el numero del empleado:");
                 int numEmp = Integer.parseInt(br.readLine());//numero de empleado
                 if (existeEmpleado(departamentos[posDeptInsertar].getDept_no(), numEmp) != -1){//comprueba si ya existe ese empleado
                     System.out.println("Ese empleado ya existe en el departamento.");
                 }
                 else{
+                    System.out.println("Que quiere insertar:\n1 - Un analista.\n2 - Un Director.");
+                    int tipoEmpleado = Integer.parseInt(br.readLine());//tipo empleado
                     System.out.println("Indique el apellido del empleado:");
                     String apellidoEmp = br.readLine();//apellido de empleado
                     System.out.println("Indique la fecha de alta del empleado:\nFormato aaaa-mm-dd");
