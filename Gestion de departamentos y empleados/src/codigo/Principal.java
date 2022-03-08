@@ -21,8 +21,8 @@ public class Principal {
     private static int posicionInserciones = 0;//variable donde se hara la proxima insercion
 
     public static void main(String[] args) {
-        //cargaAutomaticaComposicion();
-        cargaAutomaticaAgregacion();
+        cargaAutomaticaComposicion();
+        //cargaAutomaticaAgregacion();
         System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
         do {
             try {
@@ -157,6 +157,8 @@ public class Principal {
                 modificarEmpleado();
                 break;
             case 4:
+                mostrarDepartamentosEmpleados();
+                borrarEmpleadoInteractivo();
                 break;
             case 5:
                 break;
@@ -421,9 +423,13 @@ public class Principal {
         }
     }
 
-    //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno
+    //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno. modificarlo para que lo haga aqui con el getter
     public static int insertarEmpleado(Empleado emp, Departamento dept) {
-        dept.insertarEmpleado(emp);
+        dept.setPosicionInserciones(buscarHuecoEmpleados(dept));
+        //dept.insertarEmpleado(emp);
+        dept.getEmpleados()[existeEmpleado(dept.getDept_no(),emp.getNumeroEmpleado())]=emp;
+        dept.setPosicionInserciones(buscarHuecoEmpleados(dept));
+        dept.setNumeroEmpleados(dept.getNumeroEmpleados()+1);
         return 1;
     }
 
@@ -469,6 +475,67 @@ public class Principal {
                 }
             }
         }
+    }
+
+    //metodo para borrar un empleado, devuelve -1 si no existe el empleado,0 si esta vacio, 1 si se ha realizado correctamente
+    public static int borrarEmpleado(int numeroEmpleado, Departamento dept){
+        int posicionEmpleado = existeEmpleado(dept.getDept_no(),numeroEmpleado);
+        if(empleadosVacios(dept)){
+            return 0;
+        }
+        else if(posicionEmpleado == -1){
+            return -1;//no existe el empleado
+        }
+        else{
+            dept.getEmpleados()[posicionEmpleado]=null;
+            dept.setNumeroEmpleados(dept.getNumeroEmpleados()-1);
+            dept.setPosicionInserciones(dept.getPosicionInserciones()-1);
+            return 1;//se ha eliminado el empleado
+        }
+    }
+
+    //metodo interactivo para borrar un empleado
+    public static void borrarEmpleadoInteractivo() throws IOException{
+        if(departamentosVacios()){//control de error si no hay departamentos registrados
+            System.out.println("No hay ningún departamento");
+        }
+        else{
+            System.out.println("Introduzca el numero de departamento del que quiere borrar un empleado:");
+            int numeroDepartamento = Integer.parseInt(br.readLine());
+            int posicionDepartamento = existeDepartamento(numeroDepartamento);
+            if(posicionDepartamento == -1){//control de error si no existe el departamento
+                System.out.println("No existe el departamento elegido.");
+            }
+            else{
+                System.out.println("Introduzca el numero de empleado que quiere borrar");
+                int numeroEmpleado = Integer.parseInt(br.readLine());
+                switch (borrarEmpleado(numeroEmpleado,departamentos[posicionDepartamento])){
+                    case -1:
+                        System.out.println("No existe el empleado elegido.");
+                        break;
+                    case 0:
+                        System.out.println("No hay empleados registrados en ese departamento.");
+                        break;
+                    case 1:
+                        System.out.println("Operacion realizada correctamente.");
+                        break;
+                }
+            }
+        }
+    }
+
+    //metodo que busca el hueco de insercion de empleados en el departamento elegido, retorna -1 no encontrado o la posicion
+    public static int buscarHuecoEmpleados(Departamento dept){
+        boolean noEncontrado = false;
+        int i = 0;
+        do{
+            if(dept.getEmpleados()[i] == null){
+                noEncontrado = true;
+            } else i++;
+        }
+        while(!noEncontrado && i < dept.getTAMANO());
+        if(noEncontrado) return i;
+        else return -1;
     }
 
 }
