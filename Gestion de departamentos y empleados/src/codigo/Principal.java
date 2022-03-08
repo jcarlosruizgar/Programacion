@@ -425,9 +425,8 @@ public class Principal {
 
     //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno. modificarlo para que lo haga aqui con el getter
     public static int insertarEmpleado(Empleado emp, Departamento dept) {
-        dept.setPosicionInserciones(buscarHuecoEmpleados(dept));
         //dept.insertarEmpleado(emp);
-        dept.getEmpleados()[existeEmpleado(dept.getDept_no(),emp.getNumeroEmpleado())]=emp;
+        dept.getEmpleados()[buscarHuecoEmpleados(dept)]=emp;
         dept.setPosicionInserciones(buscarHuecoEmpleados(dept));
         dept.setNumeroEmpleados(dept.getNumeroEmpleados()+1);
         return 1;
