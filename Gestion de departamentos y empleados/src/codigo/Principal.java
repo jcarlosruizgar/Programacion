@@ -176,35 +176,6 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    public void modificarEmpleado() throws IOException {
-        System.out.println("Introduzca el numero de empleado del que quiere realizar una modificacion:");
-        int opcionModificacionEmpleado = Integer.parseInt(br.readLine());
-        System.out.println("¿Que dato quiere modificar?");
-        System.out.println("1 - Para numero de empleado.");
-        System.out.println("2 - Para apellido.");
-        System.out.println("3 - Para oficio.");
-        System.out.println("4 - Para fecha de alta.");
-        System.out.println("5 - Para salario.");
-        System.out.println("6 - Para comision.");
-        System.out.println("7 - Para departamento.");
-        switch (Integer.parseInt(br.readLine())) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-        }
-    }
-
     public void cargaAutomaticaConComposicion() {
         departamentos[0] = new Departamento(7, "Ventas", "Madrid");//creo el primer departamento por composicion
         departamentos[1] = new Departamento(2, "Logistica", "Barcelona");//creo el segundo departamento por composicion
@@ -592,7 +563,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                         System.out.println("5 - Para comision del director.");
                     }
                     datos[2] = Integer.parseInt(br.readLine());
-                    p.modificarDepartamento(datos);
+                    p.modificarEmpleado(datos);
                 }
             }
         }
@@ -601,15 +572,19 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     public void modificarEmpleado(int[] datos) throws IOException {
         switch (datos[2]){
             case 1:
+                p.modificarNumeroEmpleadoInteractivo(datos);
                 System.out.println("1");
                 break;
             case 2:
+                p.modificarApellidoEmpleadoInteractivo(datos);
                 System.out.println("2");
                 break;
             case 3:
+                p.modificarFechaAltaEmpleadoInteractivo(datos);
                 System.out.println("3");
                 break;
             case 4:
+                p.modificarSalarioEmpleadoInteractivo(datos);
                 System.out.println("4");
                 break;
             case 5:
@@ -618,6 +593,29 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    public void modificarNumeroEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca el nuevo numero del empleado:");
+        int numeroEmpleado = Integer.parseInt(br.readLine());
+        departamentos[datos[0]].getEmpleados()[datos[1]].setNumeroEmpleado(numeroEmpleado);
+    }
+
+    public void modificarApellidoEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca el nuevo apellido del empleado:");
+        String apellidoEmpleado = br.readLine();
+        departamentos[datos[0]].getEmpleados()[datos[1]].setApellido(apellidoEmpleado);
+    }
+
+    public void modificarFechaAltaEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca la nueva fecha de alta del empleado.\n(Formato aaaa-mm-dd)");
+        LocalDate fechaAltaEmpleado = LocalDate.parse(br.readLine());
+        departamentos[datos[0]].getEmpleados()[datos[1]].setFechaAlta(fechaAltaEmpleado);
+    }
+
+    public void modificarSalarioEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduza el nuevo salario del empleado.");
+        double salarioEmpleado = Double.parseDouble(br.readLine());
+        departamentos[datos[0]].getEmpleados()[datos[1]].setSalario(salarioEmpleado);
+    }
 }
 
 
