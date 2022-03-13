@@ -588,7 +588,9 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                     System.out.println("2 - Para apellido del empleado.");
                     System.out.println("3 - Para fecha de alta del empleado.");
                     System.out.println("4 - Para salario del empleado.");
-                    //TODO poder modificar comision si es director
+                    if(departamentos[datos[0]].getEmpleados()[datos[1]] instanceof Director){
+                        System.out.println("5 - Para comision del director.");
+                    }
                     datos[2] = Integer.parseInt(br.readLine());
                 }
             }
