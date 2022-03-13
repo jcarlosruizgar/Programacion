@@ -11,28 +11,30 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 
-public class Principal {
+public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
     private static boolean salir = false;//variable bandera que controla la ejecucion del programa
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static final int TAMANO = 5;//constante que determina el tamano del array de departamentos
-    private static Departamento[] departamentos = new Departamento[TAMANO];
-    private static int numeroDepartamentos = 0;//variable de control con el numero de departamentos ocupados
-    private static int posicionInserciones = 0;//variable donde se hara la proxima insercion
+    //private int final TAM = 5;//constante que determina el tamano del array de departamentos
+    private Departamento[] departamentos = new Departamento[p.TAM];
+    private int numeroDepartamentos = 0;//variable de control con el numero de departamentos ocupados
+    private int posicionInserciones = 0;//variable donde se hara la proxima insercion
+    private static Principal p = new Principal();
 
     public static void main(String[] args) {
-        cargaAutomaticaComposicion();
-        //cargaAutomaticaAgregacion();
+        p.cargaAutomaticaConComposicion();
+        //p.cargaAutomaticaConAgregacion();
+        System.out.println(p.buscarDepartamento("Logistica"));
         System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
         do {
             try {
                 System.out.println("Introduzca:\n1 - Para gestionar los departamentos.\n2 - Para gestionar los empleados.\n0 - Para salir.");
                 switch (Integer.parseInt(br.readLine())) {
                     case 1:
-                        menuDepartamentos();
+                        p.menuDepartamentos();
                         break;
                     case 2:
-                        menuEmpleados();
+                        p.menuEmpleados();
                         break;
                     case 0:
                         salir = true;
@@ -45,7 +47,7 @@ public class Principal {
         while (!salir);
     }
 
-    public static void menuDepartamentos() throws IOException {
+    public void menuDepartamentos() throws IOException {
         System.out.println("Menu de gestion de departamentos.\nSeleccione que operacion quiere realizar:");
         System.out.println("1 - Mostrar un departamento.");
         System.out.println("2 - Insertar un departamento.");
@@ -54,89 +56,89 @@ public class Principal {
         System.out.println("0 - Volver al menu anterior.");
         switch (Integer.parseInt(br.readLine())) {
             case 1:
-                mostrarDepartamentos();
+                p.mostrarDepartamentos();
                 break;
             case 2:
-                mostrarDepartamentos();
-                insertarDepartamentoSinEmpleadosInteractivo();
+                p.mostrarDepartamentos();
+                p.insertarDepartamentoSinEmpleadosInteractivo();
                 break;
             case 3:
-                mostrarDepartamentos();
-                borrarDepartamentoInteractivo();
+                p.mostrarDepartamentos();
+                p.borrarDepartamentoInteractivo();
                 break;
             case 4:
-                mostrarDepartamentos();
-                modificarDepartamentoInteractivo();
+                p.mostrarDepartamentos();
+                p.modificarDepartamentoInteractivo();
                 break;
             case 0:
                 break;
         }
     }
 
-    public static void modificarDepartamentoInteractivo() throws IOException {
+    public void modificarDepartamentoInteractivo() throws IOException {
         int[] datos = new int[2];
-        if (departamentosVacios()) {
+        if (p.departamentosVacio()) {
             System.out.println("No hay ningun departamento registrado.");
         } else {
             System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
-            datos[0] = existeDepartamento(Integer.parseInt(br.readLine()));
+            datos[0] = p.existeDepartamento(Integer.parseInt(br.readLine()));
             if (datos[0] == -1) {
                 System.out.println("Ese departamento no existe.");
             } else {
                 System.out.println("¿Que dato quiere modificar?");
                 System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
                 datos[1] = Integer.parseInt(br.readLine());
-                modificarDepartamento(datos);
+                p.modificarDepartamento(datos);
             }
         }
     }
 
-    public static void modificarDepartamento(int[] datos) throws IOException {
+    public void modificarDepartamento(int[] datos) throws IOException {
         switch (datos[1]) {
             case 1:
-                modificarNumeroDepartamenteInteractivo(datos[0]);
+                p.modificarNumeroDepartamenteInteractivo(datos[0]);
                 break;
             case 2:
-                modificarNombreDepartamenteInteractivo(datos[0]);
+                p.modificarNombreDepartamenteInteractivo(datos[0]);
                 break;
             case 3:
-                modificarLocalizacionDepartamenteInteractivo(datos[0]);
+                p.modificarLocalizacionDepartamenteInteractivo(datos[0]);
                 break;
         }
     }
 
-    public static void modificarNumeroDepartamento(int departamento, int nuevo_dept_no) {
+    public void modificarNumeroDepartamento(int departamento, int nuevo_dept_no) {
         departamentos[departamento].setDept_no(nuevo_dept_no);
     }
 
-    public static void modificarNumeroDepartamenteInteractivo(int departamento) throws IOException {
+    public void modificarNumeroDepartamenteInteractivo(int departamento) throws IOException {
         System.out.println("Introduzca el nuevo numero de departamento");
         try {
-            modificarNumeroDepartamento(departamento, Integer.parseInt(br.readLine()));
+            p.modificarNumeroDepartamento(departamento, Integer.parseInt(br.readLine()));
         } catch (NumberFormatException nfe) {
             System.out.println("Ese no es un numero de departamento valido.");
         }
     }
 
-    public static void modificarNombreDepartamento(int departamento, String nombre) {
+    public void modificarNombreDepartamento(int departamento, String nombre) {
         departamentos[departamento].setDnombre(nombre);
     }
 
-    public static void modificarNombreDepartamenteInteractivo(int departamento) throws IOException {
+    public void modificarNombreDepartamenteInteractivo(int departamento) throws IOException {
         System.out.println("Introduzca el nuevo nombre del departamento");
-        modificarNombreDepartamento(departamento, br.readLine());
+        p.modificarNombreDepartamento(departamento, br.readLine());
     }
 
-    public static void modificarLocalizacionDepartamento(int departamento, String localizacion) {
+    public void modificarLocalizacionDepartamento(int departamento, String localizacion) {
         departamentos[departamento].setLocalizacion(localizacion);
     }
 
-    public static void modificarLocalizacionDepartamenteInteractivo(int departamento) throws IOException {
+    public void modificarLocalizacionDepartamenteInteractivo(int departamento) throws IOException {
         System.out.println("Introduzca la nueva localizacion del departamento");
-        modificarLocalizacionDepartamento(departamento, br.readLine());
+        p.modificarLocalizacionDepartamento(departamento, br.readLine());
     }
 
-    public static void menuEmpleados() throws IOException {
+    public void menuEmpleados() throws IOException {
         System.out.println("Menu de gestion de empleados.\nSeleccione que operacion quiere realizar:");
         System.out.println("1 - Insertar un empleado.");
         System.out.println("2 - Mostrar empleados.");
@@ -146,19 +148,19 @@ public class Principal {
         System.out.println("0 - Volver al menu anterior.");
         switch (Integer.parseInt(br.readLine())) {
             case 1:
-                mostrarDepartamentosEmpleados();
-                insertarEmpleadoInteractivo();
+                p.mostrarDepartamentosEmpleados();
+                p.insertarEmpleadoInteractivo();
                 break;
             case 2:
-                mostrarDepartamentosEmpleados();
+                p.mostrarDepartamentosEmpleados();
                 break;
             case 3:
-                mostrarDepartamentosEmpleados();
-                modificarEmpleado();
+                p.mostrarDepartamentosEmpleados();
+                p.modificarEmpleado();
                 break;
             case 4:
-                mostrarDepartamentosEmpleados();
-                borrarEmpleadoInteractivo();
+                p.mostrarDepartamentosEmpleados();
+                p.borrarEmpleadoInteractivo();
                 break;
             case 5:
                 break;
@@ -167,7 +169,7 @@ public class Principal {
         }
     }
 
-    public static void modificarEmpleado() throws IOException {
+    public void modificarEmpleado() throws IOException {
         System.out.println("Introduzca el numero de empleado del que quiere realizar una modificacion:");
         int opcionModificacionEmpleado = Integer.parseInt(br.readLine());
         System.out.println("¿Que dato quiere modificar?");
@@ -196,15 +198,15 @@ public class Principal {
         }
     }
 
-    public static void cargaAutomaticaComposicion() {
+    public void cargaAutomaticaConComposicion() {
         departamentos[0] = new Departamento(7, "Ventas", "Madrid");//creo el primer departamento por composicion
         departamentos[1] = new Departamento(2, "Logistica", "Barcelona");//creo el segundo departamento por composicion
         numeroDepartamentos = 2;
         posicionInserciones = 2;
     }
 
-    public static void cargaAutomaticaAgregacion() {
-        int tamanoEmpleados = 5;//tamano de los array de empleados
+    public void cargaAutomaticaConAgregacion() {
+        int tamanoEmpleados = TAM;//tamano de los array de empleados
 
         //creacion del array de empleados de ventas y 2 empleados
         Empleado[] empleadosVentas = new Empleado[tamanoEmpleados];
@@ -233,21 +235,21 @@ public class Principal {
         posicionInserciones = 2;
     }
 
-    public static void mostrarDepartamentos() {
-        if (departamentosVacios()) {//si no hay datos, no muestra departamentos
+    public void mostrarDepartamentos() {
+        if (p.departamentosVacio()) {//si no hay datos, no muestra departamentos
             System.out.println("No hay ningun departamento que mostrar.");
         } else {//si los hay, muestra los departamentos
-            for (int i = 0; i < TAMANO; i++) {
+            for (int i = 0; i < TAM; i++) {
                 if (departamentos[i] != null) System.out.println(departamentos[i]);
             }
         }
     }
 
-    public static void mostrarDepartamentosEmpleados() {
-        if (departamentosVacios()) {//si no hay datos, no muestra nada
+    public void mostrarDepartamentosEmpleados() {
+        if (p.departamentosVacio()) {//si no hay datos, no muestra nada
             System.out.println("No hay ningun dato que mostrar.");
         } else {//si los hay, ejecuta el metodo
-            for (int i = 0; i < TAMANO; i++) {//bucle que recorre los departamentos
+            for (int i = 0; i < TAM; i++) {//bucle que recorre los departamentos
                 if (departamentos[i] != null) {
                     System.out.println("\nEl departamento de " + departamentos[i].getDnombre() +
                             " con numero de departamento " + departamentos[i].getDept_no() +
@@ -263,7 +265,7 @@ public class Principal {
                 }
             }
             System.out.println("\nHay " + numeroDepartamentos + " departamentos registrados en el sistema.");
-            if (numeroDepartamentos == TAMANO) {
+            if (numeroDepartamentos == TAM) {
                 System.out.println("\nLa estructura esta llena.");
             } else {
                 System.out.println("\nEl proximo departamento se insertara en la posicion " + (posicionInserciones + 1) + ".");
@@ -272,18 +274,18 @@ public class Principal {
     }
 
     //departamentos llenos
-    public static boolean departamentosLlenos() {
-        return numeroDepartamentos == TAMANO;
+    public boolean departamentosLLeno() {
+        return numeroDepartamentos == TAM;
     }
 
     //departamentos vacios
-    public static boolean departamentosVacios() {
+    public boolean departamentosVacio() {
         return numeroDepartamentos == 0;
     }
 
     //metodo para insertar un departamento sin empleados, retorna -1 si no se ha podido insertar o la posicion en la que se ha insertado y recibe por argumentos los 3 atributos de los departamentos
-    public static void insertarDepartamentoSinEmpleadosInteractivo() throws IOException {
-        if (departamentosLlenos()) {
+    public void insertarDepartamentoSinEmpleadosInteractivo() throws IOException {
+        if (p.departamentosLLeno()) {
             System.out.println("No se pueden insertar mas departamentos.");
         } else {
             try {
@@ -293,20 +295,20 @@ public class Principal {
                 String nomDpto = br.readLine();
                 System.out.println("Introduzca donde se ubica el departamento:");
                 String locDpto = br.readLine();
-                insertarDepartamentoSinEmpleados(nDpto, nomDpto, locDpto);
+                p.insertarDepartamentoSinEmpleados(nDpto, nomDpto, locDpto);
             } catch (NumberFormatException nfe) {
                 System.out.println("Lo que ha introducido como numero de departamento, no es un numero.");
             }
         }
     }
 
-    public static void insertarDepartamentoSinEmpleados(int nDpto, String nomDpto, String locDpto) {
-        departamentos[buscarHueco()] = new Departamento(nDpto, nomDpto, locDpto);
+    public void insertarDepartamentoSinEmpleados(int nDpto, String nomDpto, String locDpto) {
+        departamentos[p.buscaHueco()] = new Departamento(nDpto, nomDpto, locDpto);
         numeroDepartamentos++;
     }
 
     //modificarlo a que retorne un int, -1 si no encontrado o numero encontrado
-    public static int buscarHueco() {
+    public int buscaHueco() {
         boolean noEncontrado = false;
         int i = 0;
         do {
@@ -314,39 +316,39 @@ public class Principal {
                 noEncontrado = true;
             } else i++;
         }
-        while (!noEncontrado && i < TAMANO);
+        while (!noEncontrado && i < TAM);
         if (noEncontrado) return i;
         else return -1;
     }
 
     //existe departamento, devuelve -1 si no existe o devuelve la posicion del array donde se encuentra dicho departamento
-    public static int existeDepartamento(int numero) {
+    public int existeDepartamento(int num) {
         boolean encontrado = false;
         int contador = 0;
         do {
-            if (departamentos[contador] != null && departamentos[contador].getDept_no() == numero) {
+            if (departamentos[contador] != null && departamentos[contador].getDept_no() == num) {
                 encontrado = true;
             } else {
                 contador++;
             }
         }
-        while (!encontrado && contador < TAMANO);
+        while (!encontrado && contador < TAM);
         if (encontrado) return contador;
         else return -1;
     }
 
     //borrar departamento recibe el numero de departamento a borrar, devuelve 1 si se ha borrado correctamente y 0 en caso contrario
-    public static int borrarDepartamento(int numero) {
+    public int borrarDepartamento(int numero) {
         int borrado = 1;//retorno de 1 si ha borrado correctamente
-        if (departamentosVacios()) {
+        if (p.departamentosVacio()) {
             borrado = 0;//no hay departamentos a borrar
         } else {
-            if (existeDepartamento(numero) == -1) {
+            if (p.existeDepartamento(numero) == -1) {
                 borrado = -1;//no existe el departamento elegido
-            } else if (existeDepartamento(numero) == -2) {
+            } else if (p.existeDepartamento(numero) == -2) {
                 borrado = -2;//no hay ningun departamento registrado
             } else {
-                departamentos[existeDepartamento(numero)] = null;
+                departamentos[p.existeDepartamento(numero)] = null;
                 posicionInserciones = numero;
                 numeroDepartamentos--;
             }
@@ -355,13 +357,13 @@ public class Principal {
     }
 
     //interactura con el usuario para borrar un departamento.
-    public static void borrarDepartamentoInteractivo() throws IOException {
-        if (departamentosVacios()) {
+    public void borrarDepartamentoInteractivo() throws IOException {
+        if (p.departamentosVacio()) {
             System.out.println("No hay ningun departamento registrado.");
         } else {
             System.out.println("Introduzca el numero de departamento que quiere borrar:");
             int departamentoBorrar = Integer.parseInt(br.readLine());
-            switch (borrarDepartamento(departamentoBorrar)) {
+            switch (p.borrarDepartamento(departamentoBorrar)) {
                 /**
                  * case 0:
                  *                     System.out.println("No hay ningun departamento registrado en el sistema.");
@@ -378,12 +380,12 @@ public class Principal {
     }
 
     //devuelve -1 si no existe empleado, o la posicion del empleado buscado en un departamento
-    public static int existeEmpleado(int num_dpto, int num_empl) {
+    public int existeEmpleados(int num_dpto, int num) {
         boolean encontrado = false;
         int contador = 0;
-        int dptoBuscar = existeDepartamento(num_dpto);
+        int dptoBuscar = p.existeDepartamento(num_dpto);
         do {
-            if (departamentos[dptoBuscar].getEmpleados()[contador] != null && departamentos[dptoBuscar].getEmpleados()[contador].getNumeroEmpleado() == num_empl) {
+            if (departamentos[dptoBuscar].getEmpleados()[contador] != null && departamentos[dptoBuscar].getEmpleados()[contador].getNumeroEmpleado() == num) {
                 encontrado = true;
             } else {
                 contador++;
@@ -394,61 +396,61 @@ public class Principal {
         else return -1;
     }
 
-    public static boolean empleadosVacios(Departamento dept) {
-        return dept.getNumeroEmpleados() == 0;
+    public boolean empleadosVacio(Departamento d) {
+        return d.getNumeroEmpleados() == 0;
     }
 
-    public static boolean empleadosLlenos(Departamento dept) {
-        return dept.getNumeroEmpleados() == dept.getTAMANO();
+    public boolean empleadosLLeno(Departamento d) {
+        return d.getNumeroEmpleados() == d.getTAMANO();
     }
 
-    public static void mostrarEmpleados(Departamento dept) {
-        if (empleadosVacios(dept)) {
-            System.out.println("No existen empleados registrados en el departamento " + dept.getDnombre());
+    public void mostrarEmpleados(Departamento d) {
+        if (p.empleadosVacio(d)) {
+            System.out.println("No existen empleados registrados en el departamento " + d.getDnombre());
         } else {
-            for (int i = 0; i < dept.getEmpleados().length; i++) {//bucle que recorre los empleados
-                if (dept.getEmpleados()[i] != null) {
-                    System.out.println("\tEl empleado " + dept.getEmpleados()[i].getApellido() +
-                            " con numero de empleado " + dept.getEmpleados()[i].getNumeroEmpleado() +
-                            " se dio de alta el dia " + dept.getEmpleados()[i].getFechaAlta() +
-                            " percibe un salario de " + dept.getEmpleados()[i].getSalario());
+            for (int i = 0; i < d.getEmpleados().length; i++) {//bucle que recorre los empleados
+                if (d.getEmpleados()[i] != null) {
+                    System.out.println("\tEl empleado " + d.getEmpleados()[i].getApellido() +
+                            " con numero de empleado " + d.getEmpleados()[i].getNumeroEmpleado() +
+                            " se dio de alta el dia " + d.getEmpleados()[i].getFechaAlta() +
+                            " percibe un salario de " + d.getEmpleados()[i].getSalario());
                 }
             }
-            System.out.println("Hay " + dept.getNumeroEmpleados() + " empleados en el departamento " + dept.getDnombre());
-            if (dept.getNumeroEmpleados() == dept.getTAMANO()) {
+            System.out.println("Hay " + d.getNumeroEmpleados() + " empleados en el departamento " + d.getDnombre());
+            if (d.getNumeroEmpleados() == d.getTAMANO()) {
                 System.out.println("La estructura esta llena.");
             } else {
-                System.out.println("El proximo empleado se insertara en la posicion " + (dept.getPosicionInserciones() + 1) + ".");
+                System.out.println("El proximo empleado se insertara en la posicion " + (d.getPosicionInserciones() + 1) + ".");
             }
         }
     }
 
     //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno. modificarlo para que lo haga aqui con el getter
-    public static int insertarEmpleado(Empleado emp, Departamento dept) {
+    public int insertarEmpleado(Empleado emp, Departamento dept) {
         //dept.insertarEmpleado(emp);
-        dept.getEmpleados()[buscarHuecoEmpleados(dept)]=emp;
-        dept.setPosicionInserciones(buscarHuecoEmpleados(dept));
+        dept.getEmpleados()[p.buscarHuecoEmpleados(dept)]=emp;
+        dept.setPosicionInserciones(p.buscarHuecoEmpleados(dept));
         dept.setNumeroEmpleados(dept.getNumeroEmpleados()+1);
         return 1;
     }
 
     //metodo interactivo para insertar un empleado en un departamento
-    public static void insertarEmpleadoInteractivo() throws IOException{
+    public void insertarEmpleadoInteractivo() throws IOException{
         System.out.println("Seleccione en que departamento quiere insertar un empleado.");
         int deptInsertar = Integer.parseInt(br.readLine());//lee el numero de departamento
-        int posDeptInsertar = existeDepartamento(deptInsertar);//convierte el numero de departamento en la posicion del departamento
+        int posDeptInsertar = p.existeDepartamento(deptInsertar);//convierte el numero de departamento en la posicion del departamento
         if (posDeptInsertar == -1){//comrpueba que exista el departamento elegido
             System.out.println("El departamento elegido no existe.");
         }
         else{
-            if (empleadosLlenos(departamentos[posDeptInsertar])){//comprueba que no este lleno el array de empleados del departamento
+            if (p.empleadosLLeno(departamentos[posDeptInsertar])){//comprueba que no este lleno el array de empleados del departamento
                 System.out.println("No caben mas empleados en este departamento.");
             }
             else{
                 Empleado emp;//objeto empleado
                 System.out.println("Indique el numero del empleado:");
                 int numEmp = Integer.parseInt(br.readLine());//numero de empleado
-                if (existeEmpleado(departamentos[posDeptInsertar].getDept_no(), numEmp) != -1){//comprueba si ya existe ese empleado
+                if (p.existeEmpleados(departamentos[posDeptInsertar].getDept_no(), numEmp) != -1){//comprueba si ya existe ese empleado
                     System.out.println("Ese empleado ya existe en el departamento.");
                 }
                 else{
@@ -477,9 +479,9 @@ public class Principal {
     }
 
     //metodo para borrar un empleado, devuelve -1 si no existe el empleado,0 si esta vacio, 1 si se ha realizado correctamente
-    public static int borrarEmpleado(int numeroEmpleado, Departamento dept){
-        int posicionEmpleado = existeEmpleado(dept.getDept_no(),numeroEmpleado);
-        if(empleadosVacios(dept)){
+    public int borrarEmpleado(int numeroEmpleado, Departamento dept){
+        int posicionEmpleado = p.existeEmpleados(dept.getDept_no(),numeroEmpleado);
+        if(p.empleadosVacio(dept)){
             return 0;
         }
         else if(posicionEmpleado == -1){
@@ -494,21 +496,21 @@ public class Principal {
     }
 
     //metodo interactivo para borrar un empleado
-    public static void borrarEmpleadoInteractivo() throws IOException{
-        if(departamentosVacios()){//control de error si no hay departamentos registrados
+    public void borrarEmpleadoInteractivo() throws IOException{
+        if(p.departamentosVacio()){//control de error si no hay departamentos registrados
             System.out.println("No hay ningún departamento");
         }
         else{
             System.out.println("Introduzca el numero de departamento del que quiere borrar un empleado:");
             int numeroDepartamento = Integer.parseInt(br.readLine());
-            int posicionDepartamento = existeDepartamento(numeroDepartamento);
+            int posicionDepartamento = p.existeDepartamento(numeroDepartamento);
             if(posicionDepartamento == -1){//control de error si no existe el departamento
                 System.out.println("No existe el departamento elegido.");
             }
             else{
                 System.out.println("Introduzca el numero de empleado que quiere borrar");
                 int numeroEmpleado = Integer.parseInt(br.readLine());
-                switch (borrarEmpleado(numeroEmpleado,departamentos[posicionDepartamento])){
+                switch (p.borrarEmpleado(numeroEmpleado,departamentos[posicionDepartamento])){
                     case -1:
                         System.out.println("No existe el empleado elegido.");
                         break;
@@ -524,7 +526,7 @@ public class Principal {
     }
 
     //metodo que busca el hueco de insercion de empleados en el departamento elegido, retorna -1 no encontrado o la posicion
-    public static int buscarHuecoEmpleados(Departamento dept){
+    public int buscarHuecoEmpleados(Departamento dept){
         boolean noEncontrado = false;
         int i = 0;
         do{
@@ -536,6 +538,25 @@ public class Principal {
         if(noEncontrado) return i;
         else return -1;
     }
+
+    public int buscarDepartamento(String nombreDepartamento){
+        boolean encontrado = false;
+        int contador = 0;
+        do{
+            if(departamentos[contador] != null && departamentos[contador].getDnombre() == nombreDepartamento){
+                encontrado = true;
+            }else{
+                contador++;
+            }
+        }
+        while(!encontrado && contador < TAM);
+        if (encontrado) return contador;
+        else return -1;
+    }
+
+    //implementar buscar departamento interactivo
+
+    //implementar modificar empleados
 
 }
 
