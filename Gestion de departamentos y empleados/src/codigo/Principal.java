@@ -380,10 +380,10 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     }
 
     //devuelve -1 si no existe empleado, o la posicion del empleado buscado en un departamento
-    public int existeEmpleados(int num_dpto, int num) {
+    public int existeEmpleados(Departamento d, int num) {
         boolean encontrado = false;
         int contador = 0;
-        int dptoBuscar = p.existeDepartamento(num_dpto);
+        int dptoBuscar = p.existeDepartamento(d.getDept_no());
         do {
             if (departamentos[dptoBuscar].getEmpleados()[contador] != null && departamentos[dptoBuscar].getEmpleados()[contador].getNumeroEmpleado() == num) {
                 encontrado = true;
@@ -450,7 +450,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                 Empleado emp;//objeto empleado
                 System.out.println("Indique el numero del empleado:");
                 int numEmp = Integer.parseInt(br.readLine());//numero de empleado
-                if (p.existeEmpleados(departamentos[posDeptInsertar].getDept_no(), numEmp) != -1){//comprueba si ya existe ese empleado
+                if (p.existeEmpleados(departamentos[posDeptInsertar], numEmp) != -1){//comprueba si ya existe ese empleado
                     System.out.println("Ese empleado ya existe en el departamento.");
                 }
                 else{
@@ -480,7 +480,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
     //metodo para borrar un empleado, devuelve -1 si no existe el empleado,0 si esta vacio, 1 si se ha realizado correctamente
     public int borrarEmpleado(int numeroEmpleado, Departamento dept){
-        int posicionEmpleado = p.existeEmpleados(dept.getDept_no(),numeroEmpleado);
+        int posicionEmpleado = p.existeEmpleados(dept,numeroEmpleado);
         if(p.empleadosVacio(dept)){
             return 0;
         }

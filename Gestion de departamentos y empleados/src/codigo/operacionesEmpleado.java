@@ -22,6 +22,12 @@ public interface operacionesEmpleado extends operaciones{
      */
     boolean empleadosLLeno(Departamento d);
 
-    int existeEmpleados(int num_dpto, int num);//cambiar a Departamento d
+    /**
+     * Metodo para saber si un empleado de un departamento existe por medio de su numero de empleado
+     * @param d objeto departamento
+     * @param num numero de empleado
+     * @return retorna -1 si no existe o la posicion en el array si existe
+     */
+    int existeEmpleados(Departamento d, int num);
 
 }

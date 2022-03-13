@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 public class Departamento {
 
+    /**
+     * Atributos de la clase Departamento
+     */
     private int dept_no;//numero de departamento
     private String dnombre;//nombre del departamento
     private String localizacion;//nombre de la poblacion donde esta el departamento
@@ -13,10 +16,18 @@ public class Departamento {
     private int numeroEmpleados = 0;//variable de control con el numero de empleados en el array de empledos
     private int posicionInserciones = 0;//posicion en la que se realizara la proxima insercion en el array de empleados
 
+    /**
+     * Constructor vacio de Departamento
+     */
     public Departamento() {
     }
 
-    //constructor composicion
+    /**
+     * Constructor parametrizado por composicion de Departamento
+     * @param dept_no numero del departamento
+     * @param dnombre nombre del departamento
+     * @param localizacion localizacion del departamento
+     */
     public Departamento(int dept_no, String dnombre, String localizacion) {
         this.dept_no = dept_no;
         this.dnombre = dnombre;
@@ -28,7 +39,13 @@ public class Departamento {
         posicionInserciones = 2;
     }
 
-    //contructor agregacion
+    /**
+     * Constructor parametrizado por agregacion de Departamento
+     * @param dept_no numero del departamento
+     * @param dnombre nombre del departamento
+     * @param localizacion localizacion del departamento
+     * @param empleados array de objetos Empleado
+     */
     public Departamento(int dept_no, String dnombre, String localizacion, Empleado[] empleados){
         this.dept_no=dept_no;
         this.dnombre=dnombre;
@@ -42,6 +59,9 @@ public class Departamento {
         posicionInserciones = numeroEmpleados;
     }
 
+    /**
+     * Getter & Setters clase Departamento
+     */
     public int getDept_no() {
         return dept_no;
     }
@@ -60,41 +80,32 @@ public class Departamento {
     public void setLocalizacion(String localizacion) {
         this.localizacion = localizacion;
     }
-
     public Empleado[] getEmpleados() {
         return empleados;
     }
-
     public void setEmpleados(Empleado[] empleados) {
         this.empleados = empleados;
     }
-
-    //metodo que convierte el numero de empleado, en la posicion del array en la que se encuentra el mismo
-    public int posicionEmpleado(int emp_no){
-        /*
-        int posicionLocalizada = -1;
-        for (int i = 0; i < listaEmpleados.length; i++) {
-            if (listaEmpleados[i] != null && listaEmpleados[i].getNumeroEmpleado()== emp_no) {
-                posicionLocalizada = i;
-                break;
-            }
-        }
-        return posicionLocalizada;
-        */
-        int i = 0;
-        boolean encontrado = false;
-        do{
-            if(empleados[i] != null && empleados[i].getNumeroEmpleado()== emp_no){
-                encontrado = true;
-            }
-            else i++;
-
-        }
-        while(!encontrado && i < empleados.length);
-        if(encontrado)return i;
-        else return -1;
+    public int getTAMANO() {
+        return TAMANO;
+    }
+    public int getNumeroEmpleados() {
+        return numeroEmpleados;
+    }
+    public void setNumeroEmpleados(int numeroEmpleados) {
+        this.numeroEmpleados = numeroEmpleados;
+    }
+    public int getPosicionInserciones() {
+        return posicionInserciones;
+    }
+    public void setPosicionInserciones(int posicionInserciones) {
+        this.posicionInserciones = posicionInserciones;
     }
 
+    /**
+     * Metodo toString de Departamento
+     * @return retorna un string formateado con la informacion del departamento
+     */
     @Override
     public String toString() {
         return "Departamento{" +
@@ -106,33 +117,6 @@ public class Departamento {
                 ", numeroEmpleados=" + numeroEmpleados +
                 ", posicionInserciones=" + posicionInserciones +
                 '}';
-    }
-
-    public int getTAMANO() {
-        return TAMANO;
-    }
-
-    public int getNumeroEmpleados() {
-        return numeroEmpleados;
-    }
-
-    public void setNumeroEmpleados(int numeroEmpleados) {
-        this.numeroEmpleados = numeroEmpleados;
-    }
-
-    public int getPosicionInserciones() {
-        return posicionInserciones;
-    }
-
-    public void setPosicionInserciones(int posicionInserciones) {
-        this.posicionInserciones = posicionInserciones;
-    }
-
-    //metodo para insertar un empleado en el departamento
-    public void insertarEmpleado(Empleado emp){
-        this.empleados[posicionInserciones] = emp;
-        numeroEmpleados++;
-        posicionInserciones++;
     }
 
 }
