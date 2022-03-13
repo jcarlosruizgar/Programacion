@@ -13,6 +13,9 @@ import java.time.LocalDate;
 
 public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
+    /**
+     * Atributos de la clase Principal
+     */
     private static boolean salir = false;//variable bandera que controla la ejecucion del programa
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //private int final TAM = 5;//constante que determina el tamano del array de departamentos
@@ -21,6 +24,10 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     private int posicionInserciones = 0;//variable donde se hara la proxima insercion
     private static Principal p = new Principal();
 
+    /**
+     * Metodo main con la ejecucion del programa
+     * @param args
+     */
     public static void main(String[] args) {
         p.cargaAutomaticaConComposicion();
         //p.cargaAutomaticaConAgregacion();
