@@ -625,4 +625,5 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         double comisionDirector = Double.parseDouble(br.readLine());
         ((Director)departamentos[datos[0]].getEmpleados()[datos[1]]).setComision(comisionDirector);
     }
+
 }
