@@ -597,22 +597,19 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //TODO
     public void modificarEmpleado(int[] datos) throws IOException {
-
-
-        /*
-        switch (datos[1]) {
+        switch (datos[2]){
             case 1:
-                p.modificarNumeroDepartamenteInteractivo(datos[0]);
                 break;
             case 2:
-                p.modificarNombreDepartamenteInteractivo(datos[0]);
                 break;
             case 3:
-                p.modificarLocalizacionDepartamenteInteractivo(datos[0]);
                 break;
-        }*/
+            case 4:
+                break;
+            case 5:
+                break;
+        }
     }
 
 }
