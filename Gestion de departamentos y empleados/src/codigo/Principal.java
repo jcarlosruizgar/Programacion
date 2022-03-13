@@ -234,10 +234,19 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                             " esta ubicado en " + departamentos[i].getLocalizacion());
                     for (int j = 0; j < departamentos[i].getEmpleados().length; j++) {//bucle que recorre los empleados
                         if (departamentos[i] != null && departamentos[i].getEmpleados()[j] != null) {
-                            System.out.println("\tEl empleado " + departamentos[i].getEmpleados()[j].getApellido() +
-                                    " con numero de empleado " + departamentos[i].getEmpleados()[j].getNumeroEmpleado() +
-                                    " se dio de alta el dia " + departamentos[i].getEmpleados()[j].getFechaAlta() +
-                                    " percibe un salario de " + departamentos[i].getEmpleados()[j].getSalario());
+                            if(departamentos[i].getEmpleados()[j] instanceof Director){
+                                System.out.println("\tEl Director " + departamentos[i].getEmpleados()[j].getApellido() +
+                                        " con numero de empleado " + departamentos[i].getEmpleados()[j].getNumeroEmpleado() +
+                                        " se dio de alta el dia " + departamentos[i].getEmpleados()[j].getFechaAlta() +
+                                        " percibe un salario de " + departamentos[i].getEmpleados()[j].getSalario() +
+                                        " percibe una comision de " + ((Director)departamentos[i].getEmpleados()[j]).getComision());
+                            }
+                            else{
+                                System.out.println("\tEl Analista " + departamentos[i].getEmpleados()[j].getApellido() +
+                                        " con numero de empleado " + departamentos[i].getEmpleados()[j].getNumeroEmpleado() +
+                                        " se dio de alta el dia " + departamentos[i].getEmpleados()[j].getFechaAlta() +
+                                        " percibe un salario de " + departamentos[i].getEmpleados()[j].getSalario());
+                            }
                         }
                     }
                 }
