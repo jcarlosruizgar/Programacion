@@ -565,26 +565,34 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
     //implementar modificar empleados
 
-    //TODO
     public void modificarEmpleadoInteractivo() throws IOException {
         int[] datos = new int[3];
-
-
-        /*
-        if (p.departamentosVacio()) {
+        if(p.departamentosVacio()){
             System.out.println("No hay ningun departamento registrado.");
-        } else {
-            System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
+        }
+        else{
+            System.out.println("Introduzca el numero de departamento:");
             datos[0] = p.existeDepartamento(Integer.parseInt(br.readLine()));
-            if (datos[0] == -1) {
+            if (datos[0] == -1){
                 System.out.println("Ese departamento no existe.");
-            } else {
-                System.out.println("¿Que dato quiere modificar?");
-                System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
-                datos[1] = Integer.parseInt(br.readLine());
-                p.modificarDepartamento(datos);
             }
-        }*/
+            else{
+                System.out.println("Introduza el numero de empleado del que quiere realizar una modificacion:");
+                datos[1] = p.existeEmpleados(departamentos[datos[0]],Integer.parseInt(br.readLine()));
+                if(datos[1] == -1){
+                    System.out.println("Ese empleado no existe.");
+                }
+                else{
+                    System.out.println("¿Que dato quiere modificar?");
+                    System.out.println("1 - Para numero del empleado.");
+                    System.out.println("2 - Para apellido del empleado.");
+                    System.out.println("3 - Para fecha de alta del empleado.");
+                    System.out.println("4 - Para salario del empleado.");
+                    //TODO poder modificar comision si es director
+                    datos[2] = Integer.parseInt(br.readLine());
+                }
+            }
+        }
     }
 
     //TODO
