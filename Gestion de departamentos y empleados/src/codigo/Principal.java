@@ -588,6 +588,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                 System.out.println("4");
                 break;
             case 5:
+                p.modificarComisionDirectorInteractivo(datos);
                 System.out.println("5");
                 break;
         }
@@ -615,6 +616,12 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         System.out.println("Introduza el nuevo salario del empleado.");
         double salarioEmpleado = Double.parseDouble(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setSalario(salarioEmpleado);
+    }
+
+    public void modificarComisionDirectorInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca la nueva comision del director:");
+        double comisionDirector = Double.parseDouble(br.readLine());
+        ((Director)departamentos[datos[0]].getEmpleados()[datos[1]]).setComision(comisionDirector);
     }
 }
 
