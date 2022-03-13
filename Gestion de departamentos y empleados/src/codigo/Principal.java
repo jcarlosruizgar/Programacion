@@ -626,5 +626,3 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         ((Director)departamentos[datos[0]].getEmpleados()[datos[1]]).setComision(comisionDirector);
     }
 }
-
-
