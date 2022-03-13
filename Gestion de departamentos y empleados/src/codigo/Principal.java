@@ -163,7 +163,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                 break;
             case 3:
                 p.mostrarDepartamentosEmpleados();
-                p.modificarEmpleado();
+                p.modificarEmpleadoInteractivo();
                 break;
             case 4:
                 p.mostrarDepartamentosEmpleados();
