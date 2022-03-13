@@ -565,6 +565,46 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
     //implementar modificar empleados
 
+    //TODO
+    public void modificarEmpleadoInteractivo() throws IOException {
+        int[] datos = new int[3];
+
+
+        /*
+        if (p.departamentosVacio()) {
+            System.out.println("No hay ningun departamento registrado.");
+        } else {
+            System.out.println("Introduzca el numero de departamento del que quiere realizar una modificacion:");
+            datos[0] = p.existeDepartamento(Integer.parseInt(br.readLine()));
+            if (datos[0] == -1) {
+                System.out.println("Ese departamento no existe.");
+            } else {
+                System.out.println("¿Que dato quiere modificar?");
+                System.out.println("1 - Para numero.\n2 - Para nombre.\n3 - Para localizacion.");
+                datos[1] = Integer.parseInt(br.readLine());
+                p.modificarDepartamento(datos);
+            }
+        }*/
+    }
+
+    //TODO
+    public void modificarEmpleado(int[] datos) throws IOException {
+
+
+        /*
+        switch (datos[1]) {
+            case 1:
+                p.modificarNumeroDepartamenteInteractivo(datos[0]);
+                break;
+            case 2:
+                p.modificarNombreDepartamenteInteractivo(datos[0]);
+                break;
+            case 3:
+                p.modificarLocalizacionDepartamenteInteractivo(datos[0]);
+                break;
+        }*/
+    }
+
 }
 
 
