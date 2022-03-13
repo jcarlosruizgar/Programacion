@@ -543,8 +543,6 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
     //implementar buscar departamento interactivo
 
-    //implementar modificar empleados
-
     public void modificarEmpleadoInteractivo() throws IOException {
         int[] datos = new int[3];
         if(p.departamentosVacio()){
