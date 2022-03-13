@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
@@ -54,7 +55,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         while (!salir);
     }
 
-    public void menuDepartamentos() throws IOException {
+    public void menuDepartamentos() throws IOException, NumberFormatException {
         System.out.println("Menu de gestion de departamentos.\nSeleccione que operacion quiere realizar:");
         System.out.println("1 - Mostrar un departamento.");
         System.out.println("2 - Insertar un departamento.");
@@ -82,7 +83,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    public void modificarDepartamentoInteractivo() throws IOException {
+    public void modificarDepartamentoInteractivo() throws IOException, NumberFormatException {
         int[] datos = new int[2];
         if (p.departamentosVacio()) {
             System.out.println("No hay ningun departamento registrado.");
@@ -118,7 +119,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         departamentos[departamento].setDept_no(nuevo_dept_no);
     }
 
-    public void modificarNumeroDepartamenteInteractivo(int departamento) throws IOException {
+    public void modificarNumeroDepartamenteInteractivo(int departamento) throws IOException,NumberFormatException {
         System.out.println("Introduzca el nuevo numero de departamento");
         try {
             p.modificarNumeroDepartamento(departamento, Integer.parseInt(br.readLine()));
@@ -145,7 +146,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         p.modificarLocalizacionDepartamento(departamento, br.readLine());
     }
 
-    public void menuEmpleados() throws IOException {
+    public void menuEmpleados() throws IOException,NumberFormatException {
         System.out.println("Menu de gestion de empleados.\nSeleccione que operacion quiere realizar:");
         System.out.println("1 - Insertar un empleado.");
         System.out.println("2 - Mostrar empleados.");
@@ -344,7 +345,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     }
 
     //interactura con el usuario para borrar un departamento.
-    public void borrarDepartamentoInteractivo() throws IOException {
+    public void borrarDepartamentoInteractivo() throws IOException,NumberFormatException {
         if (p.departamentosVacio()) {
             System.out.println("No hay ningun departamento registrado.");
         } else {
@@ -414,7 +415,6 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
 
     //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno. modificarlo para que lo haga aqui con el getter
     public int insertarEmpleado(Empleado emp, Departamento dept) {
-        //dept.insertarEmpleado(emp);
         dept.getEmpleados()[p.buscarHuecoEmpleados(dept)]=emp;
         dept.setPosicionInserciones(p.buscarHuecoEmpleados(dept));
         dept.setNumeroEmpleados(dept.getNumeroEmpleados()+1);
@@ -422,7 +422,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     }
 
     //metodo interactivo para insertar un empleado en un departamento
-    public void insertarEmpleadoInteractivo() throws IOException{
+    public void insertarEmpleadoInteractivo() throws IOException,NumberFormatException,DateTimeParseException {
         System.out.println("Seleccione en que departamento quiere insertar un empleado.");
         int deptInsertar = Integer.parseInt(br.readLine());//lee el numero de departamento
         int posDeptInsertar = p.existeDepartamento(deptInsertar);//convierte el numero de departamento en la posicion del departamento
@@ -483,7 +483,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     }
 
     //metodo interactivo para borrar un empleado
-    public void borrarEmpleadoInteractivo() throws IOException{
+    public void borrarEmpleadoInteractivo() throws IOException,NumberFormatException{
         if(p.departamentosVacio()){//control de error si no hay departamentos registrados
             System.out.println("No hay ningún departamento");
         }
@@ -541,7 +541,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         else return -1;
     }
 
-    public void modificarEmpleadoInteractivo() throws IOException {
+    public void modificarEmpleadoInteractivo() throws IOException,NumberFormatException {
         int[] datos = new int[3];
         if(p.departamentosVacio()){
             System.out.println("No hay ningun departamento registrado.");
@@ -596,7 +596,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    public void modificarNumeroEmpleadoInteractivo(int[] datos) throws IOException{
+    public void modificarNumeroEmpleadoInteractivo(int[] datos) throws IOException,NumberFormatException{
         System.out.println("Introduzca el nuevo numero del empleado:");
         int numeroEmpleado = Integer.parseInt(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setNumeroEmpleado(numeroEmpleado);
@@ -608,19 +608,19 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         departamentos[datos[0]].getEmpleados()[datos[1]].setApellido(apellidoEmpleado);
     }
 
-    public void modificarFechaAltaEmpleadoInteractivo(int[] datos) throws IOException{
+    public void modificarFechaAltaEmpleadoInteractivo(int[] datos) throws IOException,DateTimeParseException{
         System.out.println("Introduzca la nueva fecha de alta del empleado.\n(Formato aaaa-mm-dd)");
         LocalDate fechaAltaEmpleado = LocalDate.parse(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setFechaAlta(fechaAltaEmpleado);
     }
 
-    public void modificarSalarioEmpleadoInteractivo(int[] datos) throws IOException{
+    public void modificarSalarioEmpleadoInteractivo(int[] datos) throws IOException,NumberFormatException{
         System.out.println("Introduza el nuevo salario del empleado.");
         double salarioEmpleado = Double.parseDouble(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setSalario(salarioEmpleado);
     }
 
-    public void modificarComisionDirectorInteractivo(int[] datos) throws IOException{
+    public void modificarComisionDirectorInteractivo(int[] datos) throws IOException,NumberFormatException{
         System.out.println("Introduzca la nueva comision del director:");
         double comisionDirector = Double.parseDouble(br.readLine());
         ((Director)departamentos[datos[0]].getEmpleados()[datos[1]]).setComision(comisionDirector);
