@@ -48,13 +48,28 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                         salir = true;
                         break;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            }
+            catch (IOException ioe){
+                System.out.println("Error en la entrada de datos.");
+            }
+            catch (NumberFormatException nfe){
+                System.out.println("Eso no es un numero.");
+            }
+            catch (DateTimeParseException dtpe){
+                System.out.println("Formato no valido de fecha, pruebe el formato aaaa-mm-dd.");
+            }
+            catch (Exception e) {
+                System.out.println("Error.");
             }
         }
         while (!salir);
     }
 
+    /**
+     * Metodo con el menu de los departamentos
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void menuDepartamentos() throws IOException, NumberFormatException {
         System.out.println("Menu de gestion de departamentos.\nSeleccione que operacion quiere realizar:");
         System.out.println("1 - Mostrar un departamento.");
@@ -83,6 +98,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo interactivo para modificar los datos de un departamento
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void modificarDepartamentoInteractivo() throws IOException, NumberFormatException {
         int[] datos = new int[2];
         if (p.departamentosVacio()) {
@@ -101,6 +121,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo operacional que modifica los datos de un departamento
+     * @param datos array que contiene los valores para ejecutar el metodo, procedentes de modificarDepartamentoInteractivo
+     * @throws IOException
+     */
     public void modificarDepartamento(int[] datos) throws IOException {
         switch (datos[1]) {
             case 1:
@@ -115,10 +140,21 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo operacional que modifica el numero de un departamento
+     * @param departamento posicion del departamento a modificar
+     * @param nuevo_dept_no nuevo numero de departamento
+     */
     public void modificarNumeroDepartamento(int departamento, int nuevo_dept_no) {
         departamentos[departamento].setDept_no(nuevo_dept_no);
     }
 
+    /**
+     * Metodo Interactivo que modifica el numero de un departamento
+     * @param departamento posicion del departamento a modificar
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void modificarNumeroDepartamenteInteractivo(int departamento) throws IOException,NumberFormatException {
         System.out.println("Introduzca el nuevo numero de departamento");
         try {
@@ -128,31 +164,55 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo operacional para modiifcar el nombre de un departamento
+     * @param departamento posicion del departamento a modificar
+     * @param nombre nuevo nombre del departamento
+     */
     public void modificarNombreDepartamento(int departamento, String nombre) {
         departamentos[departamento].setDnombre(nombre);
     }
 
+    /**
+     * Metodo interactivo para modificar el nombre de un departamento
+     * @param departamento posicion del departamento a modificar
+     * @throws IOException
+     */
     public void modificarNombreDepartamenteInteractivo(int departamento) throws IOException {
         System.out.println("Introduzca el nuevo nombre del departamento");
         p.modificarNombreDepartamento(departamento, br.readLine());
     }
 
+    /**
+     * Metodo operacional para modificar la localizacion de un departamento
+     * @param departamento posicion del departamento a modificar
+     * @param localizacion nuevo nombre del departamento
+     */
     public void modificarLocalizacionDepartamento(int departamento, String localizacion) {
         departamentos[departamento].setLocalizacion(localizacion);
     }
 
+    /**
+     * Metodo interactivo para modificar la localizacion de un departamento
+     * @param departamento posicion del departamento a modificar
+     * @throws IOException
+     */
     public void modificarLocalizacionDepartamenteInteractivo(int departamento) throws IOException {
         System.out.println("Introduzca la nueva localizacion del departamento");
         p.modificarLocalizacionDepartamento(departamento, br.readLine());
     }
 
+    /**
+     * Metodo con el menu de los empleados
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void menuEmpleados() throws IOException,NumberFormatException {
         System.out.println("Menu de gestion de empleados.\nSeleccione que operacion quiere realizar:");
         System.out.println("1 - Insertar un empleado.");
         System.out.println("2 - Mostrar empleados.");
         System.out.println("3 - Modificar un empleado.");
         System.out.println("4 - Borrar un empleado.");
-        System.out.println("5 - Carga automatica.");
         System.out.println("0 - Volver al menu anterior.");
         switch (Integer.parseInt(br.readLine())) {
             case 1:
@@ -170,13 +230,14 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
                 p.mostrarDepartamentosEmpleados();
                 p.borrarEmpleadoInteractivo();
                 break;
-            case 5:
-                break;
             case 0:
                 break;
         }
     }
 
+    /**
+     * Metodo con una carga automatica de departamentos y empleados por composicion
+     */
     public void cargaAutomaticaConComposicion() {
         departamentos[0] = new Departamento(7, "Ventas", "Madrid");//creo el primer departamento por composicion
         departamentos[1] = new Departamento(2, "Logistica", "Barcelona");//creo el segundo departamento por composicion
@@ -184,6 +245,9 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         posicionInserciones = 2;
     }
 
+    /**
+     * Metodo con una carga automatica de departamentos y empleados por agregacion
+     */
     public void cargaAutomaticaConAgregacion() {
         int tamanoEmpleados = TAM;//tamano de los array de empleados
 
@@ -214,6 +278,9 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         posicionInserciones = 2;
     }
 
+    /**
+     * Metodo para mostrar todos los departamentos registrados
+     */
     public void mostrarDepartamentos() {
         if (p.departamentosVacio()) {//si no hay datos, no muestra departamentos
             System.out.println("No hay ningun departamento que mostrar.");
@@ -224,6 +291,9 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo que muestra todos los departamentos registrados, asi como todos los empleados de cada uno
+     */
     public void mostrarDepartamentosEmpleados() {
         if (p.departamentosVacio()) {//si no hay datos, no muestra nada
             System.out.println("No hay ningun dato que mostrar.");
@@ -261,18 +331,27 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //departamentos llenos
+    /**
+     * Metodo que comprueba si el array de departamentos esta lleno
+     * @return retorna verdadero si esta lleno
+     */
     public boolean departamentosLLeno() {
         return numeroDepartamentos == TAM;
     }
 
-    //departamentos vacios
+    /**
+     * Metodo que comprueba si el array de departamentos esta vacio
+     * @return retorna verdadero si esta vacio
+     */
     public boolean departamentosVacio() {
         return numeroDepartamentos == 0;
     }
 
-    //metodo para insertar un departamento sin empleados, retorna -1 si no se ha podido insertar o la posicion en la que se ha insertado y recibe por argumentos los 3 atributos de los departamentos
-    public void insertarDepartamentoSinEmpleadosInteractivo() throws IOException {
+    /**
+     * Metodo interactivo para insertar un departamento sin ningun empleado
+     * @throws IOException
+     */
+    public void insertarDepartamentoSinEmpleadosInteractivo() throws IOException,NumberFormatException {
         if (p.departamentosLLeno()) {
             System.out.println("No se pueden insertar mas departamentos.");
         } else {
@@ -290,12 +369,21 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo operacional para insertar un departamento sin empleados
+     * @param nDpto numero del departamento
+     * @param nomDpto nombre del departamento
+     * @param locDpto localizacion del departamento
+     */
     public void insertarDepartamentoSinEmpleados(int nDpto, String nomDpto, String locDpto) {
         departamentos[p.buscaHueco()] = new Departamento(nDpto, nomDpto, locDpto);
         numeroDepartamentos++;
     }
 
-    //modificarlo a que retorne un int, -1 si no encontrado o numero encontrado
+    /**
+     * Metodo que busca hueco en el array de departamentos (null)
+     * @return retorna -1 si no hay hueco, o la posicion en caso contrario
+     */
     public int buscaHueco() {
         boolean noEncontrado = false;
         int i = 0;
@@ -309,7 +397,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         else return -1;
     }
 
-    //existe departamento, devuelve -1 si no existe o devuelve la posicion del array donde se encuentra dicho departamento
+    /**
+     * Metodo que comprueba si un departamento existe por medio de su numero de departamento
+     * @param num numero de departamento que queremos comprobar si existe
+     * @return retorna -1 si no existe el departamento, o su posicion si existe
+     */
     public int existeDepartamento(int num) {
         boolean encontrado = false;
         int contador = 0;
@@ -325,7 +417,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         else return -1;
     }
 
-    //borrar departamento recibe el numero de departamento a borrar, devuelve 1 si se ha borrado correctamente y 0 en caso contrario
+    /**
+     * Metodo operacional para borrar un departamento
+     * @param numero numero de departamento
+     * @return retorna el resultado de la operacion
+     */
     public int borrarDepartamento(int numero) {
         int borrado = 1;//retorno de 1 si ha borrado correctamente
         if (p.departamentosVacio()) {
@@ -344,7 +440,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         return borrado;
     }
 
-    //interactura con el usuario para borrar un departamento.
+    /**
+     * Metodo interactivo para borrar un departamento
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void borrarDepartamentoInteractivo() throws IOException,NumberFormatException {
         if (p.departamentosVacio()) {
             System.out.println("No hay ningun departamento registrado.");
@@ -352,11 +452,6 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
             System.out.println("Introduzca el numero de departamento que quiere borrar:");
             int departamentoBorrar = Integer.parseInt(br.readLine());
             switch (p.borrarDepartamento(departamentoBorrar)) {
-                /**
-                 * case 0:
-                 *                     System.out.println("No hay ningun departamento registrado en el sistema.");
-                 *                     break;
-                 */
                 case 1:
                     System.out.println("El departamento ha sido eliminado del sistema.");
                     break;
@@ -367,7 +462,12 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //devuelve -1 si no existe empleado, o la posicion del empleado buscado en un departamento
+    /**
+     * Metodo que comprueba si existe un empleado
+     * @param d objeto departamento
+     * @param num numero de empleado
+     * @return retorna -1 si no existe el empleado, o su posicion
+     */
     public int existeEmpleados(Departamento d, int num) {
         boolean encontrado = false;
         int contador = 0;
@@ -384,14 +484,28 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         else return -1;
     }
 
+    /**
+     * Metodo que comprueba que el array de empleados esta vacio
+     * @param d objeto departamento
+     * @return retorna verdadero si esta vacio
+     */
     public boolean empleadosVacio(Departamento d) {
         return d.getNumeroEmpleados() == 0;
     }
 
+    /**
+     * Metodo que comprueba que el array de empleados esta lleno
+     * @param d objeto departamento
+     * @return retorna verdadero si esta lleno
+     */
     public boolean empleadosLLeno(Departamento d) {
         return d.getNumeroEmpleados() == d.getTAMANO();
     }
 
+    /**
+     * Metodo que muestra los empleados de un departamento
+     * @param d objeto departamento
+     */
     public void mostrarEmpleados(Departamento d) {
         if (p.empleadosVacio(d)) {
             System.out.println("No existen empleados registrados en el departamento " + d.getDnombre());
@@ -413,7 +527,12 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //metodo para insertar un empleado en un departamento, recibe un empleado y un departamento, 1 ok, 0 ya existe, -1 esta lleno. modificarlo para que lo haga aqui con el getter
+    /**
+     * Metodo operacional para insertar un empleado
+     * @param emp objeto empleado
+     * @param dept objeto departamento
+     * @return retorna 1 para validar la ejecucion
+     */
     public int insertarEmpleado(Empleado emp, Departamento dept) {
         dept.getEmpleados()[p.buscarHuecoEmpleados(dept)]=emp;
         dept.setPosicionInserciones(p.buscarHuecoEmpleados(dept));
@@ -421,7 +540,12 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         return 1;
     }
 
-    //metodo interactivo para insertar un empleado en un departamento
+    /**
+     * Metodo interactivo para insertar un empleado
+     * @throws IOException
+     * @throws NumberFormatException
+     * @throws DateTimeParseException
+     */
     public void insertarEmpleadoInteractivo() throws IOException,NumberFormatException,DateTimeParseException {
         System.out.println("Seleccione en que departamento quiere insertar un empleado.");
         int deptInsertar = Integer.parseInt(br.readLine());//lee el numero de departamento
@@ -465,7 +589,12 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //metodo para borrar un empleado, devuelve -1 si no existe el empleado,0 si esta vacio, 1 si se ha realizado correctamente
+    /**
+     * Metodo operacional para borrar un empleado
+     * @param numeroEmpleado numero del empleado a borrar
+     * @param dept objeto departamento
+     * @return retorna 0 si no hay empleados, -1 si no existe el empleado o 1 si se ha borrado correctamente
+     */
     public int borrarEmpleado(int numeroEmpleado, Departamento dept){
         int posicionEmpleado = p.existeEmpleados(dept,numeroEmpleado);
         if(p.empleadosVacio(dept)){
@@ -482,7 +611,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //metodo interactivo para borrar un empleado
+    /**
+     * Metodo interactivo para borrar a un empleado
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void borrarEmpleadoInteractivo() throws IOException,NumberFormatException{
         if(p.departamentosVacio()){//control de error si no hay departamentos registrados
             System.out.println("No hay ningún departamento");
@@ -512,7 +645,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
-    //metodo que busca el hueco de insercion de empleados en el departamento elegido, retorna -1 no encontrado o la posicion
+    /**
+     * Metodo para buscar la posicion de un empleado por medio de su numero
+     * @param dept objeto departamento
+     * @return retorna -1 si no hay hueco, o la posicion donde se encuentra
+     */
     public int buscarHuecoEmpleados(Departamento dept){
         boolean noEncontrado = false;
         int i = 0;
@@ -526,6 +663,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         else return -1;
     }
 
+    /**
+     * Metodo para buscar un departamento por medio de su nombre
+     * @param nombreDepartamento nombre del departamento que queremos comprobar si existe
+     * @return retorna -1 si no existe, o la posicion donde se encuentra
+     */
     public int buscarDepartamento(String nombreDepartamento){
         boolean encontrado = false;
         int contador = 0;
@@ -541,6 +683,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         else return -1;
     }
 
+    /**
+     * Metodo interactivo para modificar un empleado
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void modificarEmpleadoInteractivo() throws IOException,NumberFormatException {
         int[] datos = new int[3];
         if(p.departamentosVacio()){
@@ -574,6 +721,11 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo operacional para modificar un empleado
+     * @param datos array con datos procedente de modificarEmpleadoInteractivo
+     * @throws IOException
+     */
     public void modificarEmpleado(int[] datos) throws IOException {
         switch (datos[2]){
             case 1:
@@ -596,30 +748,59 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         }
     }
 
+    /**
+     * Metodo interactivo para modificar el numero de un empleado
+     * @param datos datos procedentes de modificarEmpleado
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void modificarNumeroEmpleadoInteractivo(int[] datos) throws IOException,NumberFormatException{
         System.out.println("Introduzca el nuevo numero del empleado:");
         int numeroEmpleado = Integer.parseInt(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setNumeroEmpleado(numeroEmpleado);
     }
 
+    /**
+     * Metodo interactivo para modificar el apellido de un empleado
+     * @param datos datos procedentes de modificarEmpleado
+     * @throws IOException
+     */
     public void modificarApellidoEmpleadoInteractivo(int[] datos) throws IOException{
         System.out.println("Introduzca el nuevo apellido del empleado:");
         String apellidoEmpleado = br.readLine();
         departamentos[datos[0]].getEmpleados()[datos[1]].setApellido(apellidoEmpleado);
     }
 
+    /**
+     * Metodo interactivo para modificar la fecha de alta de un empleado
+     * @param datos datos procedentes de modificarEmpleado
+     * @throws IOException
+     * @throws DateTimeParseException
+     */
     public void modificarFechaAltaEmpleadoInteractivo(int[] datos) throws IOException,DateTimeParseException{
         System.out.println("Introduzca la nueva fecha de alta del empleado.\n(Formato aaaa-mm-dd)");
         LocalDate fechaAltaEmpleado = LocalDate.parse(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setFechaAlta(fechaAltaEmpleado);
     }
 
+    /**
+     * Metodo interactivo para modificar el salario de un empleado
+     * @param datos datos procedentes de modificarEmpleado
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void modificarSalarioEmpleadoInteractivo(int[] datos) throws IOException,NumberFormatException{
         System.out.println("Introduza el nuevo salario del empleado.");
         double salarioEmpleado = Double.parseDouble(br.readLine());
         departamentos[datos[0]].getEmpleados()[datos[1]].setSalario(salarioEmpleado);
     }
 
+    /**
+     * Metodo interactivo para modificar la comision de un director
+     * @param datos datos procedentes de modificarEmpleado
+     * @throws IOException
+     * @throws NumberFormatException
+     */
     public void modificarComisionDirectorInteractivo(int[] datos) throws IOException,NumberFormatException{
         System.out.println("Introduzca la nueva comision del director:");
         double comisionDirector = Double.parseDouble(br.readLine());
