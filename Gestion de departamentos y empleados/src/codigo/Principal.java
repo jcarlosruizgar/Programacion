@@ -573,23 +573,20 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         switch (datos[2]){
             case 1:
                 p.modificarNumeroEmpleadoInteractivo(datos);
-                System.out.println("1");
                 break;
             case 2:
                 p.modificarApellidoEmpleadoInteractivo(datos);
-                System.out.println("2");
                 break;
             case 3:
                 p.modificarFechaAltaEmpleadoInteractivo(datos);
-                System.out.println("3");
                 break;
             case 4:
                 p.modificarSalarioEmpleadoInteractivo(datos);
-                System.out.println("4");
                 break;
             case 5:
-                p.modificarComisionDirectorInteractivo(datos);
-                System.out.println("5");
+                if(departamentos[datos[0]].getEmpleados()[datos[1]] instanceof Director){
+                    p.modificarComisionDirectorInteractivo(datos);
+                }
                 break;
         }
     }
