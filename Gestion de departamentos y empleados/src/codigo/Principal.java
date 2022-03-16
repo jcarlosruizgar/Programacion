@@ -32,7 +32,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
     public static void main(String[] args) {
         p.cargaAutomaticaConComposicion();
         //p.cargaAutomaticaConAgregacion();
-        System.out.println(p.buscarDepartamento("Logistica"));
+        System.out.println(p.posicionDelApellido("MaRiA",2));
         System.out.println("Programa de gestion de departamentos y empleados, versión 1.0");
         do {
             try {
@@ -805,6 +805,33 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
         System.out.println("Introduzca la nueva comision del director:");
         double comisionDirector = Double.parseDouble(br.readLine());
         ((Director)departamentos[datos[0]].getEmpleados()[datos[1]]).setComision(comisionDirector);
+    }
+
+    /**
+     * Metodo para averiguar la posicion de un empleado de un departamento por medio de su apellido
+     * @param apellido apellido del empleado
+     * @param dept_no numero de departamento al que pertenece el empleado
+     * @return retorna -1 si no existe el departamento, -2 si no existe el apellido o la posicion donde se encuentra
+     */
+    int posicionDelApellido(String apellido,int dept_no){
+        boolean encontrado = false;
+        int contador = 0;
+        int dptoBuscar = p.existeDepartamento(dept_no);
+        if(dptoBuscar == -1){
+            return -1;
+        }
+        else{
+            do {
+                if (departamentos[dptoBuscar].getEmpleados()[contador] != null && departamentos[dptoBuscar].getEmpleados()[contador].getApellido().compareToIgnoreCase(apellido) == 0) {
+                    encontrado = true;
+                } else {
+                    contador++;
+                }
+            }
+            while (!encontrado && contador < departamentos[dptoBuscar].getTAMANO());
+            if (encontrado) return contador;
+            else return -2;
+        }
     }
 
 }
