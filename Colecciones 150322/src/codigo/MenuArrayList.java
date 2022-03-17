@@ -76,7 +76,7 @@ public class MenuArrayList {
         System.out.println("introduzca el numero que quiere modificar:");
         int numeroBuscado = numeros.lastIndexOf(Double.parseDouble(br.readLine()));
         if (numeroBuscado == -1){
-            System.out.println("El numero buscado " + numeroBuscado + " no esta registrado.");
+            System.out.println("El numero buscado no existe.");
         }
         else{
             System.out.println("Introduzca el nuevo numero:");
