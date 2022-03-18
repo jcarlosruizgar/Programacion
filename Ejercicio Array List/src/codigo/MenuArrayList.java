@@ -15,7 +15,7 @@ public class MenuArrayList {
 
     private static boolean salir = false;
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static ArrayList<Double> numeros = new ArrayList<Double>();
+    private static ArrayList<Integer> numeros = new ArrayList<Integer>();
 
     public static void main(String[] args) {
         System.out.println("Aplicacion operaciones Array List:");
@@ -57,30 +57,30 @@ public class MenuArrayList {
 
     public static void mostrarNumeros(){
         System.out.println("Los numeros almacenados son:");
-        for(Double numero:numeros){
+        for(Integer numero:numeros){
             System.out.println("\t" + numero);
         }
     }
 
     public static void anadirNumero() throws IOException {
         System.out.println("Introduzca el numero que quiere añadir:");
-        numeros.add(Double.parseDouble(br.readLine()));
+        numeros.add(Integer.parseInt(br.readLine()));
     }
 
     public static void borrarNumero() throws IOException {
         System.out.println("Introduzca el numero que quiere borrar:");
-        numeros.remove(Double.parseDouble(br.readLine()));
+        numeros.remove(Integer.parseInt(br.readLine()));
     }
 
     public static void modificarNumero() throws IOException {
         System.out.println("introduzca el numero que quiere modificar:");
-        int numeroBuscado = numeros.lastIndexOf(Double.parseDouble(br.readLine()));
+        int numeroBuscado = numeros.lastIndexOf(Integer.parseInt(br.readLine()));
         if (numeroBuscado == -1){
             System.out.println("El numero buscado no existe.");
         }
         else{
             System.out.println("Introduzca el nuevo numero:");
-            numeros.set(numeroBuscado,Double.parseDouble(br.readLine()));
+            numeros.set(numeroBuscado,Integer.parseInt(br.readLine()));
         }
     }
 
