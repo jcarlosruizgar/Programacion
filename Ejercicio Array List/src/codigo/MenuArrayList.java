@@ -26,6 +26,7 @@ public class MenuArrayList {
                 System.out.println("2 - Para borrar un numero.");
                 System.out.println("3 - Para modificar un numero.");
                 System.out.println("4 - Para mostrar los numeros almacenados.");
+                System.out.println("5 - Buscar un numero.");
                 System.out.println("0 - Para salir.");
                 int seleccionMenu = Integer.parseInt(br.readLine());
                 switch (seleccionMenu){
@@ -40,6 +41,9 @@ public class MenuArrayList {
                         break;
                     case 4:
                         mostrarNumeros();
+                        break;
+                    case 5:
+                        buscarNumero();
                         break;
                     case 0:
                         salir = true;
@@ -108,13 +112,30 @@ public class MenuArrayList {
         }
         else{
             System.out.println("introduzca el numero que quiere modificar:");
-            int numeroBuscado = numeros.lastIndexOf(Integer.parseInt(br.readLine()));
+            int numeroBuscado = numeros.indexOf(Integer.parseInt(br.readLine()));
             if (numeroBuscado == -1){
                 System.out.println("El numero buscado no existe.");
             }
             else{
                 System.out.println("Introduzca el nuevo numero:");
                 numeros.set(numeroBuscado,Integer.parseInt(br.readLine()));
+            }
+        }
+    }
+
+    public static void buscarNumero() throws IOException{
+        if(numeros.isEmpty()){
+            System.out.println("No hay ningun numero almacenado");
+        }
+        else{
+            System.out.println("Introduzca el numero que quiere buscar:");
+            int numeroBuscado = Integer.parseInt(br.readLine());
+            int posicionNumeroBuscado = numeros.indexOf(numeroBuscado);
+            if (posicionNumeroBuscado == -1){
+                System.out.println("El numero buscado no existe.");
+            }
+            else{
+                System.out.println("El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado+1);
             }
         }
     }
