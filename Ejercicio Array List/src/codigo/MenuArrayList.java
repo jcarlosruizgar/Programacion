@@ -22,24 +22,24 @@ public class MenuArrayList {
         do{
             try{
                 System.out.println("Introduzca:");
-                System.out.println("1 - Para mostrar los numeros almacenados.");
-                System.out.println("2 - Para añadir un numero.");
-                System.out.println("3 - Para borrar un numero.");
-                System.out.println("4 - Para modificar un numero.");
+                System.out.println("1 - Para añadir un numero.");
+                System.out.println("2 - Para borrar un numero.");
+                System.out.println("3 - Para modificar un numero.");
+                System.out.println("4 - Para mostrar los numeros almacenados.");
                 System.out.println("0 - Para salir.");
                 int seleccionMenu = Integer.parseInt(br.readLine());
                 switch (seleccionMenu){
                     case 1:
-                        mostrarNumeros();
-                        break;
-                    case 2:
                         anadirNumero();
                         break;
-                    case 3:
+                    case 2:
                         borrarNumero();
                         break;
-                    case 4:
+                    case 3:
                         modificarNumero();
+                        break;
+                    case 4:
+                        mostrarNumeros();
                         break;
                     case 0:
                         salir = true;
@@ -65,7 +65,7 @@ public class MenuArrayList {
         else{
             System.out.println("Los numeros almacenados son:");
             for(Integer numero:numeros){
-                System.out.println("\t" + numero);
+                System.out.printf("%10s %n",numero);
             }
         }
     }
