@@ -55,9 +55,12 @@ public class MenuArrayList {
         }while (!salir);
     }
 
+    /**
+     * Metodo para mostrar los numeros almacenados en el ArrayList numeros
+     */
     public static void mostrarNumeros(){
         if(numeros.isEmpty()){
-            System.out.println("No hay ningun numero almacenados.");
+            System.out.println("No hay ningun numero almacenado.");
         }
         else{
             System.out.println("Los numeros almacenados son:");
@@ -67,11 +70,19 @@ public class MenuArrayList {
         }
     }
 
+    /**
+     * Metodo para anadir un numero al ArrayList numeros
+     * @throws IOException
+     */
     public static void anadirNumero() throws IOException {
         System.out.println("Introduzca el numero que quiere añadir:");
         numeros.add(Integer.parseInt(br.readLine()));
     }
 
+    /**
+     * Metodo para borrar un numero registrado en el ArrayList numeros
+     * @throws IOException
+     */
     public static void borrarNumero() throws IOException {
         if(numeros.isEmpty()){
             System.out.println("No hay ningun numero almacenado.");
@@ -84,11 +95,13 @@ public class MenuArrayList {
             catch (IndexOutOfBoundsException ioobe){
                 System.out.println("El numero elegido no existe.");
             }
-
         }
-
     }
 
+    /**
+     * Metodo para modificar un numero registrado en el ArrayList numeros
+     * @throws IOException
+     */
     public static void modificarNumero() throws IOException {
         if (numeros.isEmpty()){
             System.out.println("No hay ningun numero almacenado.");
