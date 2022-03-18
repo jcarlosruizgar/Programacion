@@ -56,9 +56,14 @@ public class MenuArrayList {
     }
 
     public static void mostrarNumeros(){
-        System.out.println("Los numeros almacenados son:");
-        for(Integer numero:numeros){
-            System.out.println("\t" + numero);
+        if(numeros.isEmpty()){
+            System.out.println("No hay ningun numero almacenados.");
+        }
+        else{
+            System.out.println("Los numeros almacenados son:");
+            for(Integer numero:numeros){
+                System.out.println("\t" + numero);
+            }
         }
     }
 
@@ -68,8 +73,14 @@ public class MenuArrayList {
     }
 
     public static void borrarNumero() throws IOException {
-        System.out.println("Introduzca el numero que quiere borrar:");
-        numeros.remove(Integer.parseInt(br.readLine()));
+        if(numeros.isEmpty()){
+            System.out.println("No hay ningun numero almacenado.");
+        }
+        else{
+            System.out.println("Introduzca el numero que quiere borrar:");
+            numeros.remove(Integer.parseInt(br.readLine()));
+        }
+
     }
 
     public static void modificarNumero() throws IOException {
