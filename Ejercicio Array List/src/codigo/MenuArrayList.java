@@ -77,21 +77,32 @@ public class MenuArrayList {
             System.out.println("No hay ningun numero almacenado.");
         }
         else{
-            System.out.println("Introduzca el numero que quiere borrar:");
-            numeros.remove(Integer.parseInt(br.readLine()));
+            try{
+                System.out.println("Introduzca el numero que quiere borrar:");
+                numeros.remove(Integer.parseInt(br.readLine()));
+            }
+            catch (IndexOutOfBoundsException ioobe){
+                System.out.println("El numero elegido no existe.");
+            }
+
         }
 
     }
 
     public static void modificarNumero() throws IOException {
-        System.out.println("introduzca el numero que quiere modificar:");
-        int numeroBuscado = numeros.lastIndexOf(Integer.parseInt(br.readLine()));
-        if (numeroBuscado == -1){
-            System.out.println("El numero buscado no existe.");
+        if (numeros.isEmpty()){
+            System.out.println("No hay ningun numero almacenado.");
         }
         else{
-            System.out.println("Introduzca el nuevo numero:");
-            numeros.set(numeroBuscado,Integer.parseInt(br.readLine()));
+            System.out.println("introduzca el numero que quiere modificar:");
+            int numeroBuscado = numeros.lastIndexOf(Integer.parseInt(br.readLine()));
+            if (numeroBuscado == -1){
+                System.out.println("El numero buscado no existe.");
+            }
+            else{
+                System.out.println("Introduzca el nuevo numero:");
+                numeros.set(numeroBuscado,Integer.parseInt(br.readLine()));
+            }
         }
     }
 
