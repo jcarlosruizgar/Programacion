@@ -135,7 +135,7 @@ public class MenuArrayList {
                 System.out.println("El numero buscado no existe.");
             }
             else{
-                System.out.println("El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado+1);
+                System.out.println("El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado + " del ArrayList");
             }
         }
     }
