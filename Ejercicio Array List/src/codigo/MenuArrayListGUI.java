@@ -1,5 +1,6 @@
 package codigo;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,29 +8,29 @@ import java.util.ArrayList;
 
 /**
  * @author Juan Carlos
- * @date 17/03/2022
  * @version 1
+ * @date 17/03/2022
  * @description menu interactivo, añadir, borrar, modificar numeros
  */
 public class MenuArrayListGUI {
 
     private static boolean salir = false;
-    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static ArrayList<Integer> numeros = new ArrayList<Integer>();
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
-        System.out.println("Aplicacion operaciones Array List:");
-        do{
-            try{
-                System.out.println("Introduzca:");
-                System.out.println("1 - Para añadir un numero.");
-                System.out.println("2 - Para borrar un numero.");
-                System.out.println("3 - Para modificar un numero.");
-                System.out.println("4 - Para mostrar los numeros almacenados.");
-                System.out.println("5 - Buscar un numero.");
-                System.out.println("0 - Para salir.");
-                int seleccionMenu = Integer.parseInt(br.readLine());
-                switch (seleccionMenu){
+        JOptionPane.showMessageDialog(null, "Aplicacion operaciones Array List.");
+        do {
+            try {
+                int seleccionMenu = Integer.parseInt(JOptionPane.showInputDialog("Introduzca:" +
+                        "\n1 - Para anadir un numero." +
+                        "\n2 - Para borrar un numero." +
+                        "\n3 - Para modificar un numero." +
+                        "\n4 - Para mostrar los numeros almacenados." +
+                        "\n5 - Para buscar un numero." +
+                        "\n0 - Para salir."));
+                //int seleccionMenu = Integer.parseInt(br.readLine());
+                switch (seleccionMenu) {
                     case 1:
                         anadirNumero();
                         break;
@@ -49,92 +50,88 @@ public class MenuArrayListGUI {
                         salir = true;
                         break;
                 }
-            }
-            catch (NumberFormatException nfe){
+            } catch (NumberFormatException nfe) {
                 System.out.println("Eso no es un numero.");
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }while (!salir);
+        } while (!salir);
     }
 
     /**
      * Metodo para mostrar los numeros almacenados en el ArrayList numeros
      */
-    public static void mostrarNumeros(){
-        if(numeros.isEmpty()){
-            System.out.println("No hay ningun numero almacenado.");
-        }
-        else{
-            System.out.println("Los numeros almacenados son:");
-            for(Integer numero:numeros){
-                System.out.printf("%10s %n",numero);
+    public static void mostrarNumeros() {
+        if (numeros.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun numero almacenado.");
+        } else {
+            String mostrar = "Los numeros almacenados son:";
+            for (Integer numero : numeros) {
+                mostrar += "\n" + numero;
             }
+            JOptionPane.showMessageDialog(null, mostrar);
         }
     }
 
     /**
      * Metodo para anadir un numero al ArrayList numeros
+     *
      * @throws IOException
      */
     public static void anadirNumero() throws IOException {
-        System.out.println("Introduzca el numero que quiere añadir:");
-        numeros.add(Integer.parseInt(br.readLine()));
+        int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere anadir:"));
+        numeros.add(numero);
     }
 
     /**
      * Metodo para borrar un numero registrado en el ArrayList numeros
+     *
      * @throws IOException
      */
     public static void borrarNumero() throws IOException {
-        if(numeros.isEmpty()){
-            System.out.println("No hay ningun numero almacenado.");
-        }
-        else{
-            try{
-                System.out.println("Introduzca el numero que quiere borrar:");
-                numeros.remove(Integer.parseInt(br.readLine()));
-            }
-            catch (IndexOutOfBoundsException ioobe){
+        if (numeros.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay ningun numero almacenado.");
+        } else {
+            System.out.println("Introduzca el numero que quiere borrar:");
+            int posicion = numeros.indexOf(Integer.parseInt(br.readLine()));
+            if (posicion == -1) {
                 System.out.println("El numero elegido no existe.");
+            } else {
+                numeros.remove(posicion);
             }
         }
     }
 
     /**
      * Metodo para modificar un numero registrado en el ArrayList numeros
+     *
      * @throws IOException
      */
     public static void modificarNumero() throws IOException {
-        if (numeros.isEmpty()){
+        if (numeros.isEmpty()) {
             System.out.println("No hay ningun numero almacenado.");
-        }
-        else{
+        } else {
             System.out.println("introduzca el numero que quiere modificar:");
             int numeroBuscado = numeros.indexOf(Integer.parseInt(br.readLine()));
-            if (numeroBuscado == -1){
+            if (numeroBuscado == -1) {
                 System.out.println("El numero buscado no existe.");
-            }
-            else{
+            } else {
                 System.out.println("Introduzca el nuevo numero:");
-                numeros.set(numeroBuscado,Integer.parseInt(br.readLine()));
+                numeros.set(numeroBuscado, Integer.parseInt(br.readLine()));
             }
         }
     }
 
-    public static void buscarNumero() throws IOException{
-        if(numeros.isEmpty()){
+    public static void buscarNumero() throws IOException {
+        if (numeros.isEmpty()) {
             System.out.println("No hay ningun numero almacenado");
-        }
-        else{
+        } else {
             System.out.println("Introduzca el numero que quiere buscar:");
             int numeroBuscado = Integer.parseInt(br.readLine());
             int posicionNumeroBuscado = numeros.indexOf(numeroBuscado);
-            if (posicionNumeroBuscado == -1){
+            if (posicionNumeroBuscado == -1) {
                 System.out.println("El numero buscado no existe.");
-            }
-            else{
+            } else {
                 System.out.println("El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado + " del ArrayList");
             }
         }
