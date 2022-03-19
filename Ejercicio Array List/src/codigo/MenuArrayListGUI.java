@@ -48,7 +48,7 @@ public class MenuArrayListGUI {
                         break;
                 }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(null,"Eso no es un numero.");
+                JOptionPane.showMessageDialog(null, "Eso no es un numero.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -78,7 +78,7 @@ public class MenuArrayListGUI {
     public static void anadirNumero() throws IOException {
         int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere anadir:"));
         numeros.add(numero);
-        JOptionPane.showMessageDialog(null,"El numero " + numero + " se ha anadido correctamente.");
+        JOptionPane.showMessageDialog(null, "El numero " + numero + " se ha anadido correctamente.");
     }
 
     /**
@@ -96,7 +96,7 @@ public class MenuArrayListGUI {
                 JOptionPane.showMessageDialog(null, "El numero elegido no existe.");
             } else {
                 numeros.remove(posicion);
-                JOptionPane.showMessageDialog(null,"El numero " + numero + " ha sido borrado correctamente.");
+                JOptionPane.showMessageDialog(null, "El numero " + numero + " ha sido borrado correctamente.");
             }
         }
     }
@@ -117,7 +117,7 @@ public class MenuArrayListGUI {
             } else {
                 int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el nuevo numero:"));
                 numeros.set(posicionNumeroBuscado, numero);
-                JOptionPane.showMessageDialog(null,"El numero " + numeroBuscado + " ha sido modificado por el numero " + numero + " correctamente.");
+                JOptionPane.showMessageDialog(null, "El numero " + numeroBuscado + " ha sido modificado por el numero " + numero + " correctamente.");
             }
         }
     }
@@ -134,9 +134,9 @@ public class MenuArrayListGUI {
             int numeroBuscado = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere buscar:"));
             int posicionNumeroBuscado = numeros.indexOf(numeroBuscado);
             if (posicionNumeroBuscado == -1) {
-                JOptionPane.showMessageDialog(null,"El numero buscado no existe.");
+                JOptionPane.showMessageDialog(null, "El numero buscado no existe.");
             } else {
-                JOptionPane.showMessageDialog(null,"El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado + " del ArrayList");
+                JOptionPane.showMessageDialog(null, "El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado + " del ArrayList");
             }
         }
     }
