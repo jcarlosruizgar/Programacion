@@ -92,10 +92,9 @@ public class MenuArrayListGUI {
         if (numeros.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay ningun numero almacenado.");
         } else {
-            System.out.println("Introduzca el numero que quiere borrar:");
-            int posicion = numeros.indexOf(Integer.parseInt(br.readLine()));
+            int posicion = numeros.indexOf(Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere borrar:")));
             if (posicion == -1) {
-                System.out.println("El numero elegido no existe.");
+                JOptionPane.showMessageDialog(null,"El numero elegido no existe.");
             } else {
                 numeros.remove(posicion);
             }
