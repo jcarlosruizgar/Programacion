@@ -78,6 +78,7 @@ public class MenuArrayListGUI {
     public static void anadirNumero() throws IOException {
         int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere anadir:"));
         numeros.add(numero);
+        JOptionPane.showMessageDialog(null,"El numero " + numero + " se ha anadido correctamente.");
     }
 
     /**
@@ -89,11 +90,13 @@ public class MenuArrayListGUI {
         if (numeros.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay ningun numero almacenado.");
         } else {
-            int posicion = numeros.indexOf(Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere borrar:")));
+            int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere borrar:"));
+            int posicion = numeros.indexOf(numero);
             if (posicion == -1) {
                 JOptionPane.showMessageDialog(null, "El numero elegido no existe.");
             } else {
                 numeros.remove(posicion);
+                JOptionPane.showMessageDialog(null,"El numero " + numero + " ha sido borrado correctamente.");
             }
         }
     }
@@ -107,11 +110,14 @@ public class MenuArrayListGUI {
         if (numeros.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay ningun numero almacenado.");
         } else {
-            int numeroBuscado = numeros.indexOf(Integer.parseInt(JOptionPane.showInputDialog("introduzca el numero que quiere modificar:")));
-            if (numeroBuscado == -1) {
+            int numeroBuscado = Integer.parseInt(JOptionPane.showInputDialog("introduzca el numero que quiere modificar:"));
+            int posicionNumeroBuscado = numeros.indexOf(numeroBuscado);
+            if (posicionNumeroBuscado == -1) {
                 JOptionPane.showMessageDialog(null, "El numero buscado no existe.");
             } else {
-                numeros.set(numeroBuscado, Integer.parseInt(JOptionPane.showInputDialog("Introduzca el nuevo numero:")));
+                int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el nuevo numero:"));
+                numeros.set(posicionNumeroBuscado, numero);
+                JOptionPane.showMessageDialog(null,"El numero " + numeroBuscado + " ha sido modificado por el numero " + numero + " correctamente.");
             }
         }
     }
