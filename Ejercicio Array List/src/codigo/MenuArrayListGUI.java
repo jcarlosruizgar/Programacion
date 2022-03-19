@@ -48,7 +48,7 @@ public class MenuArrayListGUI {
                         break;
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println("Eso no es un numero.");
+                JOptionPane.showMessageDialog(null,"Eso no es un numero.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
