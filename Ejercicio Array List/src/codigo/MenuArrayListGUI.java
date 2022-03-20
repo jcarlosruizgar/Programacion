@@ -46,6 +46,9 @@ public class MenuArrayListGUI {
                     case 0:
                         salir = true;
                         break;
+                    default:
+                        JOptionPane.showMessageDialog(null,"Selecciona una opcion correcta.");
+                        break;
                 }
             } catch (NumberFormatException nfe) {
                 JOptionPane.showMessageDialog(null, "Eso no es un numero.");
