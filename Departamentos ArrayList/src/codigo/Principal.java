@@ -1,4 +1,10 @@
 package codigo;
+/**
+ * @author Juan Carlos Ruiz Garcia
+ * @date 21/03/2022
+ * @version 1
+ * @description Aplicacion de Departamento y Empleados haciendo uso de ArrayList
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,19 +14,146 @@ import java.util.Iterator;
 
 public class Principal {
 
+    private static boolean salir = false;//variable bandera que controla la ejecucion del programa
     private static ArrayList departamentos = new ArrayList<>();
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
 
         cargaAutomatica();
+        /*
         try{
             cargaInteractiva();
         }
         catch (IOException ioe){
             System.out.println("Error con la introduccion de datos.");
         }
+        */
         mostrarDepartamentos();
+        //System.out.println(departamentos.contains(departamentos.get(0)));
+    }
+
+    public void menuDepartamentos(){
+
+    }
+
+    public void modificarDepartamentoInteractivo(){
+
+    }
+
+    public void modificarDepartamento(){
+
+    }
+
+    public void modificarNumeroDepartamento(int departamento, int nuevo_dept_no){
+
+    }
+
+    public void modificarNumeroDepartamenteInteractivo(int departamento){
+
+    }
+
+    public void modificarNombreDepartamento(int departamento, String nombre){
+
+    }
+
+    public void modificarNombreDepartamenteInteractivo(int departamento){
+
+    }
+
+    public void modificarLocalizacionDepartamento(int departamento, String localizacion){
+
+    }
+
+    public void modificarLocalizacionDepartamenteInteractivo(int departamento){
+
+    }
+
+    public void menuEmpleados(){
+
+    }
+
+    public void cargaAutomaticaConComposicion(){
+
+    }
+
+    public void cargaAutomaticaConAgregacion(){
+
+    }
+
+    public void mostrarDepartamentosEmpleados(){
+
+    }
+
+    public boolean departamentosLLeno(){
+        return false;
+    }
+
+    public boolean departamentosVacio(){
+        return false;
+    }
+
+    public int borrarDepartamento(int numero){
+        return 0;
+    }
+
+    public void borrarDepartamentoInteractivo(){
+
+    }
+
+    public boolean empleadosVacio(Departamento d){
+        return false;
+    }
+
+    public boolean empleadosLLeno(Departamento d){
+        return false;
+    }
+
+    public void mostrarEmpleados(Departamento d){
+
+    }
+
+    public int insertarEmpleado(Empleado emp, Departamento dept){
+        return 0;
+    }
+
+    public void insertarEmpleadoInteractivo(){
+
+    }
+
+    public int borrarEmpleado(int numeroEmpleado, Departamento dept){
+        return 0;
+    }
+
+    public void borrarEmpleadoInteractivo(){
+
+    }
+
+    public void modificarEmpleadoInteractivo(){
+
+    }
+
+    public void modificarEmpleado(){
+
+    }
+
+    public void modificarNumeroEmpleadoInteractivo(){
+
+    }
+
+    public void modificarApellidoEmpleadoInteractivo(){
+
+    }
+
+    public void modificarFechaAltaEmpleadoInteractivo(){
+
+    }
+
+    public void modificarSalarioEmpleadoInteractivo(){
+
+    }
+
+    public void modificarComisionDirectorInteractivo(){
 
     }
 

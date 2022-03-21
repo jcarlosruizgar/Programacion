@@ -813,7 +813,7 @@ public class Principal implements operacionesDepartamento,operacionesEmpleado {
      * @param dept_no numero de departamento al que pertenece el empleado
      * @return retorna -1 si no existe el departamento, -2 si no existe el apellido o la posicion donde se encuentra
      */
-    int posicionDelApellido(String apellido,int dept_no){
+    public int posicionDelApellido(String apellido,int dept_no){
         boolean encontrado = false;
         int contador = 0;
         int dptoBuscar = p.existeDepartamento(dept_no);
