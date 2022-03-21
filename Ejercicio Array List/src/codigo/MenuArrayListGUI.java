@@ -3,6 +3,7 @@ package codigo;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author Juan Carlos
@@ -135,12 +136,23 @@ public class MenuArrayListGUI {
             JOptionPane.showMessageDialog(null, "No hay ningun numero almacenado.");
         } else {
             int numeroBuscado = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero que quiere buscar:"));
+            int posicion;
+            Iterator it=numeros.iterator();
+            while(it.hasNext()){
+                int numero = (int)it.next();
+                if(numeroBuscado == numero){
+                    JOptionPane.showMessageDialog(null,numero);
+                }
+            }
+
+            /* buscando con index of
             int posicionNumeroBuscado = numeros.indexOf(numeroBuscado);
             if (posicionNumeroBuscado == -1) {
                 JOptionPane.showMessageDialog(null, "El numero buscado no existe.");
             } else {
                 JOptionPane.showMessageDialog(null, "El numero " + numeroBuscado + " se encuentra en la posicion numero " + posicionNumeroBuscado + " del ArrayList");
             }
+            */
         }
     }
 
