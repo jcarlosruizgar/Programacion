@@ -60,7 +60,7 @@ public class Departamento {
     }
 
     /**
-     * Getter & Setters clase Departamento
+     * Getters & Setters clase Departamento
      */
     public int getDept_no() {
         return dept_no;
