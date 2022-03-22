@@ -74,16 +74,13 @@ public class Departamento {
         this.localizacion = localizacion;
     }
 
-    /**
-     * Metodo toString de Departamento
-     * @return retorna un string formateado con la informacion del departamento
-     */
     @Override
     public String toString() {
         return "Departamento{" +
                 "dept_no=" + dept_no +
                 ", dnombre='" + dnombre + '\'' +
                 ", localizacion='" + localizacion + '\'' +
+                ", empleados=" + empleados +
                 '}';
     }
 }

@@ -16,7 +16,7 @@ import java.util.Iterator;
 public class Principal {
 
     private static boolean salir = false;//variable bandera que controla la ejecucion del programa
-    private static ArrayList departamentos = new ArrayList<>();
+    private static ArrayList <Departamento> departamentos = new ArrayList<Departamento>();
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
@@ -76,26 +76,33 @@ public class Principal {
     }
 
     public static void cargaAutomaticaConComposicion(){
-
+        departamentos.add(new Departamento(6,"Ventas","Caceres"));
+        departamentos.add(new Departamento(17,"Innovacion","Madrid"));
     }
 
     public static void cargaAutomaticaConAgregacion(){
 
         //creacion array list empleados del departamento de ventas
-        ArrayList empleadosVentas = new ArrayList();
+        ArrayList <Empleado> empleadosVentas = new ArrayList<Empleado>();
         empleadosVentas.add(new Director(20,"Sanchez", LocalDate.of(2020,10,1),2600,null,500));
         empleadosVentas.add(new Analista(7,"Perez", LocalDate.of(2017,9,7),1600,null));
 
         //creacion del departamento de ventas en el array list
         departamentos.add(new Departamento(6,"Ventas","Caceres",empleadosVentas));
 
+        empleadosVentas.get(0).setDepartamentoEmpleado((Departamento) departamentos.get(0));
+        empleadosVentas.get(1).setDepartamentoEmpleado((Departamento) departamentos.get(0));
+
         //creacion array list empleados del departamento de innovacion
-        ArrayList empleadosInnovacion = new ArrayList();
+        ArrayList <Empleado> empleadosInnovacion = new ArrayList<Empleado>();
         empleadosInnovacion.add(new Director(9,"Gallardo", LocalDate.of(2010,1,1),3800,null,1000));
         empleadosInnovacion.add(new Analista(38,"Galan", LocalDate.of(2012,12,20),2000,null));
 
         //creacion del departamento de innovacion en el array list
         departamentos.add(new Departamento(17,"Innovacion","Madrid",empleadosInnovacion));
+
+        empleadosInnovacion.get(0).setDepartamentoEmpleado(departamentos.get(1));
+        empleadosInnovacion.get(1).setDepartamentoEmpleado(departamentos.get(1));
 
     }
 
