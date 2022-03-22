@@ -9,6 +9,7 @@ package codigo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,7 +21,8 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        cargaAutomatica();
+        //cargaAutomatica();
+        cargaAutomaticaConAgregacion();
         /*
         try{
             cargaInteractiva();
@@ -33,127 +35,143 @@ public class Principal {
         //System.out.println(departamentos.contains(departamentos.get(0)));
     }
 
-    public void menuDepartamentos(){
+    public static void menuDepartamentos(){
 
     }
 
-    public void modificarDepartamentoInteractivo(){
+    public static void modificarDepartamentoInteractivo(){
 
     }
 
-    public void modificarDepartamento(){
+    public static void modificarDepartamento(){
 
     }
 
-    public void modificarNumeroDepartamento(int departamento, int nuevo_dept_no){
+    public static void modificarNumeroDepartamento(int departamento, int nuevo_dept_no){
 
     }
 
-    public void modificarNumeroDepartamenteInteractivo(int departamento){
+    public static void modificarNumeroDepartamenteInteractivo(int departamento){
 
     }
 
-    public void modificarNombreDepartamento(int departamento, String nombre){
+    public static void modificarNombreDepartamento(int departamento, String nombre){
 
     }
 
-    public void modificarNombreDepartamenteInteractivo(int departamento){
+    public static void modificarNombreDepartamenteInteractivo(int departamento){
 
     }
 
-    public void modificarLocalizacionDepartamento(int departamento, String localizacion){
+    public static void modificarLocalizacionDepartamento(int departamento, String localizacion){
 
     }
 
-    public void modificarLocalizacionDepartamenteInteractivo(int departamento){
+    public static void modificarLocalizacionDepartamenteInteractivo(int departamento){
 
     }
 
-    public void menuEmpleados(){
+    public static void menuEmpleados(){
 
     }
 
-    public void cargaAutomaticaConComposicion(){
+    public static void cargaAutomaticaConComposicion(){
 
     }
 
-    public void cargaAutomaticaConAgregacion(){
+    public static void cargaAutomaticaConAgregacion(){
+
+        //creacion array list empleados del departamento de ventas
+        ArrayList empleadosVentas = new ArrayList();
+        empleadosVentas.add(new Director(20,"Sanchez", LocalDate.of(2020,10,1),2600,null,500));
+        empleadosVentas.add(new Analista(7,"Perez", LocalDate.of(2017,9,7),1600,null));
+
+        //creacion del departamento de ventas en el array list
+        departamentos.add(new Departamento(6,"Ventas","Caceres",empleadosVentas));
+
+        //creacion array list empleados del departamento de innovacion
+        ArrayList empleadosInnovacion = new ArrayList();
+        empleadosInnovacion.add(new Director(9,"Gallardo", LocalDate.of(2010,1,1),3800,null,1000));
+        empleadosInnovacion.add(new Analista(38,"Galan", LocalDate.of(2012,12,20),2000,null));
+
+        //creacion del departamento de innovacion en el array list
+        departamentos.add(new Departamento(17,"Innovacion","Madrid",empleadosInnovacion));
 
     }
 
-    public void mostrarDepartamentosEmpleados(){
+    public static void mostrarDepartamentosEmpleados(){
 
     }
 
-    public boolean departamentosLLeno(){
+    public static boolean departamentosLLeno(){
         return false;
     }
 
-    public boolean departamentosVacio(){
+    public static boolean departamentosVacio(){
         return false;
     }
 
-    public int borrarDepartamento(int numero){
+    public static int borrarDepartamento(int numero){
         return 0;
     }
 
-    public void borrarDepartamentoInteractivo(){
+    public static void borrarDepartamentoInteractivo(){
 
     }
 
-    public boolean empleadosVacio(Departamento d){
+    public static boolean empleadosVacio(Departamento d){
         return false;
     }
 
-    public boolean empleadosLLeno(Departamento d){
+    public static boolean empleadosLLeno(Departamento d){
         return false;
     }
 
-    public void mostrarEmpleados(Departamento d){
+    public static void mostrarEmpleados(Departamento d){
 
     }
 
-    public int insertarEmpleado(Empleado emp, Departamento dept){
+    public static int insertarEmpleado(Empleado emp, Departamento dept){
         return 0;
     }
 
-    public void insertarEmpleadoInteractivo(){
+    public static void insertarEmpleadoInteractivo(){
 
     }
 
-    public int borrarEmpleado(int numeroEmpleado, Departamento dept){
+    public static int borrarEmpleado(int numeroEmpleado, Departamento dept){
         return 0;
     }
 
-    public void borrarEmpleadoInteractivo(){
+    public static void borrarEmpleadoInteractivo(){
 
     }
 
-    public void modificarEmpleadoInteractivo(){
+    public static void modificarEmpleadoInteractivo(){
 
     }
 
-    public void modificarEmpleado(){
+    public static void modificarEmpleado(){
 
     }
 
-    public void modificarNumeroEmpleadoInteractivo(){
+    public static void modificarNumeroEmpleadoInteractivo(){
 
     }
 
-    public void modificarApellidoEmpleadoInteractivo(){
+    public static void modificarApellidoEmpleadoInteractivo(){
 
     }
 
-    public void modificarFechaAltaEmpleadoInteractivo(){
+    public static void modificarFechaAltaEmpleadoInteractivo(){
 
     }
 
-    public void modificarSalarioEmpleadoInteractivo(){
+    public static void modificarSalarioEmpleadoInteractivo(){
 
     }
 
-    public void modificarComisionDirectorInteractivo(){
+    public static void modificarComisionDirectorInteractivo(){
 
     }
 
