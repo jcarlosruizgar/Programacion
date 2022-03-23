@@ -11,7 +11,7 @@ public class Departamento {
     private int dept_no;
     private String dnombre;
     private String localizacion;
-    private ArrayList empleados = new ArrayList();
+    private ArrayList <Empleado> empleados = new ArrayList<Empleado>();
 
     /**
      * Constructor vacio de Departamento
@@ -72,6 +72,14 @@ public class Departamento {
 
     public void setLocalizacion(String localizacion) {
         this.localizacion = localizacion;
+    }
+
+    public ArrayList<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(ArrayList<Empleado> empleados) {
+        this.empleados = empleados;
     }
 
     @Override

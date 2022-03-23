@@ -23,7 +23,6 @@ public class Principal {
 
         //cargaAutomatica();
         cargaAutomaticaConAgregacion();
-        System.out.println(existeDepartamento(4));
         /*
         try{
             cargaInteractiva();
@@ -143,8 +142,40 @@ public class Principal {
 
 
     //metodo para insertar empleado de forma interactiva
-    public static void insertarEmpleadoInteractivo(){
-
+    public static void insertarEmpleadoInteractivo() throws IOException{
+        System.out.println("Seleccione en que departamento quiere insertar un empleado:");
+        int deptInsertar = Integer.parseInt(br.readLine());
+        int posDeptInsertar = existeDepartamento(deptInsertar);//convierte el numero de departamento en la posicion del departamento
+        if (posDeptInsertar == -1){//comprueba si existe el departamento elegido
+            System.out.println("El departamento elegido no existe.");
+        }
+        else{
+            Empleado emp;
+            System.out.println("Indique el numero del empleado:");
+            int numEmp = Integer.parseInt(br.readLine());//numero de empleado
+            if(existeEmpleados(departamentos.get(posDeptInsertar),numEmp) != -1){//comprueba si ya existe ese empleado
+                System.out.println("Ese empleado ya existe en el departamento.");
+            }
+            else{
+                System.out.println("Que quiere intertar:\n1 - Un analista.\n2 - Un director.");
+                int tipoEmpleado = Integer.parseInt(br.readLine());//tipo de empleado
+                System.out.println("Indique el apellido del empelado:");
+                String apellidoEmp = br.readLine();
+                System.out.println("Indique la fecha de alta del empleado:\nFormato aaaa-mm-dd");
+                LocalDate fechaAltaEmp = LocalDate.parse(br.readLine());
+                System.out.println("Indique el salario del empleado:");
+                double salarioEmp = Double.parseDouble(br.readLine());
+                if (tipoEmpleado == 1){//si es analista llama a su constructor
+                    emp = new Analista(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos.get(posDeptInsertar));
+                }
+                else{//si es un director pide la comision y llama a su constructor
+                    System.out.println("Indique la comision del director:");
+                    double comisionDir = Double.parseDouble(br.readLine());
+                    emp = new Director(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos.get(posDeptInsertar),comisionDir);
+                }
+                //LLAMADA AL OPERACIONAL
+            }
+        }
     }
 
     //retorna 1 si todo ok, 0 el empleado duplicado, -1 departamento no existe
@@ -163,6 +194,22 @@ public class Principal {
             }
         }
         while(!encontrado && contador < departamentos.size());
+        if (encontrado) return contador;
+        else return -1;
+    }
+
+    public static int existeEmpleados(Departamento d, int num) {
+        boolean encontrado = false;
+        int contador = 0;
+        int dptoBuscar = existeDepartamento(d.getDept_no());
+        do {
+            if (departamentos.get(dptoBuscar).getEmpleados().get(contador).getNumeroEmpleado() == num ) {
+                encontrado = true;
+            } else {
+                contador++;
+            }
+        }
+        while (!encontrado && contador < departamentos.get(dptoBuscar).getEmpleados().size());
         if (encontrado) return contador;
         else return -1;
     }
