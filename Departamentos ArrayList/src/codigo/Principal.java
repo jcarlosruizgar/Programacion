@@ -277,10 +277,12 @@ public class Principal {
     }
 
     public static void mostrarDepartamentos(){
-        Iterator it = departamentos.iterator();
-        while (it.hasNext()){
-            String s = it.next().toString();
-            System.out.println(s);
+        for (Departamento departamento : departamentos) {
+            System.out.println(departamento);
+            for (Empleado empleado:departamento.getEmpleados()){
+                System.out.println("\t" + empleado.toString());
+            }
+            System.out.println();
         }
     }
 

@@ -88,7 +88,6 @@ public class Departamento {
                 "dept_no=" + dept_no +
                 ", dnombre='" + dnombre + '\'' +
                 ", localizacion='" + localizacion + '\'' +
-                ", empleados=" + empleados +
                 '}';
     }
 }
