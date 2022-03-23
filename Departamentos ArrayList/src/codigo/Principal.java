@@ -23,6 +23,7 @@ public class Principal {
 
         //cargaAutomatica();
         cargaAutomaticaConAgregacion();
+        System.out.println(existeDepartamento(4));
         /*
         try{
             cargaInteractiva();
@@ -138,12 +139,32 @@ public class Principal {
 
     }
 
-    public static int insertarEmpleado(Empleado emp, Departamento dept){
+
+
+
+    //metodo para insertar empleado de forma interactiva
+    public static void insertarEmpleadoInteractivo(){
+
+    }
+
+    //retorna 1 si todo ok, 0 el empleado duplicado, -1 departamento no existe
+    public static int insertarEmpleadoOperativo(Empleado emp, Departamento dept){
         return 0;
     }
 
-    public static void insertarEmpleadoInteractivo(){
-
+    public static int existeDepartamento(int num){
+        boolean encontrado = false;
+        int contador = 0;
+        do{
+            if (departamentos.get(contador).getDept_no() == num) {
+                encontrado = true;
+            } else {
+                contador++;
+            }
+        }
+        while(!encontrado && contador < departamentos.size());
+        if (encontrado) return contador;
+        else return -1;
     }
 
     public static int borrarEmpleado(int numeroEmpleado, Departamento dept){
