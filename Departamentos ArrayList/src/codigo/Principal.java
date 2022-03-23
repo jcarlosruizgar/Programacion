@@ -21,18 +21,17 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        //cargaAutomatica();
-        cargaAutomaticaConAgregacion();
-        /*
         try{
-            cargaInteractiva();
+            //cargaAutomatica();
+            cargaAutomaticaConAgregacion();
+            mostrarDepartamentos();
+            insertarEmpleadoInteractivo();
+            mostrarDepartamentos();
         }
-        catch (IOException ioe){
-            System.out.println("Error con la introduccion de datos.");
+        catch (Exception e){
+            e.printStackTrace();
         }
-        */
-        mostrarDepartamentos();
-        //System.out.println(departamentos.contains(departamentos.get(0)));
+
     }
 
     public static void menuDepartamentos(){
@@ -173,14 +172,13 @@ public class Principal {
                     double comisionDir = Double.parseDouble(br.readLine());
                     emp = new Director(numEmp,apellidoEmp,fechaAltaEmp,salarioEmp,departamentos.get(posDeptInsertar),comisionDir);
                 }
-                //LLAMADA AL OPERACIONAL
+                insertarEmpleadoOperativo(emp,departamentos.get(posDeptInsertar));
             }
         }
     }
 
-    //retorna 1 si todo ok, 0 el empleado duplicado, -1 departamento no existe
-    public static int insertarEmpleadoOperativo(Empleado emp, Departamento dept){
-        return 0;
+    public static void insertarEmpleadoOperativo(Empleado emp, Departamento dept){
+        dept.getEmpleados().add(emp);
     }
 
     public static int existeDepartamento(int num){
