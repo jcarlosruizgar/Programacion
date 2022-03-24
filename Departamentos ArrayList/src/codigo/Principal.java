@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,10 +24,17 @@ public class Principal {
 
         try{
             //cargaAutomatica();
-            cargaAutomaticaConAgregacion();
+            //cargaAutomaticaConAgregacion();
+            //mostrarDepartamentos();
+            //insertarEmpleadoInteractivo();
+            insertarDepartamentoVacioInteractivo();
             mostrarDepartamentos();
-            insertarEmpleadoInteractivo();
-            mostrarDepartamentos();
+        }
+        catch (NumberFormatException nfe){
+            System.out.println("Eso no es un numero.");
+        }
+        catch(DateTimeParseException dtpe){
+            System.out.println("Fecha introducida no valida.");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -137,8 +145,26 @@ public class Principal {
 
     }
 
+    public static void insertarDepartamentoVacioInteractivo() throws IOException{
+        System.out.println("Introduza el numero de departamento a insertar:");
+        int numDept = Integer.parseInt(br.readLine());
+        if (existeDepartamento(numDept) != -1){
+            System.out.println("Ya existe un departamento con ese mismo numero.");
+        }
+        else{
+            System.out.println("Introduza el nombre del departamento:");
+            String nomDept = br.readLine();
+            System.out.println("Introduza la localizacion del departamento:");
+            String locDept = br.readLine();
+            insertarDepartamentoVacioOperativo(numDept,nomDept,locDept);
+            System.out.println("El departamento se ha insertado correctamente.");
+        }
+    }
 
-
+    public static void insertarDepartamentoVacioOperativo(int dept_no,String dnombre,String localizacion){
+        ArrayList<Empleado> emp = new ArrayList<Empleado>();
+        departamentos.add(new Departamento(dept_no,dnombre,localizacion,emp));
+    }
 
     //metodo para insertar empleado de forma interactiva
     public static void insertarEmpleadoInteractivo() throws IOException{
@@ -185,7 +211,7 @@ public class Principal {
         boolean encontrado = false;
         int contador = 0;
         do{
-            if (departamentos.get(contador).getDept_no() == num) {
+            if (departamentos.size() != 0 && departamentos.get(contador).getDept_no() == num) {
                 encontrado = true;
             } else {
                 contador++;
@@ -201,7 +227,7 @@ public class Principal {
         int contador = 0;
         int dptoBuscar = existeDepartamento(d.getDept_no());
         do {
-            if (departamentos.get(dptoBuscar).getEmpleados().get(contador).getNumeroEmpleado() == num ) {
+            if (departamentos.get(contador).getEmpleados().size() != 0 && departamentos.get(dptoBuscar).getEmpleados().get(contador).getNumeroEmpleado() == num ) {
                 encontrado = true;
             } else {
                 contador++;
