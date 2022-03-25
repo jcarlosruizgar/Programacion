@@ -24,11 +24,15 @@ public class Principal {
 
         try{
             //cargaAutomatica();
-            //cargaAutomaticaConAgregacion();
+            cargaAutomaticaConAgregacion();
             //mostrarDepartamentos();
             //insertarEmpleadoInteractivo();
-            insertarDepartamentoVacioInteractivo();
+            //insertarDepartamentoVacioInteractivo();
             mostrarDepartamentos();
+            //borrarEmpleadoInteractivo();
+            //borrarDepartamentoInteractivo();
+            //mostrarDepartamentos();
+            modificarEmpleadoInteractivo();
         }
         catch (NumberFormatException nfe){
             System.out.println("Eso no es un numero.");
@@ -50,7 +54,7 @@ public class Principal {
 
     }
 
-    public static void modificarDepartamento(){
+    public static void modificarDepartamentoOperativo(){
 
     }
 
@@ -92,7 +96,7 @@ public class Principal {
         //creacion array list empleados del departamento de ventas
         ArrayList <Empleado> empleadosVentas = new ArrayList<Empleado>();
         empleadosVentas.add(new Director(20,"Sanchez", LocalDate.of(2020,10,1),2600,null,500));
-        empleadosVentas.add(new Analista(7,"Perez", LocalDate.of(2017,9,7),1600,null));
+        empleadosVentas.add(new Analista(9,"Perez", LocalDate.of(2017,9,7),1600,null));
 
         //creacion del departamento de ventas en el array list
         departamentos.add(new Departamento(6,"Ventas","Caceres",empleadosVentas));
@@ -125,12 +129,26 @@ public class Principal {
         return false;
     }
 
-    public static int borrarDepartamento(int numero){
-        return 0;
+    public static int borrarDepartamentoOperativo(int numero){
+        int posDeptBorrar = existeDepartamento(numero);
+        if(posDeptBorrar == -1){
+            return -1;
+        }
+        else{
+            departamentos.remove(posDeptBorrar);
+            return posDeptBorrar;
+        }
     }
 
-    public static void borrarDepartamentoInteractivo(){
-
+    public static void borrarDepartamentoInteractivo() throws IOException{
+        System.out.println("Introduza que departamento quiere eliminar:");
+        int deptBorrar = Integer.parseInt(br.readLine());
+        if(borrarDepartamentoOperativo(deptBorrar) == -1){
+            System.out.println("No existe el departamento elegido.");
+        }
+        else{
+            System.out.println("El departamaneto ha sido elimidado correctamente.");
+        }
     }
 
     public static boolean empleadosVacio(Departamento d){
@@ -234,23 +252,65 @@ public class Principal {
             }
         }
         while (!encontrado && contador < departamentos.get(dptoBuscar).getEmpleados().size());
-        if (encontrado) return contador;
-        else return -1;
+        if (encontrado) {
+            return contador;
+        } else return -1;
     }
 
-    public static int borrarEmpleado(int numeroEmpleado, Departamento dept){
-        return 0;
+
+
+    /**
+     * borra un empleado en toda la compania
+     * for each que recorre todos los departamentos, en su interior
+     * otro for each que recorre todos los empleados de ese departamento
+     * si encuentra un departamento con el numero de empleado indicado, lo eliminara
+     */
+    public static void borrarEmpleadoInteractivo() throws IOException{
+        System.out.println("Indique el numero de empleado que quiere borrar:");
+        int empBorrar = Integer.parseInt(br.readLine());
+        borrarEmpleadoOperativo(empBorrar);
     }
 
-    public static void borrarEmpleadoInteractivo(){
-
+    public static void borrarEmpleadoOperativo(int numeroEmpleado){
+        for (Departamento departamento: departamentos) {
+                departamento.getEmpleados().removeIf(i -> i.getNumeroEmpleado() == numeroEmpleado);
+                /*
+                for(int i = 0; i < departamento.getEmpleados().size();i++){
+                    if (departamento.getEmpleados().get(i).getNumeroEmpleado() == numeroEmpleado){
+                        departamento.getEmpleados().remove(i);
+                    }
+                }
+                */
+        }
     }
 
-    public static void modificarEmpleadoInteractivo(){
-
+    /**
+     * recibe, numero empelado, dato a cambia, nuevo dato
+     * salida, no existe, errores de entrada de datos y si se ha borrado
+     */
+    public static void modificarEmpleadoInteractivo() throws IOException{
+        System.out.println("Introduce el numero de empleado a modificar:");
+        int numEmp = Integer.parseInt(br.readLine());
+        int[] datos = {-1,-1};//pos 0 para posicion departamento y pos 1 para posicion empleado
+        for(int i = 0; i < departamentos.size(); i++){//bucle para coger los datos del departamento y el empleado
+            if(existeEmpleados(departamentos.get(i),numEmp) != -1){
+                datos[0] = i;
+                datos[1] = existeEmpleados(departamentos.get(i),numEmp);
+            }
+        }
+        if(datos[1] == -1){
+            System.out.println("El empleado buscado no existe.");
+            System.out.println(datos[0]);
+            System.out.println(datos[1]);
+        }
+        else{
+            System.out.println("afgdf");
+            System.out.println(datos[0]);
+            System.out.println(datos[1]);
+        }
     }
 
-    public static void modificarEmpleado(){
+    public static void modificarEmpleadoOperativo(){
 
     }
 
