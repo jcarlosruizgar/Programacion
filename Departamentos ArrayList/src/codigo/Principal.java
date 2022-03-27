@@ -33,6 +33,7 @@ public class Principal {
             //borrarDepartamentoInteractivo();
             //mostrarDepartamentos();
             modificarEmpleadoInteractivo();
+            mostrarDepartamentos();
         }
         catch (NumberFormatException nfe){
             System.out.println("Eso no es un numero.");
@@ -106,7 +107,7 @@ public class Principal {
 
         //creacion array list empleados del departamento de innovacion
         ArrayList <Empleado> empleadosInnovacion = new ArrayList<Empleado>();
-        empleadosInnovacion.add(new Director(9,"Gallardo", LocalDate.of(2010,1,1),3800,null,1000));
+        empleadosInnovacion.add(new Director(19,"Gallardo", LocalDate.of(2010,1,1),3800,null,1000));
         empleadosInnovacion.add(new Analista(38,"Galan", LocalDate.of(2012,12,20),2000,null));
 
         //creacion del departamento de innovacion en el array list
@@ -291,7 +292,7 @@ public class Principal {
     public static void modificarEmpleadoInteractivo() throws IOException{
         System.out.println("Introduce el numero de empleado a modificar:");
         int numEmp = Integer.parseInt(br.readLine());
-        int[] datos = {-1,-1};//pos 0 para posicion departamento y pos 1 para posicion empleado
+        int[] datos = {-1,-1,-1};//pos 0 para posicion departamento, pos 1 para posicion empleado y pos 2 para modificacion a realizar
         for(int i = 0; i < departamentos.size(); i++){//bucle para coger los datos del departamento y el empleado
             if(existeEmpleados(departamentos.get(i),numEmp) != -1){
                 datos[0] = i;
@@ -300,38 +301,74 @@ public class Principal {
         }
         if(datos[1] == -1){
             System.out.println("El empleado buscado no existe.");
-            System.out.println(datos[0]);
-            System.out.println(datos[1]);
         }
-        else{
-            System.out.println("afgdf");
-            System.out.println(datos[0]);
-            System.out.println(datos[1]);
+        else{//si existe
+            System.out.println("¿Que dato quiere modificar?");
+            System.out.println("1 - Para numero del empleado.");
+            System.out.println("2 - Para apellido del empleado.");
+            System.out.println("3 - Para fecha de alta del empleado.");
+            System.out.println("4 - Para salario del empleado.");
+            if(departamentos.get(datos[0]).getEmpleados().get(datos[1]) instanceof Director){
+                System.out.println("5 - Para comision del director.");
+            }
+            datos[2] = Integer.parseInt(br.readLine());
+            modificarEmpleadoOperativo(datos);
         }
     }
 
-    public static void modificarEmpleadoOperativo(){
-
+    public static void modificarEmpleadoOperativo(int[] datos) throws IOException{
+        switch (datos[2]){
+            case 1:
+                modificarNumeroEmpleadoInteractivo(datos);
+                break;
+            case 2:
+                modificarApellidoEmpleadoInteractivo(datos);
+                break;
+            case 3:
+                modificarFechaAltaEmpleadoInteractivo(datos);
+                break;
+            case 4:
+                modificarSalarioEmpleadoInteractivo(datos);
+                break;
+            case 5:
+                if(departamentos.get(datos[0]).getEmpleados().get(datos[1]) instanceof Director){
+                    modificarComisionDirectorInteractivo(datos);
+                }
+                break;
+            default:
+                System.out.println("Eso no es una opcion valida.");
+                break;
+        }
     }
 
-    public static void modificarNumeroEmpleadoInteractivo(){
-
+    public static void modificarNumeroEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca el nuevo numero del empleado:");
+        int numeroEmpleado = Integer.parseInt(br.readLine());
+        departamentos.get(datos[0]).getEmpleados().get(datos[1]).setNumeroEmpleado(numeroEmpleado);
     }
 
-    public static void modificarApellidoEmpleadoInteractivo(){
-
+    public static void modificarApellidoEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca el nuevo apellido del empleado:");
+        String apellidoEmpleado = br.readLine();
+        departamentos.get(datos[0]).getEmpleados().get(datos[1]).setApellido(apellidoEmpleado);
     }
 
-    public static void modificarFechaAltaEmpleadoInteractivo(){
-
+    public static void modificarFechaAltaEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca la nueva fecha de alta del empleado.\n(Formato aaaa-mm-dd)");
+        LocalDate fechaAltaEmpleado = LocalDate.parse(br.readLine());
+        departamentos.get(datos[0]).getEmpleados().get(datos[1]).setFechaAlta(fechaAltaEmpleado);
     }
 
-    public static void modificarSalarioEmpleadoInteractivo(){
-
+    public static void modificarSalarioEmpleadoInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduza el nuevo salario del empleado.");
+        double salarioEmpleado = Double.parseDouble(br.readLine());
+        departamentos.get(datos[0]).getEmpleados().get(datos[1]).setSalario(salarioEmpleado);
     }
 
-    public static void modificarComisionDirectorInteractivo(){
-
+    public static void modificarComisionDirectorInteractivo(int[] datos) throws IOException{
+        System.out.println("Introduzca la nueva comision del director:");
+        double comisionDirector = Double.parseDouble(br.readLine());
+        ((Director)departamentos.get(datos[0]).getEmpleados().get(datos[1])).setComision(comisionDirector);
     }
 
     public static void cargaAutomatica(){
