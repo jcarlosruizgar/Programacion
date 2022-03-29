@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/Calculadora/Calculadora.iml" filepath="$PROJECT_DIR$/Calculadora/Calculadora.iml" />
       <module fileurl="file://$PROJECT_DIR$/CifradorCesar/CifradorCesar.iml" filepath="$PROJECT_DIR$/CifradorCesar/CifradorCesar.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cola ArrayList/Cola ArrayList.iml" filepath="$PROJECT_DIR$/Cola ArrayList/Cola ArrayList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cola LinkedList/Cola LinkedList.iml" filepath="$PROJECT_DIR$/Cola LinkedList/Cola LinkedList.iml" />
       <module fileurl="file://$PROJECT_DIR$/Colecciones 150322/Colecciones 150322.iml" filepath="$PROJECT_DIR$/Colecciones 150322/Colecciones 150322.iml" />
       <module fileurl="file://$PROJECT_DIR$/Departamentos 04022022/Departamentos 04022022.iml" filepath="$PROJECT_DIR$/Departamentos 04022022/Departamentos 04022022.iml" />
       <module fileurl="file://$PROJECT_DIR$/Departamentos ArrayList/Departamentos ArrayList.iml" filepath="$PROJECT_DIR$/Departamentos ArrayList/Departamentos ArrayList.iml" />
@@ -28,6 +29,7 @@
       <module fileurl="file://$PROJECT_DIR$/Matrices/Matrices.iml" filepath="$PROJECT_DIR$/Matrices/Matrices.iml" />
       <module fileurl="file://$PROJECT_DIR$/Persona/Persona.iml" filepath="$PROJECT_DIR$/Persona/Persona.iml" />
       <module fileurl="file://$PROJECT_DIR$/Pila ArrayList/Pila ArrayList.iml" filepath="$PROJECT_DIR$/Pila ArrayList/Pila ArrayList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pila LinkedList/Pila LinkedList.iml" filepath="$PROJECT_DIR$/Pila LinkedList/Pila LinkedList.iml" />
       <module fileurl="file://$PROJECT_DIR$/Poliformismo 14022022/Poliformismo 14022022.iml" filepath="$PROJECT_DIR$/Poliformismo 14022022/Poliformismo 14022022.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Programacion.iml" filepath="$PROJECT_DIR$/.idea/Programacion.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProyectoRestaurante/ProyectoRestaurante.iml" filepath="$PROJECT_DIR$/ProyectoRestaurante/ProyectoRestaurante.iml" />
