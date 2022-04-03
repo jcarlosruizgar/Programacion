@@ -1,5 +1,6 @@
 package codigo;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 
 public class PruebaComentarios {
@@ -43,7 +44,8 @@ public class PruebaComentarios {
                 comentarioLargo = pc.getLt().get(i).getComentario();
             }
         }
-        return comentarioLargo;
+        StringBuilder sb = new StringBuilder(String.valueOf(comentarioLargo));
+        return sb.reverse().toString();
     }
 
 }
