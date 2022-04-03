@@ -34,8 +34,8 @@ public class PruebaComentarios {
          */
 
         //System.out.println("El comentario mas largo es: " + comentarioMasLargo());
-        //System.out.println(autorComentarioMasLargo());
-        System.out.println(comentarioDelAnio("2020"));
+        System.out.println(autorComentarioMasLargo());
+        //System.out.println(comentarioDelAnio("2020"));
 
     }
 
@@ -54,6 +54,7 @@ public class PruebaComentarios {
         if(pilaComentario.estaVacia()){
             return "";
         }else{
+            boolean encontrado = false;
             int contador = 0;
             StringBuilder sb = new StringBuilder(String.valueOf(comentarioMasLargo()));
             String comentario = String.valueOf(sb.reverse());
@@ -63,8 +64,9 @@ public class PruebaComentarios {
                     nombreApellido = pilaComentario.getPila().get(contador).getNombre()+" "+pilaComentario.getPila().get(contador).getApellidos();
                 }
                 contador++;
+                encontrado = true;
             }
-            while(contador < pilaComentario.getPila().size());
+            while(!encontrado || contador < pilaComentario.getPila().size());
             return "El comentario mas largo ha sido hecho por: " +nombreApellido;
         }
     }
