@@ -34,8 +34,8 @@ public class PruebaComentarios {
          */
 
         //System.out.println("El comentario mas largo es: " + comentarioMasLargo());
-        System.out.println(autorComentarioMasLargo());
-        //System.out.println(comentarioDelAnio("2020"));
+        //System.out.println(autorComentarioMasLargo());
+        System.out.println(comentarioDelAnio("2020"));
 
     }
 
