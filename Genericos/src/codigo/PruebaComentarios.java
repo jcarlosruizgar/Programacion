@@ -62,9 +62,9 @@ public class PruebaComentarios {
             do{
                 if(comentario.compareTo(pilaComentario.getPila().get(contador).getComentario()) == 0){
                     nombreApellido = pilaComentario.getPila().get(contador).getNombre()+" "+pilaComentario.getPila().get(contador).getApellidos();
+                    encontrado = true;
                 }
                 contador++;
-                encontrado = true;
             }
             while(!encontrado || contador < pilaComentario.getPila().size());
             return "El comentario mas largo ha sido hecho por: " +nombreApellido;
