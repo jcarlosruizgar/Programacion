@@ -4,36 +4,36 @@ import java.util.LinkedList;
 
 public class PilaGenerica <T>{
 
-    private LinkedList<T> lt = new LinkedList<>();
+    private LinkedList<T> pila = new LinkedList<>();
 
     public boolean estaVacia(){
-        return this.lt.isEmpty();
+        return this.pila.isEmpty();
     }
 
     public T extraer(){
-        return this.lt.removeFirst();
+        return this.pila.removeFirst();
     }
 
     public T primero(){
-        return this.lt.getFirst();
+        return this.pila.getFirst();
     }
 
     public void aniadir(T obj){
-        this.lt.addFirst(obj);
+        this.pila.addFirst(obj);
     }
 
-    public LinkedList<T> getLt() {
-        return lt;
+    public LinkedList<T> getPila() {
+        return pila;
     }
 
-    public void setLt(LinkedList<T> lt) {
-        this.lt = lt;
+    public void setPila(LinkedList<T> pila) {
+        this.pila = pila;
     }
 
     @Override
     public String toString() {
         return "PilaGenerica{" +
-                "lt=" + lt +
+                "lt=" + pila +
                 '}';
     }
 }

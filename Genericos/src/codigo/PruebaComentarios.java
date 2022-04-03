@@ -1,11 +1,10 @@
 package codigo;
 
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 
 public class PruebaComentarios {
 
-    private static PilaGenerica<Comentario> pc = new PilaGenerica<>();
+    private static PilaGenerica<Comentario> pilaComentario = new PilaGenerica<>();
 
     public static void main(String[] args) {
 
@@ -16,12 +15,12 @@ public class PruebaComentarios {
         Comentario c3 = new Comentario("perici","perez", LocalDate.of(2020,10,05),"df dh fsgj on es5huh 9e5hg esh8g5e ege");
         Comentario c4 = new Comentario("perice","perez", LocalDate.of(2020,10,05),"holdfgdsh asdrhfghgf");
 
-        System.out.println(pc.estaVacia());
+        System.out.println(pilaComentario.estaVacia());
 
-        pc.aniadir(c1);
-        pc.aniadir(c2);
-        pc.aniadir(c3);
-        pc.aniadir(c4);
+        pilaComentario.aniadir(c1);
+        pilaComentario.aniadir(c2);
+        pilaComentario.aniadir(c3);
+        pilaComentario.aniadir(c4);
 
         /*
         System.out.println(pc.estaVacia());
@@ -39,9 +38,9 @@ public class PruebaComentarios {
 
     public static String comentarioMasLargo(){
         String comentarioLargo = "";
-        for (int i = 0; i < pc.getLt().size(); i++) {
-            if(pc.getLt().get(i).getComentario().length() > comentarioLargo.length()){
-                comentarioLargo = pc.getLt().get(i).getComentario();
+        for(Comentario comentario: pilaComentario.getPila()){
+            if(comentario.getComentario().length() > comentarioLargo.length()){
+                comentarioLargo = comentario.getComentario();
             }
         }
         StringBuilder sb = new StringBuilder(String.valueOf(comentarioLargo));
