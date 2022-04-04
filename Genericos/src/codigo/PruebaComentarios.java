@@ -75,7 +75,7 @@ public class PruebaComentarios {
         ArrayList<String> listaComentarios = new ArrayList<>();
         for(Comentario comentario: pilaComentario.getPila()){
             if (comentario.getFecha().getYear()==Integer.parseInt(anio)){
-                listaComentarios.add(comentario.toString()+"\n");
+                listaComentarios.add(comentario+"\n");
             }
         }
         return listaComentarios;
