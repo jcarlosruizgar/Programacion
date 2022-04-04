@@ -10,7 +10,7 @@ public class EltoAleatorio <T> {
     public T getElemento() {
         return elemento;
     }
-    public boolean mismoÍndice(EltoAleatorio<T> elto){
+    public boolean mismoIndice(EltoAleatorio<T> elto){
         return elto.indice==this.indice;
     }
 }
