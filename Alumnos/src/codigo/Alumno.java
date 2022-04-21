@@ -63,6 +63,16 @@ public class Alumno implements Comparable<Alumno> {
 
     @Override
     public int compareTo(Alumno o) {
+        int comparacion = nombre.compareToIgnoreCase(o.nombre) + apellidos.compareToIgnoreCase(o.apellidos) +
+                poblacion.compareToIgnoreCase(o.poblacion) + edad - o.edad;
+        if (comparacion == 0) {
+            return 0;
+        } else return comparacion;
+    }
+
+   /*
+    @Override
+    public int compareTo(Alumno o) {
         if (((nombre.compareToIgnoreCase(o.nombre) == 0) &&
                 (apellidos.compareToIgnoreCase(o.apellidos) == 0) &&
                 (poblacion.compareToIgnoreCase(o.poblacion) == 0) &&
@@ -70,5 +80,6 @@ public class Alumno implements Comparable<Alumno> {
             return 0;
         } else return 1;
     }
+    */
 
 }
