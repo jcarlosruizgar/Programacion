@@ -3,17 +3,18 @@ package codigo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.rmi.server.ExportException;
 import java.util.Iterator;
 import java.util.TreeSet;
 
 public class Principal {
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static boolean salir = false;
     private static TreeSet<Alumno> aula1 = new TreeSet<Alumno>();
-    private static TreeSet<Alumno> aula2 = new TreeSet<Alumno>();
-    private static TreeSet<Alumno> aula3 = new TreeSet<Alumno>();
-
-    private static Aula aulaDos = new Aula();
+    //private static TreeSet<Alumno> aula2 = new TreeSet<Alumno>();
+    //private static TreeSet<Alumno> aula3 = new TreeSet<Alumno>();
+    //private static Aula aulaDos = new Aula();
 
     public static void main(String[] args) {
         /*
@@ -50,101 +51,123 @@ public class Principal {
         System.out.println(primerAlumno());
         System.out.println(ultimoAlumno());
         */
-        try{
-            switch (menu()){
-                case 1:
-                    insertarAlumno();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-                    System.out.println("Eso no es una opcion valida.");
-                    break;
+        do {
+            try {
+                switch (menu()) {
+                    case 1:
+                        insertarAlumno();
+                        break;
+                    case 2:
+                        borrarAlumno();
+                        break;
+                    case 3:
+                        mostrarAlumnos();
+                        break;
+                    case 0:
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Eso no es una opcion valida.");
+                        break;
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error en la entrada de datos.");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        catch (IOException ioe){
-            System.out.println("Error en la entrada de datos.");
-        }
+        while (!salir);
     }
 
-    public static int insertarAlumnoOperativo(Alumno a){
+    public static int insertarAlumnoOperativo(Alumno a) {
         if (aula1.add(a)) return 1;
         else return 0;
     }
 
-    public static void insertarAlumno() throws IOException{
-        String nombre;
-        String apellido;
+    public static void insertarAlumno() throws IOException {
         int edad = 0;
-        String poblacion;
         System.out.println("Introduzca el nombre del alumno:");
-        nombre = br.readLine();
+        String nombre = br.readLine();
         System.out.println("Introduzca el apellido del alumno:");
-        apellido = br.readLine();
+        String apellido = br.readLine();
         System.out.println("Introduzca la edad del alumno:");
-        try{
+        try {
             edad = Integer.parseInt(br.readLine());
-        }
-        catch (NumberFormatException nfe){
-            System.out.println("Eso no es un numero valido.");
+        } catch (NumberFormatException nfe) {
+            System.out.println("Eso no es un numero.");
         }
         System.out.println("Introduza la poblacion del alumno:");
-        poblacion = br.readLine();
-        insertarAlumnoOperativo(new Alumno(nombre,apellido,edad,poblacion));
+        String poblacion = br.readLine();
+        insertarAlumnoOperativo(new Alumno(nombre, apellido, edad, poblacion));
     }
 
-    public static void mostrarAlumnos(){
-        for(Alumno alumno: aula1){
+    public static void mostrarAlumnos() {
+        for (Alumno alumno : aula1) {
             System.out.println(alumno);
         }
     }
 
-    public static void mostrarAlumnosIt(){
-        Iterator it = aula2.iterator();
-        while(it.hasNext()){
+    public static void mostrarAlumnosIt() {
+        Iterator it = aula1.iterator();
+        while (it.hasNext()) {
             System.out.println(it.next());
         }
     }
 
-    public static void insertarAlumnos(TreeSet aulaOrigen,TreeSet aulaDestino){
+    public static void insertarAlumnos(TreeSet aulaOrigen, TreeSet aulaDestino) {
         aulaDestino.addAll(aulaOrigen);
     }
 
-    public static void clonarAula(TreeSet aulaOrigen,TreeSet aulaDestino){
+    public static void clonarAula(TreeSet aulaOrigen, TreeSet aulaDestino) {
         //aulaDestino = (TreeSet)aulaOrigen.clone();
         aulaDestino.clear();
         aulaDestino.addAll(aulaOrigen);
     }
 
-    public static int borrarAlumno(Alumno a){
-        if(aula1.remove(a)){
-            return 1;
+    public static void borrarAlumno() throws IOException{
+        int edad = 0;
+        System.out.println("Introduzca el nombre de alumno a borrar:");
+        String nombre = br.readLine();
+        System.out.println("Introduzca el apellido del alumno a borrar:");
+        String apellido = br.readLine();
+        System.out.println("Introduza la edad del alumno a borrar:");
+        try{
+            edad = Integer.parseInt(br.readLine());
         }
-        else return 0;
+        catch (NumberFormatException nfe){
+            System.out.println("Eso no es un numero.");
+        }
+        System.out.println("Introduzca la poblacion del alumno a borrar:");
+        String poblacion = br.readLine();
+        borrarAlumnoOperativo(new Alumno(nombre,apellido,edad,poblacion));
     }
 
-    public static Alumno primerAlumno(){
+    public static int borrarAlumnoOperativo(Alumno a) {
+        if (aula1.remove(a)) {
+            return 1;
+        } else return 0;
+    }
+
+    public static Alumno primerAlumno() {
         return aula1.first();
     }
 
-    public static Alumno ultimoAlumno(){
+    public static Alumno ultimoAlumno() {
         return aula1.last();
     }
 
-    public static int menu(){
+    public static int menu() throws IOException{
         int opcion;
         System.out.println("Seleccione una operacion a realizar:");
-        System.out.println("1- Insertar un alumno");
-        System.out.println("2- Borrar un alumno");
-        System.out.println("3- Mostrar los alumnos");
-        try{
+        System.out.println("1- Insertar un alumno.");
+        System.out.println("2- Borrar un alumno.");
+        System.out.println("3- Mostrar los alumnos.");
+        System.out.println("0- Salir.");
+        try {
             return Integer.parseInt(br.readLine());
-        }
-        catch (IOException ioe){
-            System.out.println("Error en la entrada de datos.");
-            return 0;
+        } catch (NumberFormatException nfe) {
+            System.out.println("Eso no es un numero.");
+            return -1;//opcion no contemplada
         }
     }
 
