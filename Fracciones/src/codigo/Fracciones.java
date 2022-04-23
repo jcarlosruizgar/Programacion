@@ -26,7 +26,7 @@ public class Fracciones <T extends Number>{
             return new Fracciones(this.numerador.doubleValue()+fraccion.numerador.doubleValue(),this.denominador);
         }
         else{
-            return null;
+            return new Fracciones(this.numerador.doubleValue()*fraccion.denominador.doubleValue()+this.denominador.doubleValue()*fraccion.numerador.doubleValue(),this.denominador.doubleValue()*fraccion.denominador.doubleValue());
         }
     }
 
@@ -35,7 +35,7 @@ public class Fracciones <T extends Number>{
             return new Fracciones(this.numerador.doubleValue()-fraccion.numerador.doubleValue(),this.denominador);
         }
         else{
-            return null;
+            return new Fracciones(this.numerador.doubleValue()*fraccion.denominador.doubleValue()-this.denominador.doubleValue()*fraccion.numerador.doubleValue(),this.denominador.doubleValue()*fraccion.denominador.doubleValue());
         }
     }
 
