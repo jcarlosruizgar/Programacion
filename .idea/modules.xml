@@ -32,6 +32,7 @@
       <module fileurl="file://$PROJECT_DIR$/Mapas/Mapas.iml" filepath="$PROJECT_DIR$/Mapas/Mapas.iml" />
       <module fileurl="file://$PROJECT_DIR$/Matematicas/Matematicas.iml" filepath="$PROJECT_DIR$/Matematicas/Matematicas.iml" />
       <module fileurl="file://$PROJECT_DIR$/Matrices/Matrices.iml" filepath="$PROJECT_DIR$/Matrices/Matrices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParametroAbstracto/ParametroAbstracto.iml" filepath="$PROJECT_DIR$/ParametroAbstracto/ParametroAbstracto.iml" />
       <module fileurl="file://$PROJECT_DIR$/Persona/Persona.iml" filepath="$PROJECT_DIR$/Persona/Persona.iml" />
       <module fileurl="file://$PROJECT_DIR$/Pila ArrayList/Pila ArrayList.iml" filepath="$PROJECT_DIR$/Pila ArrayList/Pila ArrayList.iml" />
       <module fileurl="file://$PROJECT_DIR$/Pila LinkedList/Pila LinkedList.iml" filepath="$PROJECT_DIR$/Pila LinkedList/Pila LinkedList.iml" />
