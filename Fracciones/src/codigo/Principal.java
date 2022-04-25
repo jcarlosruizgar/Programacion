@@ -6,8 +6,8 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        Fraccion<Integer> f1 = new Fraccion<>(valueOf(6),valueOf(2));
-        Fraccion<Integer> f2 = new Fraccion<>(valueOf(3),valueOf(3));
+        Fraccion<Integer> f1 = new Fraccion<>(6,2);
+        Fraccion<Integer> f2 = new Fraccion<>(3,3);
 
         System.out.println(f1);
         System.out.println(f2);
