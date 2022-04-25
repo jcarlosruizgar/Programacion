@@ -1,5 +1,6 @@
 package hash;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 public class Prueba {
@@ -17,7 +18,7 @@ public class Prueba {
         HashSet<Alumno> l = new HashSet<Alumno>();
 
          */
-        LinkedHashSet<Alumno> l = new LinkedHashSet<Alumno>();
+        LinkedHashSet<Alumno> l = new LinkedHashSet<>();
 
         l.add(a1);
         l.add(a2);
@@ -25,14 +26,17 @@ public class Prueba {
         l.add(a4);
         l.add(a5);
         l.add(a6);
-        for (Alumno alumno : l) {
-            System.out.println(alumno);
+
+        Iterator it = l.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
         }
 
+        System.out.println("\n");
 
-
-
-
+        for(Alumno alumno:l){
+            System.out.println(alumno);
+        }
 
     }
 
