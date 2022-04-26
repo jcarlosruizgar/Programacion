@@ -67,7 +67,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
         int minimo = (int)a[0];
         T retorno = a[0];
         for (int i = 0; i < a.length-1; i++) {
-            if(retorno.compareTo(a[i]) < 0){
+            if(retorno.compareTo(a[i]) > 0){
                 retorno = a[i];
             }
         }
@@ -79,7 +79,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
         int maximo = (int)a[a.length-1];
         T retorno = a[0];
         for (int i = 0; i < a.length-1; i++) {
-            if(retorno.compareTo(a[i]) > 0){
+            if(retorno.compareTo(a[i]) < 0){
                 retorno = a[i];
             }
         }
