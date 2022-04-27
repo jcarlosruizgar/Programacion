@@ -2,25 +2,25 @@ package codigo;
 
 import java.util.Arrays;
 
-public class Operaciones <T extends Comparable> implements Operable<T>{
+public class Operaciones <T> implements Operable<T>{
 
 
     @Override
-    public void mostrarArray(T[] a) {
+    public <T> void mostrarArray(T[] a) {
         for (int i = 0; i < a.length; i++) {
             System.out.println(a[i]);
         }
     }
 
     @Override
-    public T[] ordenar(T[] a) {
-        Object lista[] = a;
+    public <T> T[] ordenar(T[] a) {
+        T lista[] = a;
         Arrays.sort(a);
         return a;
     }
 
     @Override
-    public T obtenerElemento(T[] a, int posicionProhibida) {
+    public <T> T obtenerElemento(T[] a, int posicionProhibida) {
         int longitud = a.length;
         int aleatorio = -1;
         do{
@@ -30,7 +30,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
     }
 
     @Override
-    public T[] revertir(T[] a) {
+    public <T> T[] revertir(T[] a) {
         Object[] arrayRetorno = new Object[a.length];
         int j = 0;
         for (int i = a.length; i < 0; i--) {
@@ -41,7 +41,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
     }
 
     @Override
-    public T[] mezclaAleatoria(T[] a) {//TODO
+    public <T> T[] mezclaAleatoria(T[] a) {//TODO
         T[] arrayRetorno = a;
         for (int i = 0; i < a.length; i++) {
             a[(int)Math.floor(Math.random())*a.length] = a[i];
@@ -50,7 +50,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
     }
 
     @Override
-    public T[] intercambio(T[] a, int i1, int i2) {
+    public <T> T[] intercambio(T[] a, int i1, int i2) {
         if(a[i1] != null && a[i2] != null){
             T[] arrayRetorno = a;
             arrayRetorno[i1] = a[i2];
@@ -63,7 +63,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
     }
 
     @Override
-    public T minimo(T[] a) {
+    public <T extends Comparable> T minimo(T[] a) {
         int minimo = (int)a[0];
         T retorno = a[0];
         for (int i = 0; i < a.length-1; i++) {
@@ -75,7 +75,7 @@ public class Operaciones <T extends Comparable> implements Operable<T>{
     }
 
     @Override
-    public T maximo(T[] a) {
+    public <T extends Comparable> T maximo(T[] a) {
         int maximo = (int)a[a.length-1];
         T retorno = a[0];
         for (int i = 0; i < a.length-1; i++) {

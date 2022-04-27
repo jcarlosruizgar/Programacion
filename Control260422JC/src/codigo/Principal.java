@@ -8,7 +8,7 @@ public class Principal{
     public static void main(String[] args) {
 
 
-        Operaciones<Integer> m = new Operaciones<>();
+        Operaciones<?> m = new Operaciones<>();
 
 
         Integer enteros[]={2,5,9,7,1,3};
