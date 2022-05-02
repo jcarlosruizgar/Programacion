@@ -25,7 +25,7 @@ public class Operaciones <T> implements Operable<T> {
     public <T> T obtenerElemento(T[] a, int posicionProhibida) {
         int aleatorio;
         do{
-            aleatorio = (int)Math.floor(Math.random())*a.length;
+            aleatorio = (int)(Math.floor(Math.random()*a.length));
         }while(aleatorio == posicionProhibida);
         return a[aleatorio];
     }
