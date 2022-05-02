@@ -1,5 +1,6 @@
 package hash;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
@@ -38,6 +39,10 @@ public class Prueba {
             System.out.println(alumno);
         }
 
+        System.out.println("\n");
+
+        ArrayList<Alumno> ali = new ArrayList<>(l);
+        System.out.println(ali);
     }
 
 }

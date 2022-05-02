@@ -12,7 +12,7 @@ public class PruebaMapa {
         Alumno a4 = new Alumno("adrian", 8);
         Alumno a5 = new Alumno("alberto", 7);
         Alumno a6 = new Alumno("adrian", 8);
-        HashMap<Integer, Alumno> l = new HashMap<Integer, Alumno>();
+        HashMap<Integer, Alumno> l = new HashMap<>();
         l.put(1, a1);
         l.put(2, a2);
         l.put(3, a3);

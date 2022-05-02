@@ -14,8 +14,8 @@ public interface Operable <T> {
 
     public <T> T[] intercambio(T[] a, int i1, int i2);
 
-    public <T extends Comparable> T minimo(T[] a);
+    public <T extends Comparable<T>> T minimo(T[] a);
 
-    public <T extends Comparable> T maximo(T[] a);
+    public <T extends Comparable<T>> T maximo(T[] a);
 
 }
