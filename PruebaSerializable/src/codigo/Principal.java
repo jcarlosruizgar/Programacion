@@ -2,6 +2,7 @@ package codigo;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Principal {
 
@@ -10,18 +11,24 @@ public class Principal {
     private static ObjectOutputStream salida = null;
     private static FileInputStream fis = null;
     private static ObjectInputStream entrada = null;
+    private static ArrayList<Videojuego> listadoVideojuegos = new ArrayList<Videojuego>();
 
     public static void main(String[] args) {
         try{
+            //guardado de objetos
             fos = new FileOutputStream("./videojuegos.obj");
             salida = new ObjectOutputStream(fos);
+            //carga de objetos
             fis = new FileInputStream("./videojuegos.obj");
             entrada = new ObjectInputStream(fis);
-
+            registrarVideojuego();
+            System.out.println(recuperarVideojuego().getNombre());
 
 
         }catch (FileNotFoundException fnfe){
             System.out.println("Fichero no encontrado.");
+        }catch (ClassNotFoundException cnfe){
+            System.out.println("Clase no encontrada.");
         }catch (IOException ioe){
             System.out.println("Error de E/S.");
         }finally{
@@ -50,8 +57,12 @@ public class Principal {
         String nombre = br.readLine();
         System.out.println("Introduzca la fecha de lanzamiento:");
         LocalDate fecha = LocalDate.parse(br.readLine());
-        Videojuego v = new Videojuego(nombre,fecha);
-        salida.writeObject(v);
+        listadoVideojuegos.add(new Videojuego(nombre,fecha));
+        salida.writeObject(listadoVideojuegos);
+    }
+
+    public static Videojuego recuperarVideojuego() throws IOException, ClassNotFoundException {
+        return (Videojuego) entrada.readObject();
     }
 
 }
