@@ -21,15 +21,19 @@ public class Principal {
             //carga de objetos
             fis = new FileInputStream("./videojuegos.obj");
             entrada = new ObjectInputStream(fis);
-            registrarVideojuego();
-            System.out.println(recuperarVideojuego().getNombre());
+            //recuperarVideojuegos();
+            registrarVideojuegos();
+            for(Videojuego v:listadoVideojuegos){
+                System.out.println(v);
+            }
 
 
         }catch (FileNotFoundException fnfe){
             System.out.println("Fichero no encontrado.");
-        }catch (ClassNotFoundException cnfe){
-            System.out.println("Clase no encontrada.");
-        }catch (IOException ioe){
+        }catch (EOFException eofe){
+            eofe.printStackTrace();
+        }
+        catch (IOException ioe){
             System.out.println("Error de E/S.");
         }finally{
             try{
@@ -52,17 +56,22 @@ public class Principal {
 
     }
 
-    public static void registrarVideojuego() throws IOException{
+    public static void registrarVideojuegos() throws IOException{
         System.out.println("Introduzca el nombre del videojuego:");
         String nombre = br.readLine();
-        System.out.println("Introduzca la fecha de lanzamiento:");
-        LocalDate fecha = LocalDate.parse(br.readLine());
-        listadoVideojuegos.add(new Videojuego(nombre,fecha));
+        //System.out.println("Introduzca la fecha de lanzamiento:");
+        //LocalDate fecha = LocalDate.parse(br.readLine());
+        listadoVideojuegos.add(new Videojuego(nombre));
         salida.writeObject(listadoVideojuegos);
     }
 
-    public static Videojuego recuperarVideojuego() throws IOException, ClassNotFoundException {
-        return (Videojuego) entrada.readObject();
+    public static void recuperarVideojuegos() throws IOException {
+        try{
+            listadoVideojuegos = (ArrayList<Videojuego>) entrada.readObject();
+        }catch (ClassNotFoundException cnfe){
+            System.out.println("Error, clase no encontrada.");
+        }
+
     }
 
 }

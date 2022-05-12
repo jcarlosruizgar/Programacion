@@ -13,6 +13,10 @@ public class Videojuego implements Serializable {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
+    public Videojuego(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Videojuego() {
     }
 
