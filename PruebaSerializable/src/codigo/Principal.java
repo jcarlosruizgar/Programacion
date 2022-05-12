@@ -15,26 +15,15 @@ public class Principal {
 
     public static void main(String[] args) {
         try{
-            //guardado de objetos
-            fos = new FileOutputStream("./videojuegos.obj");
-            salida = new ObjectOutputStream(fos);
-            //carga de objetos
-            fis = new FileInputStream("./videojuegos.obj");
-            entrada = new ObjectInputStream(fis);
-            //recuperarVideojuegos();
+            recuperarVideojuegos();
             registrarVideojuegos();
             for(Videojuego v:listadoVideojuegos){
-                System.out.println(v);
+                System.out.println(v.getNombre());
             }
 
 
-        }catch (FileNotFoundException fnfe){
-            System.out.println("Fichero no encontrado.");
-        }catch (EOFException eofe){
-            eofe.printStackTrace();
-        }
-        catch (IOException ioe){
-            System.out.println("Error de E/S.");
+        }catch (Exception e){
+            e.printStackTrace();
         }finally{
             try{
                 if(fos != null){
@@ -62,16 +51,36 @@ public class Principal {
         //System.out.println("Introduzca la fecha de lanzamiento:");
         //LocalDate fecha = LocalDate.parse(br.readLine());
         listadoVideojuegos.add(new Videojuego(nombre));
-        salida.writeObject(listadoVideojuegos);
+        try{
+            fos = new FileOutputStream("./videojuegos.dat");
+            salida = new ObjectOutputStream(fos);
+            salida.writeObject(listadoVideojuegos);
+        }catch (FileNotFoundException fnfe){
+            System.out.println("Fichero no encontrado.");
+        }catch (EOFException eofe){
+            eofe.printStackTrace();
+        }
+        catch (IOException ioe){
+            System.out.println("Error de E/S.");
+        }
     }
 
-    public static void recuperarVideojuegos() throws IOException {
+    public static void recuperarVideojuegos(){
         try{
+            fis = new FileInputStream("./videojuegos.dat");
+            entrada = new ObjectInputStream(fis);
             listadoVideojuegos = (ArrayList<Videojuego>) entrada.readObject();
+            entrada.close();
         }catch (ClassNotFoundException cnfe){
             System.out.println("Error, clase no encontrada.");
+        }catch (FileNotFoundException fnfe){
+            System.out.println("Fichero no encontrado.");
+        }catch (EOFException eofe){
+            eofe.printStackTrace();
         }
-
+        catch (IOException ioe){
+            System.out.println("Error de E/S.");
+        }
     }
 
 }
