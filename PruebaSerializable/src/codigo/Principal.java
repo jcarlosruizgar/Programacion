@@ -26,11 +26,9 @@ public class Principal {
                 int opcion = Integer.parseInt(br.readLine());
                 switch (opcion){
                     case 1:
-                        System.out.println("Registro de un videojuego:");
                         registrarVideojuegos();
                         break;
                     case 2:
-                        System.out.println("Videojuegos registrados:");
                         mostrarVideojuegos();
                         break;
                     case 0:
@@ -70,6 +68,7 @@ public class Principal {
     }
 
     public static void registrarVideojuegos() throws IOException{
+        System.out.println("Registro de un videojuego:");
         System.out.println("Introduzca el nombre del videojuego:");
         String nombre = br.readLine();
         System.out.println("Introduzca el genero del videojuego:");
@@ -90,6 +89,7 @@ public class Principal {
     }
 
     public static void recuperarVideojuegos(){
+
         try{
             fis = new FileInputStream("./videojuegos.obj");
             entrada = new ObjectInputStream(fis);
@@ -108,6 +108,7 @@ public class Principal {
     }
 
     public static void mostrarVideojuegos(){
+        System.out.println("Videojuegos registrados:\n");
         for(Videojuego v:listadoVideojuegos){
             System.out.println("\tNombre: "+v.getNombre()+"\n\t\t Genero: "+v.getGenero()+"\n");
         }
