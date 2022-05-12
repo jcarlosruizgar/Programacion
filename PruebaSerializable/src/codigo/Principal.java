@@ -109,7 +109,7 @@ public class Principal {
 
     public static void mostrarVideojuegos(){
         for(Videojuego v:listadoVideojuegos){
-            System.out.println("\tNombre: "+v.getNombre()+"\n\t\t Genero: "+v.getGenero()+"\t");
+            System.out.println("\tNombre: "+v.getNombre()+"\n\t\t Genero: "+v.getGenero()+"\n");
         }
     }
 
