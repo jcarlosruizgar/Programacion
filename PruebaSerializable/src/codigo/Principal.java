@@ -26,12 +26,15 @@ public class Principal {
                 int opcion = Integer.parseInt(br.readLine());
                 switch (opcion){
                     case 1:
+                        System.out.println("Registro de un videojuego:");
                         registrarVideojuegos();
                         break;
                     case 2:
+                        System.out.println("Videojuegos registrados:");
                         mostrarVideojuegos();
                         break;
-                    case 3:
+                    case 0:
+                        System.out.println("Cerrando el programa...");
                         salir = true;
                         break;
                     default:
@@ -69,7 +72,7 @@ public class Principal {
     public static void registrarVideojuegos() throws IOException{
         System.out.println("Introduzca el nombre del videojuego:");
         String nombre = br.readLine();
-        System.out.println("Introduzca la fecha de lanzamiento:");
+        System.out.println("Introduzca el genero del videojuego:");
         String genero = br.readLine();
         listadoVideojuegos.add(new Videojuego(nombre,genero));
         try{
@@ -106,7 +109,7 @@ public class Principal {
 
     public static void mostrarVideojuegos(){
         for(Videojuego v:listadoVideojuegos){
-            System.out.println(v.getNombre());
+            System.out.println("\tNombre: "+v.getNombre()+"\n\t\t genero: "+v.getGenero());
         }
     }
 
