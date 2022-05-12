@@ -1,20 +1,15 @@
 package codigo;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 public class Videojuego implements Serializable {
 
     private String nombre;
-    private LocalDate fechaLanzamiento;
+    private String genero;
 
-    public Videojuego(String nombre, LocalDate fechaLanzamiento) {
+    public Videojuego(String nombre, String fechaLanzamiento) {
         this.nombre = nombre;
-        this.fechaLanzamiento = fechaLanzamiento;
-    }
-
-    public Videojuego(String nombre) {
-        this.nombre = nombre;
+        this.genero = fechaLanzamiento;
     }
 
     public Videojuego() {
@@ -28,11 +23,11 @@ public class Videojuego implements Serializable {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaLanzamiento() {
-        return fechaLanzamiento;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setFechaLanzamiento(LocalDate fechaLanzamiento) {
-        this.fechaLanzamiento = fechaLanzamiento;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 }
