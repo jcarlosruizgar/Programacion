@@ -81,7 +81,7 @@ public class Principal {
         }catch (FileNotFoundException fnfe){
             System.out.println("Fichero no encontrado.");
         }catch (EOFException eofe){
-            eofe.printStackTrace();
+            System.out.println("Fin del fichero.");
         }
         catch (IOException ioe){
             System.out.println("Error de E/S.");
