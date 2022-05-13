@@ -8,6 +8,7 @@ public class Principal {
     private static ObjectOutputStream salida = null;
     private static FileInputStream fis = null;
     private static ObjectInputStream entrada = null;
+    private static final File RUTA = new File("./rectangulos.dat");
 
     public static void main(String[] args) {
 
@@ -36,7 +37,7 @@ public class Principal {
 
     public static void escribirRectangulo(){
         try{
-            fos = new FileOutputStream("./rectangulos.dat");
+            fos = new FileOutputStream(RUTA);
             salida = new ObjectOutputStream(fos);
             Rectangulo r1 = new Rectangulo(12,6,"azul");
             salida.writeObject(r1);
@@ -56,7 +57,7 @@ public class Principal {
 
     public static void leerRectangulo(){
         try{
-            fis = new FileInputStream("./rectangulos.dat");
+            fis = new FileInputStream(RUTA);
             entrada = new ObjectInputStream(fis);
             Rectangulo rr1 = (Rectangulo) entrada.readObject();
             System.out.println(rr1);
