@@ -73,4 +73,5 @@ public class Principal {
             System.out.println("Error E/S.");
         }
     }
+    //que genere un informe con cada rectangulo, rectangulos.txt
 }
