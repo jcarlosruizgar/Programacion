@@ -11,6 +11,8 @@ public class Principal {
     private static ObjectInputStream entrada = null;
     private static ArrayList<Rectangulo> listaRectangulos = new ArrayList<Rectangulo>();
     private static final File RUTA = new File("./rectangulos.dat");
+    private static final File RUTA_INFORME = new File("./rectangulos.txt");
+    private static FileWriter fw = null;
 
     public static void main(String[] args) {
 
@@ -18,6 +20,7 @@ public class Principal {
             //escribirRectangulo();
             leerRectangulo();
             mostrarRectangulos();
+            crearInforme();
         }
         finally {
             try{
@@ -32,6 +35,9 @@ public class Principal {
                 }
                 if(entrada != null){
                     entrada.close();
+                }
+                if(fw != null){
+                    fw.close();
                 }
             }catch (IOException ioe){
                 System.out.println("Error E/S");
@@ -78,5 +84,16 @@ public class Principal {
             System.out.println(r);
         }
     }
-    //que genere un informe con cada rectangulo, rectangulos.txt
+
+    public static void crearInforme(){
+        try{
+            fw = new FileWriter(RUTA_INFORME);
+            for(Rectangulo r:listaRectangulos){
+                fw.write(r.toString()+"\n\n");
+            }
+            fw.close();
+        }catch (IOException ioe){
+            System.out.println("Error E/S.");
+        }
+    }
 }
