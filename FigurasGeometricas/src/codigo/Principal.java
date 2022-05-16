@@ -17,7 +17,7 @@ public class Principal {
     public static void main(String[] args) {
 
         try{
-            //escribirRectangulo();
+            escribirRectangulo();
             leerRectangulo();
             mostrarRectangulos();
             crearInforme();
@@ -70,6 +70,8 @@ public class Principal {
             listaRectangulos = (ArrayList<Rectangulo>)entrada.readObject();
             fis.close();
             entrada.close();
+        }catch(EOFException eofe){
+            System.out.println("Fin de fichero.");
         }catch (ClassNotFoundException cnfe){
             System.out.println("Clase no encontrada.");
         }catch (FileNotFoundException fnfe){
