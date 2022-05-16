@@ -88,10 +88,13 @@ public class Principal {
     }
 
     public static void crearInforme(){
+        int contador = 1;
         try{
             fw = new FileWriter(RUTA_INFORME);
             for(Rectangulo r:listaRectangulos){
+                fw.write("Rectangulo nº"+contador+":\n");
                 fw.write(r.toString()+"\n\n");
+                contador++;
             }
             fw.close();
         }catch (IOException ioe){
