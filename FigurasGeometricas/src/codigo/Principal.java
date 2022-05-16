@@ -28,7 +28,8 @@ public class Principal {
             leerCirculo();
             mostrarCirculos();
             crearInformeCirculos();
-            mostrarFicheroTexto();
+            //mostrarFicheroTexto1();
+            mostrarFicheroTexto2();
         }
         finally {
             try{
@@ -179,12 +180,35 @@ public class Principal {
         }
     }
 
-    public static void mostrarFicheroTexto(){
+    public static void mostrarFicheroTexto1(){
         FileReader fr = null;
+        int x=0;
         try{
             fr = new FileReader(RUTA_INFORME_CIRCULOS);
-            //mostrar todo en un bucle, letra a letra, luego linea a linea
-            System.out.println((char)fr.read());
+            while(x!=-1){
+                x=fr.read();
+                System.out.print((char)fr.read());
+            }
+        }catch (EOFException eofe){
+            System.out.println("Error fin de fichero.");
+        }catch (FileNotFoundException fnfe){
+            System.out.println("Error fichero no encontrado.");
+        }catch (IOException ioe){
+            System.out.println("Error de E/S.");
+        }
+    }
+
+    public static void mostrarFicheroTexto2(){
+        FileReader fr = null;
+        BufferedReader br = null;
+        String linea ="";
+        try{
+            fr = new FileReader(RUTA_INFORME_CIRCULOS);
+            br = new BufferedReader(fr);
+            while(linea!=null){
+                System.out.println(linea);
+                linea = br.readLine();
+            }
         }catch (EOFException eofe){
             System.out.println("Error fin de fichero.");
         }catch (FileNotFoundException fnfe){
