@@ -189,6 +189,7 @@ public class Principal {
                 x=fr.read();
                 System.out.print((char)x);
             }
+            fr.close();
         }catch (EOFException eofe){
             System.out.println("ADFDSKJFD");
         }catch (FileNotFoundException fnfe){
@@ -209,6 +210,8 @@ public class Principal {
                 System.out.println(linea);
                 linea = br.readLine();
             }
+            br.close();
+            fr.close();
         }catch (EOFException eofe){
             System.out.println("Error fin de fichero.");
         }catch (FileNotFoundException fnfe){
