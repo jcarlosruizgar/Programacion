@@ -22,6 +22,6 @@ public class Circulo extends Punto{
 
     @Override
     public String toString() {
-        return "Circulo con punto x="+super.getX()+" con punto y="+super.getY()+" y con un radio de "+this.radio;
+        return "Circulo con un punto x="+super.getX()+", con un punto y="+super.getY()+" y con un radio de "+this.radio+".";
     }
 }
