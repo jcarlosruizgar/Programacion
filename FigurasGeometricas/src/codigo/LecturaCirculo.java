@@ -32,7 +32,6 @@ public class LecturaCirculo {
                 y = Integer.parseInt(cadena.substring(delA + 1, delB));//se guarda el 2º dato
                 radio = Integer.parseInt(cadena.substring(delB + 1, longitud));//se guarda el 3º dato
                 System.out.println(new Circulo(x, y, radio));
-                System.out.println(cadenaAuxiliar);
             }
         } catch (StringIndexOutOfBoundsException sioobe) {
             salir = true;
