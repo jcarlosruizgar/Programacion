@@ -2,7 +2,7 @@ package codigo;
 
 import java.io.*;
 
-public class LecturaCirculo {
+public class LecturaCirculoTxt {
 
     public static void main(String[] args) {
         FileReader fr = null;
