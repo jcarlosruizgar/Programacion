@@ -41,6 +41,7 @@ public class Principal {
                         mostrarProvincias();
                         break;
                     case 2:
+                        insertarProvinciaInteractivo();
                         break;
                     case 3:
                         break;
@@ -51,6 +52,7 @@ public class Principal {
                     case 0:
                         salir = true;
                         System.out.println("Cerrando el programa...");
+                        break;
                     default:
                         System.out.println("Eso no es una opcion correcta.");
                         break;
@@ -98,6 +100,12 @@ public class Principal {
             ex.printStackTrace();
             System.out.println("Error de conexion con la base de datos.");
         }
+    }
+
+    public static void insertarProvinciaInteractivo() throws IOException{
+        System.out.println("Introduza el nombre de la provincia a insertar");
+        String provincia = br.readLine();
+        insertarProvincia(provincia);
     }
 
     public static void modificarNombreProvincia(int id,String provincia) {
