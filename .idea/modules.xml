@@ -34,7 +34,9 @@
       <module fileurl="file://$PROJECT_DIR$/Gestion dpto emp herencia/Gestion dpto emp herencia.iml" filepath="$PROJECT_DIR$/Gestion dpto emp herencia/Gestion dpto emp herencia.iml" />
       <module fileurl="file://$PROJECT_DIR$/GestionDepartamentos/GestionDepartamentos.iml" filepath="$PROJECT_DIR$/GestionDepartamentos/GestionDepartamentos.iml" />
       <module fileurl="file://$PROJECT_DIR$/GestionEmpleados/GestionEmpleados.iml" filepath="$PROJECT_DIR$/GestionEmpleados/GestionEmpleados.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GestionProvinciaMysql/GestionProvinciaMysql.iml" filepath="$PROJECT_DIR$/GestionProvinciaMysql/GestionProvinciaMysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/Herencia y clase abstracta/Herencia y clase abstracta.iml" filepath="$PROJECT_DIR$/Herencia y clase abstracta/Herencia y clase abstracta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HolaMysql/HolaMysql.iml" filepath="$PROJECT_DIR$/HolaMysql/HolaMysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/Mapas/Mapas.iml" filepath="$PROJECT_DIR$/Mapas/Mapas.iml" />
       <module fileurl="file://$PROJECT_DIR$/Matematicas/Matematicas.iml" filepath="$PROJECT_DIR$/Matematicas/Matematicas.iml" />
       <module fileurl="file://$PROJECT_DIR$/Matrices/Matrices.iml" filepath="$PROJECT_DIR$/Matrices/Matrices.iml" />
@@ -45,7 +47,6 @@
       <module fileurl="file://$PROJECT_DIR$/Pila LinkedList/Pila LinkedList.iml" filepath="$PROJECT_DIR$/Pila LinkedList/Pila LinkedList.iml" />
       <module fileurl="file://$PROJECT_DIR$/Poliformismo 14022022/Poliformismo 14022022.iml" filepath="$PROJECT_DIR$/Poliformismo 14022022/Poliformismo 14022022.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Programacion.iml" filepath="$PROJECT_DIR$/.idea/Programacion.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ProyectoRestaurante/ProyectoRestaurante.iml" filepath="$PROJECT_DIR$/ProyectoRestaurante/ProyectoRestaurante.iml" />
       <module fileurl="file://$PROJECT_DIR$/Prueba equals 100222/Prueba equals 100222.iml" filepath="$PROJECT_DIR$/Prueba equals 100222/Prueba equals 100222.iml" />
       <module fileurl="file://$PROJECT_DIR$/PruebaSerializable/PruebaSerializable.iml" filepath="$PROJECT_DIR$/PruebaSerializable/PruebaSerializable.iml" />
       <module fileurl="file://$PROJECT_DIR$/RandomAF/RandomAF.iml" filepath="$PROJECT_DIR$/RandomAF/RandomAF.iml" />
@@ -55,7 +56,6 @@
       <module fileurl="file://$PROJECT_DIR$/Tema 7/Tema 7.iml" filepath="$PROJECT_DIR$/Tema 7/Tema 7.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tres en raya/Tres en raya.iml" filepath="$PROJECT_DIR$/Tres en raya/Tres en raya.iml" />
       <module fileurl="file://$PROJECT_DIR$/programador redf equals/programador redf equals.iml" filepath="$PROJECT_DIR$/programador redf equals/programador redf equals.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Actividad1-GestionSalarios-JuanCarlosRuizGarcia/prueba.iml" filepath="$PROJECT_DIR$/Actividad1-GestionSalarios-JuanCarlosRuizGarcia/prueba.iml" />
       <module fileurl="file://$PROJECT_DIR$/prueba interfaces/prueba interfaces.iml" filepath="$PROJECT_DIR$/prueba interfaces/prueba interfaces.iml" />
     </modules>
   </component>
