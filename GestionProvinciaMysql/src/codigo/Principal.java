@@ -44,10 +44,13 @@ public class Principal {
                         insertarProvinciaInteractivo();
                         break;
                     case 3:
+                        modificarIdProvinciaInteractivo();
                         break;
                     case 4:
+                        modificarNombreProvinciaInteractivo();
                         break;
                     case 5:
+                        borrarProvinciaInteractivo();
                         break;
                     case 0:
                         salir = true;
@@ -121,6 +124,16 @@ public class Principal {
         }
     }
 
+    public static void modificarNombreProvinciaInteractivo() throws IOException{
+        mostrarProvincias();
+        System.out.println("Introduza el id de la provincia a modificar:");
+        int id = Integer.parseInt(br.readLine());
+        System.out.println("Introduza el nuevo nombre de la provincia:");
+        String nombre = br.readLine();
+        modificarNombreProvincia(id,nombre);
+        System.out.println("Operacion realizada con exito.");
+    }
+
     public static void modificarIdProvincia(int viejoId,int nuevoId) {
         try {
             conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
@@ -135,6 +148,16 @@ public class Principal {
         }
     }
 
+    public static void modificarIdProvinciaInteractivo() throws IOException{
+        mostrarProvincias();
+        System.out.println("Introduza el id de la provincia a modificar:");
+        int viejoId = Integer.parseInt(br.readLine());
+        System.out.println("Introduza el nuevo ie de la provincia:");
+        int nuevoId = Integer.parseInt(br.readLine());
+        modificarIdProvincia(viejoId,nuevoId);
+        System.out.println("Operacion realizada con exito.");
+    }
+
     public static void borrarProvincia(int id) {
         try {
             conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
@@ -147,5 +170,12 @@ public class Principal {
         }
     }
 
+    public static void borrarProvinciaInteractivo()throws IOException{
+        mostrarProvincias();
+        System.out.println("Introduza el id de la provincia a borrar:");
+        int id = Integer.parseInt(br.readLine());
+        borrarProvincia(id);
+        System.out.println("Operacion realizada con exito.");
+    }
 
 }
