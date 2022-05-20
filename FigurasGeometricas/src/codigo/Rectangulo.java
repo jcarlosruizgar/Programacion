@@ -2,7 +2,7 @@ package codigo;
 
 import java.io.Serializable;
 
-public class Rectangulo implements Serializable {
+public class Rectangulo implements Serializable,Operable {
 
     private Punto coordenada;
     private int base;
@@ -26,6 +26,19 @@ public class Rectangulo implements Serializable {
         this.base = base;
         this.altura = altura;
         this.color = color;
+    }
+
+    public void mover(int posX,int posY){
+        this.coordenada.setX(posX);
+        this.coordenada.setY(posY);
+    }
+
+    public double area(){
+        return this.base*this.altura;
+    }
+
+    public double perimetro(){
+        return 2*this.base+2*this.altura;
     }
 
     public Punto getCoordenada() {

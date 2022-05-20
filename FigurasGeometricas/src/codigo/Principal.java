@@ -20,16 +20,20 @@ public class Principal {
     public static void main(String[] args) {
 
         try{
-            escribirRectangulo();
+            //escribirRectangulo();
             leerRectangulo();
-            mostrarRectangulos();
-            crearInformeRectangulos();
-            escribirCirculo();
+            //mostrarRectangulos();
+            //crearInformeRectangulos();
+            //escribirCirculo();
             leerCirculo();
-            mostrarCirculos();
-            crearInformeCirculos();
-            mostrarFicheroTexto1();
-            mostrarFicheroTexto2();
+            //mostrarCirculos();
+            //crearInformeCirculos();
+            //mostrarFicheroTexto1();
+            //mostrarFicheroTexto2();
+            listaCirculos.get(0).mover(9,6);
+            System.out.println(listaCirculos.get(0));
+            System.out.println(listaCirculos.get(0).area());
+            System.out.println(listaCirculos.get(0).perimetro());
         }
         finally {
             try{
@@ -220,4 +224,5 @@ public class Principal {
             System.out.println("Error de E/S.");
         }
     }
+
 }
