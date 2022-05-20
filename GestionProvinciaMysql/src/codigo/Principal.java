@@ -63,8 +63,6 @@ public class Principal {
                 System.out.println("Error, eso no es un numero.");
             } catch (IOException ioe) {
                 System.out.println("Error de E/S.");
-            } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 try {
                     if (conexion != null) conexion.close();
