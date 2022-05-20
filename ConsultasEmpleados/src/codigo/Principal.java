@@ -14,9 +14,12 @@ public class Principal {
     private static final String CONTRASENA = "";
 
     public static void main(String[] args) {
-        mayorSalario();
-        noComision();
-        deVentas();
+        //mayorSalario();
+        //noComision();
+        //deVentas();
+        //masVeterano();
+        //listadoEmpleados();
+        crearVista();
     }
 
     public static void mayorSalario(){
@@ -65,6 +68,51 @@ public class Principal {
             conexion.close();
             consulta.close();
             resultado.close();
+        }catch (SQLException sqle){
+            System.out.println("ERROR de conexion con la base de datos.");
+        }
+    }
+
+    public static void masVeterano(){
+        try{
+            conexion = DriverManager.getConnection(RUTA,USUARIO,CONTRASENA);
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT APELLIDO,FECHA_ALT FROM EMPLEADOS ORDER BY FECHA_ALT ASC LIMIT 1;");
+            while (resultado.next()){
+                System.out.println("El empleado mas veterano es "+resultado.getString(1)+" y se dio de alta el "+resultado.getString(2));
+            }
+            conexion.close();
+            consulta.close();
+            resultado.close();
+        }catch (SQLException sqle){
+            System.out.println("ERROR de conexion con la base de datos.");
+        }
+    }
+
+    public static void listadoEmpleados(){
+        try{
+            conexion = DriverManager.getConnection(RUTA,USUARIO,CONTRASENA);
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT E.APELLIDO,D.DNOMBRE FROM EMPLEADOS E INNER JOIN DEPARTAMENTOS D ON E.DEPT_NO=D.DEPT_NO;");
+            while (resultado.next()){
+                System.out.println("El empleado "+resultado.getString(1)+" pertenece al departamento de "+resultado.getString(2));
+            }
+            conexion.close();
+            consulta.close();
+            resultado.close();
+        }catch (SQLException sqle){
+            System.out.println("ERROR de conexion con la base de datos.");
+        }
+    }
+
+    public static void crearVista(){
+        try{
+            conexion = DriverManager.getConnection(RUTA,USUARIO,CONTRASENA);
+            consulta = conexion.createStatement();
+            consulta.executeUpdate("CREATE VIEW IF NOT EXISTS VISTA1 AS SELECT E.APELLIDO,D.DNOMBRE FROM EMPLEADOS E INNER JOIN DEPARTAMENTOS D ON E.DEPT_NO=D.DEPT_NO;");
+            System.out.println("Vista creada correctamente.");
+            conexion.close();
+            consulta.close();
         }catch (SQLException sqle){
             System.out.println("ERROR de conexion con la base de datos.");
         }
