@@ -17,8 +17,8 @@ public class Principal {
     private static Statement consulta;
     private static ResultSet resultado;
     private static final String RUTADB = "jdbc:mysql://localhost:3306/inmuebles";
-    private static final String usuario = "root";
-    private static final String contrasena = "";
+    private static final String USUARIO = "root";
+    private static final String CONTRASENA = "";
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static boolean salir = false;
     private static int opcion;
@@ -76,7 +76,7 @@ public class Principal {
 
     public static void mostrarProvincias() {
         try {
-            conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
+            conexion = DriverManager.getConnection(RUTADB, USUARIO, CONTRASENA);
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from provincias_programacion;");
             while (resultado.next()) {
@@ -93,7 +93,7 @@ public class Principal {
 
     public static void insertarProvincia(String provincia) {
         try {
-            conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
+            conexion = DriverManager.getConnection(RUTADB, USUARIO, CONTRASENA);
             consulta = conexion.createStatement();
             consulta.executeUpdate("insert into provincias_programacion (nombre) values (\"" + provincia + "\");");
             consulta.close();
@@ -112,7 +112,7 @@ public class Principal {
 
     public static void modificarNombreProvincia(int id, String provincia) {
         try {
-            conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
+            conexion = DriverManager.getConnection(RUTADB, USUARIO, CONTRASENA);
             consulta = conexion.createStatement();
             consulta.executeUpdate("update provincias_programacion set nombre=\"" + provincia + "\" where id=" + id + ";");
             consulta.close();
@@ -135,7 +135,7 @@ public class Principal {
 
     public static void modificarIdProvincia(int viejoId, int nuevoId) {
         try {
-            conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
+            conexion = DriverManager.getConnection(RUTADB, USUARIO, CONTRASENA);
             consulta = conexion.createStatement();
             consulta.executeUpdate("update provincias_programacion set id=" + nuevoId + " where id=" + viejoId + ";");
             consulta.close();
@@ -159,7 +159,7 @@ public class Principal {
 
     public static void borrarProvincia(int id) {
         try {
-            conexion = DriverManager.getConnection(RUTADB, usuario, contrasena);
+            conexion = DriverManager.getConnection(RUTADB, USUARIO, CONTRASENA);
             consulta = conexion.createStatement();
             consulta.executeUpdate("delete from provincias_programacion where id =" + id + ";");
             consulta.close();
