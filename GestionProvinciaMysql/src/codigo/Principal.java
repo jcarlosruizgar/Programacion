@@ -24,9 +24,9 @@ public class Principal {
     private static int opcion;
 
     public static void main(String[] args) {
+        System.out.println("Conexion con la base de datos inmuebles, tabla provincias.");
         do {
             try {
-                System.out.println("Conexion con la base de datos inmuebles, tabla provincias.");
                 System.out.println("Operaciones disponibles:");
                 System.out.println("1 - Mostrar provincias.");
                 System.out.println("2 - Insertar una provincia.");
