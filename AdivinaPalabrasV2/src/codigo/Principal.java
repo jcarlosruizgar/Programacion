@@ -1,13 +1,12 @@
 /*
 @author Juan Carlos Ruiz Garcia
-@date 24/01/2022
-@description juego de adivinar la palabra
+@version 1.1
+@date 21/05/2022
+@description juego de adivinar la palabra, carga las palabras desde un fichero palabras.txt
  */
 package codigo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -22,6 +21,7 @@ public class Principal {
     private static int intentos = 3;
     private static Palabra[] arrayPalabras;
     private static boolean noModificado = true;//booleano que determina si se han alterado las 3 palabras iniciales
+    private static final File RUTA = new File("./palabras.txt");
 
     public static void main(String[] args) {
         LocalDate fechaActual = LocalDate.now();
@@ -29,7 +29,7 @@ public class Principal {
         //String nombreJugador = "";
 
         //para leer el nombre del jugador
-        System.out.println("Juego Adivina la palabra version 1.0");
+        System.out.println("Juego Adivina la palabra version 1.1");
         /*try {
             boolean entradaIncorrecta = true;
             while (entradaIncorrecta) {
@@ -47,7 +47,7 @@ public class Principal {
         }*/
 
         do {//bucle do while que controla la repeticion del programa
-            cargarPalabras();//carga las palabras para la nueva partida
+            cargarPalabrasFichero();//carga las palabras para la nueva partida
             Partida miPartida = new Partida(fechaActual, intentos, arrayPalabras);//inicializar partida
             miPartida.pintarMenu();//ejecucion de la partida
             if (eleccion != -1) {//si se ha elegido salir del programa, no ejecutara esta parte
@@ -147,6 +147,56 @@ public class Principal {
         }
         arrayPalabras = Arrays.copyOf(pal, tamano);
     }
+
+    public static void cargarPalabrasFichero(){
+        FileReader fr = null;
+        BufferedReader br = null;
+        try{
+            fr = new FileReader(RUTA);
+            br = new BufferedReader(fr);
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+            System.out.println("Error de E/S.");
+        }
+
+        Palabra[] pal = new Palabra[tamano];
+        if (noModificado){
+            arrayString = new String[numeroLineas()];
+            try{
+                for (int i = 0; i < numeroLineas(); i++) {
+                    arrayString[i] = br.readLine();
+                }
+            }catch (IOException ioe){
+                System.out.println("Error de E/S.");
+            }
+        }
+        for (int i = 0; i < tamano; i++) {
+            char[] letras = arrayString[i].toCharArray();
+            boolean[] posiciones = iniciarPosiciones(letras);
+            pal[i] = new Palabra(arrayString[i], letras, posiciones);
+        }
+        arrayPalabras = Arrays.copyOf(pal, tamano);
+    }
+
+    public static int numeroLineas(){
+        FileReader fr = null;
+        BufferedReader br = null;
+        int numL = 0;
+        try{
+            fr = new FileReader(RUTA);
+            br = new BufferedReader(fr);
+            while(br.readLine() != null){
+                numL++;
+            }
+            br.close();
+            fr.close();
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+            System.out.println("Error de E/S.");
+        }
+        return numL;
+    }
+
 /* no necesario con la implementacion actual
     //metodo que pide a jugador las frases con las que va a jugar
     public static void pedirPalabra(){
