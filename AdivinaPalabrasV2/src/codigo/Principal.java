@@ -25,9 +25,7 @@ public class Principal {
 
     public static void main(String[] args) {
         LocalDate fechaActual = LocalDate.now();
-
         //String nombreJugador = "";
-
         //para leer el nombre del jugador
         System.out.println("Juego Adivina la palabra version 1.1");
         /*try {
@@ -45,7 +43,6 @@ public class Principal {
         } catch (IOException exception) {
             System.out.println("Dato introducido no valido.");
         }*/
-
         do {//bucle do while que controla la repeticion del programa
             cargarPalabrasFichero();//carga las palabras para la nueva partida
             Partida miPartida = new Partida(fechaActual, intentos, arrayPalabras);//inicializar partida
@@ -72,7 +69,7 @@ public class Principal {
             eleccion = 0;//reiniciar eleccion para asegurar que pregunta si se quiere repetir
         }
         while (!repetirJuego);
-        System.out.println("Cerrando el programa.");
+        System.out.println("Cerrando el programa...");
     }
 
     //recibe una array de caracteres y devuelve un array de boleanos con las posiciones que se van a mostrar en true
@@ -104,23 +101,23 @@ public class Principal {
     }
 
     //metodo que modifica intentos
-    public static void setIntentos(int intentosSiguientePartida){
+    public static void setIntentos(int intentosSiguientePartida) {
         intentos = intentosSiguientePartida;
     }
 
     //metodo que modifica tamano
-    public static void setTamano(int tamanoSiguientePartida){
+    public static void setTamano(int tamanoSiguientePartida) {
         tamano = tamanoSiguientePartida;
     }
 
     //metodo que devuelve tamano
-    public static int getTamano(){
+    public static int getTamano() {
         return tamano;
     }
 
     //metodo que pide a jugador las frases con las que va a jugar
-    public static void pedirFrase(){
-        System.out.println("Introduzca las 3 palabras con las que quiere jugar:");
+    public static void pedirFrase() {
+        System.out.println("Introduzca las palabras con las que quiere jugar:");
         String[] frasesLeidas = new String[tamano];
         try {
             for (int i = 0; i < tamano; i++) {
@@ -135,10 +132,10 @@ public class Principal {
     }
 
     //metodo que genera las palabras con las que se generara la partida
-    public static void cargarPalabras(){
+    public static void cargarPalabras() {
         Palabra[] pal = new Palabra[tamano];
-        if (noModificado){
-            arrayString = new String[] {"CODIGO","TRAZA","ALGORITMO"};
+        if (noModificado) {
+            arrayString = new String[]{"CODIGO", "TRAZA", "ALGORITMO"};
         }
         for (int i = 0; i < tamano; i++) {
             char[] letras = arrayString[i].toCharArray();
@@ -148,25 +145,26 @@ public class Principal {
         arrayPalabras = Arrays.copyOf(pal, tamano);
     }
 
-    public static void cargarPalabrasFichero(){
+    public static void cargarPalabrasFichero() {
         FileReader fr = null;
         BufferedReader br = null;
-        try{
+        try {
             fr = new FileReader(RUTA);
             br = new BufferedReader(fr);
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
             System.out.println("Error de E/S.");
         }
-
         Palabra[] pal = new Palabra[tamano];
-        if (noModificado){
+        if (noModificado) {
             arrayString = new String[numeroLineas()];
-            try{
+            try {
                 for (int i = 0; i < numeroLineas(); i++) {
                     arrayString[i] = br.readLine();
                 }
-            }catch (IOException ioe){
+                br.close();
+                fr.close();
+            } catch (IOException ioe) {
                 System.out.println("Error de E/S.");
             }
         }
@@ -178,19 +176,19 @@ public class Principal {
         arrayPalabras = Arrays.copyOf(pal, tamano);
     }
 
-    public static int numeroLineas(){
+    public static int numeroLineas() {
         FileReader fr = null;
         BufferedReader br = null;
         int numL = 0;
-        try{
+        try {
             fr = new FileReader(RUTA);
             br = new BufferedReader(fr);
-            while(br.readLine() != null){
+            while (br.readLine() != null) {
                 numL++;
             }
             br.close();
             fr.close();
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
             System.out.println("Error de E/S.");
         }
