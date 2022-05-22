@@ -151,9 +151,8 @@ public class Principal {
         try {
             fr = new FileReader(RUTA);
             br = new BufferedReader(fr);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            System.out.println("Error de E/S.");
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("Fichero no encontrado.");
         }
         Palabra[] pal = new Palabra[tamano];
         if (noModificado) {
@@ -162,8 +161,8 @@ public class Principal {
                 for (int i = 0; i < numeroLineas(); i++) {
                     arrayString[i] = br.readLine();
                 }
-                br.close();
-                fr.close();
+                if (br != null) br.close();
+                if (fr != null) fr.close();
             } catch (IOException ioe) {
                 System.out.println("Error de E/S.");
             }
@@ -188,6 +187,8 @@ public class Principal {
             }
             br.close();
             fr.close();
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("Fichero no encontrado.");
         } catch (IOException ioe) {
             ioe.printStackTrace();
             System.out.println("Error de E/S.");
