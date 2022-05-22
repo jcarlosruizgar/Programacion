@@ -1,7 +1,7 @@
 /*
 @author Juan Carlos Ruiz Garcia
 @version 1.2
-@date 21/05/2022
+@date 22/05/2022
 @description juego de adivinar la palabra, carga las palabras desde un fichero palabras.txt y cargando en un ArrayList
  */
 package codigo;
@@ -16,7 +16,7 @@ public class Principal {
     //atributos
     private static boolean repetirJuego = false;
     private static int eleccion = 0;
-    private static int tamano = 3;//cantidad de palabras
+    private static int tamano = 8;//cantidad de palabras
     //private static String[] arrayString;
     private static ArrayList<String> arrayListString = new ArrayList<String>();
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,7 +29,7 @@ public class Principal {
         LocalDate fechaActual = LocalDate.now();
         //String nombreJugador = "";
         //para leer el nombre del jugador
-        System.out.println("Juego Adivina la palabra version 1.1");
+        System.out.println("Juego Adivina la palabra version 1.2");
         /*try {
             boolean entradaIncorrecta = true;
             while (entradaIncorrecta) {
@@ -119,17 +119,12 @@ public class Principal {
 
     //metodo que pide a jugador las frases con las que va a jugar
     public static void pedirFrase() {
-        System.out.println("Introduzca las palabras con las que quiere jugar:");
-        String[] frasesLeidas = new String[tamano];
-        try {
-            for (int i = 0; i < tamano; i++) {
-                System.out.println("Introduzca la palabra numero " + (i + 1));
-                frasesLeidas[i] = br.readLine().toUpperCase();
-            }
-        } catch (IOException ioe) {
-            System.out.println("Error.");
+        System.out.println("Introduzca una nueva palabra con la que quiere jugar:");
+        try{
+            arrayListString.add(br.readLine());
+        }catch (IOException ioe){
+            System.out.println("Error de E/S.");
         }
-        arrayString = Arrays.copyOf(frasesLeidas, tamano);
         noModificado = false;
     }
 
@@ -162,10 +157,9 @@ public class Principal {
         }
         Palabra[] pal = new Palabra[tamano];
         if (noModificado) {
-            arrayString = new String[numeroLineas()];
             try {
-                for (int i = 0; i < numeroLineas(); i++) {
-                    arrayString[i] = br.readLine();
+                for (int i = 0; i < arrayListString.size(); i++) {
+                    arrayListString.add(br.readLine());
                 }
                 br.close();
                 fr.close();
@@ -173,51 +167,12 @@ public class Principal {
                 System.out.println("Error de E/S.");
             }
         }
-        for (int i = 0; i < tamano; i++) {
-            char[] letras = arrayString[i].toCharArray();
+        for (int i = 0; i < arrayListString.size(); i++) {
+            char[] letras = arrayListString.get(i).toCharArray();
             boolean[] posiciones = iniciarPosiciones(letras);
-            pal[i] = new Palabra(arrayString[i], letras, posiciones);
+            pal[i] = new Palabra(arrayListString.get(i), letras, posiciones);
         }
         arrayPalabras = Arrays.copyOf(pal, tamano);
     }
-
-    public static int numeroLineas() {
-        FileReader fr = null;
-        BufferedReader br = null;
-        int numL = 0;
-        try {
-            fr = new FileReader(RUTA);
-            br = new BufferedReader(fr);
-            while (br.readLine() != null) {
-                numL++;
-            }
-            br.close();
-            fr.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            System.out.println("Error de E/S.");
-        }
-        return numL;
-    }
-
-/* no necesario con la implementacion actual
-    //metodo que pide a jugador las frases con las que va a jugar
-    public static void pedirPalabra(){
-        System.out.println("Introduzca las 3 palabras con las que quiere jugar:");
-        Palabra[] palabrasLeidas = new Palabra[tamano];
-        try {
-            for (int i = 0; i < tamano; i++) {
-                System.out.println("Introduzca la " + (i + 1) + "º palabra");
-                String fraseLeida = br.readLine().toUpperCase();
-                char[] letras = fraseLeida.toCharArray();
-                boolean[] posiciones = iniciarPosiciones(letras);
-                palabrasLeidas[i] = new Palabra(fraseLeida, letras, posiciones);
-            }
-        } catch (IOException ioe) {
-            System.out.println("Error.");
-        }
-        arrayPalabras = Arrays.copyOf(palabrasLeidas, tamano);
-    }
-*/
 
 }
