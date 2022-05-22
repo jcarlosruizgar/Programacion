@@ -1,13 +1,14 @@
 /*
 @author Juan Carlos Ruiz Garcia
-@version 1.1
+@version 1.2
 @date 21/05/2022
-@description juego de adivinar la palabra, carga las palabras desde un fichero palabras.txt
+@description juego de adivinar la palabra, carga las palabras desde un fichero palabras.txt y cargando en un ArrayList
  */
 package codigo;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Principal {
@@ -16,7 +17,8 @@ public class Principal {
     private static boolean repetirJuego = false;
     private static int eleccion = 0;
     private static int tamano = 3;//cantidad de palabras
-    private static String[] arrayString;
+    //private static String[] arrayString;
+    private static ArrayList<String> arrayListString = new ArrayList<String>();
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static int intentos = 3;
     private static Palabra[] arrayPalabras;
@@ -135,16 +137,19 @@ public class Principal {
     public static void cargarPalabras() {
         Palabra[] pal = new Palabra[tamano];
         if (noModificado) {
-            arrayString = new String[]{"CODIGO", "TRAZA", "ALGORITMO"};
+            arrayListString.add("CODIGO");
+            arrayListString.add("TRAZA");
+            arrayListString.add("ALGORITMO");
         }
-        for (int i = 0; i < tamano; i++) {
-            char[] letras = arrayString[i].toCharArray();
+        for (int i = 0; i < arrayListString.size(); i++) {
+            char[] letras = arrayListString.get(i).toCharArray();
             boolean[] posiciones = iniciarPosiciones(letras);
-            pal[i] = new Palabra(arrayString[i], letras, posiciones);
+            pal[i] = new Palabra(arrayListString.get(i), letras, posiciones);
         }
         arrayPalabras = Arrays.copyOf(pal, tamano);
     }
 
+    //metodo que genera las palabras para la partida mediante el fichero de texto
     public static void cargarPalabrasFichero() {
         FileReader fr = null;
         BufferedReader br = null;
