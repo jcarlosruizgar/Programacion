@@ -196,24 +196,4 @@ public class Principal {
         return numL;
     }
 
-/* no necesario con la implementacion actual
-    //metodo que pide a jugador las frases con las que va a jugar
-    public static void pedirPalabra(){
-        System.out.println("Introduzca las 3 palabras con las que quiere jugar:");
-        Palabra[] palabrasLeidas = new Palabra[tamano];
-        try {
-            for (int i = 0; i < tamano; i++) {
-                System.out.println("Introduzca la " + (i + 1) + "º palabra");
-                String fraseLeida = br.readLine().toUpperCase();
-                char[] letras = fraseLeida.toCharArray();
-                boolean[] posiciones = iniciarPosiciones(letras);
-                palabrasLeidas[i] = new Palabra(fraseLeida, letras, posiciones);
-            }
-        } catch (IOException ioe) {
-            System.out.println("Error.");
-        }
-        arrayPalabras = Arrays.copyOf(palabrasLeidas, tamano);
-    }
-*/
-
 }
